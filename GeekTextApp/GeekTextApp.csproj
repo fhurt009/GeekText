@@ -11,4 +11,9 @@
     </PackageReference>
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="geek-text\src\app\book-browsing\" />
+    <Folder Include="geek-text\src\app\services\" />
+  </ItemGroup>
+
 </Project>
