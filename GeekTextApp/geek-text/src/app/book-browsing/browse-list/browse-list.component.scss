@@ -1,0 +1,34 @@
+.sort-bar {
+  height: 50px;
+  margin-top: 40px;
+  margin-left: 5%;
+  margin-right: 5%;
+  background-color: lightgray;
+}
+
+.main-grid {
+  margin-left: 5%;
+  margin-right: 5%;
+}
+
+.browse {
+  height: 500px;
+  width: 200px;
+  min-width: 200px;
+  margin-top: 20px;
+  background-color: azure;
+}
+
+
+
+.list-view {
+  list-style-type: none;
+  padding: 0px 0px 0px 3%;
+  flex: 1 0 auto;
+}
+
+li {
+  border-bottom: solid;
+  border-color: lightsteelblue;
+  border-width: 1px;
+}

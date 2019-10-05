@@ -1,1 +1,16 @@
 /* You can add global styles to this file, and also import other style files */
+
+body {
+  font-family: 'Lucida Sans';
+  margin: 16px;
+}
+
+.container {
+
+}
+
+.row {
+  margin: 0;
+  padding: 0;
+  display: flex;
+}
