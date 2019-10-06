@@ -1,6 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
+import { HttpClientModule } from '@angular/common/http';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -15,10 +16,11 @@ import { BrowseListItemComponent } from './book-browsing/browse-list-item/browse
     ],
     imports: [
         BrowserModule,
+        HttpClientModule,
         AppRoutingModule,
         RouterModule.forRoot([
             { path: '', component: AppComponent },
-            { path: 'browse', component: BrowseListComponent }
+            { path: 'browse/rating/:rating', component: BrowseListComponent }
         ])
     ],
     providers: [],

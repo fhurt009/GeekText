@@ -1,26 +1,35 @@
 <div class="row browse-list-item">
-  <img src="{{ book.cover }}" />
+  <img src="https://images-na.ssl-images-amazon.com/images/I/51fNhv2wHoL._SX322_BO1,204,203,200_.jpg" />
 
   <div class="browse-list-item-details">
     <div>
-      <h3>{{ book.name }}</h3>
-      <h4>by {{ book.authors }}</h4>
+      <h3>{{ book.Name }}</h3>
+      <h4>by {{ book.AuthorNames }}</h4>
 
-      <div class="rating">
-        <span class="stars">&#9733;&#9733;&#9733;&#9734;&#9734;</span>
-        <span>11 Reviews</span>
+      <div class="rating" *ngIf="book.NumberReviews > 1; else singleReview">
+        <span class="stars">&#9733;&#9733;&#9733;&#9734;&#9734; ({{book.Rating}})</span>
+        <span>{{ book.NumberReviews }} Reviews</span>
       </div>
 
-      <h2>$5.99</h2>
+
+      <ng-template #singleReview>
+        <div class="rating">
+          <span class="stars">&#9733;&#9733;&#9733;&#9734;&#9734; ({{book.Rating}})</span>
+          <span>{{ book.NumberReviews }} Review</span>
+        </div>
+      </ng-template>
+
+
+      <h2>${{ book.RetailPrice }}</h2>
       <h5>Released on Sept. 27, 2017</h5>
     </div>
 
 
   </div>
 
-  
-    <button>Add To Cart</button>
- 
+
+  <button>Add To Cart</button>
+
 </div>
 
 

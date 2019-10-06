@@ -1,14 +1,19 @@
+h1 {
+  margin-left: 20px;
+}
+
 .sort-bar {
   height: 50px;
-  margin-top: 40px;
-  margin-left: 5%;
-  margin-right: 5%;
+  margin-top: 50px;
+  margin-left: 10%;
+  margin-right: 10%;
+  flex: 1 0.5 auto;
   background-color: lightgray;
 }
 
 .main-grid {
-  margin-left: 5%;
-  margin-right: 5%;
+  margin-left: 10%;
+  margin-right: 10%;
 }
 
 .browse {
