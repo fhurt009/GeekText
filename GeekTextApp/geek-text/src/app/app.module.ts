@@ -7,12 +7,14 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowseListComponent } from './book-browsing/browse-list/browse-list.component';
 import { BrowseListItemComponent } from './book-browsing/browse-list-item/browse-list-item.component';
+import { CategoriesComponent } from './book-browsing/categories/categories.component';
 
 @NgModule({
     declarations: [
         AppComponent,
         BrowseListComponent,
-        BrowseListItemComponent
+        BrowseListItemComponent,
+        CategoriesComponent
     ],
     imports: [
         BrowserModule,
@@ -20,6 +22,8 @@ import { BrowseListItemComponent } from './book-browsing/browse-list-item/browse
         AppRoutingModule,
         RouterModule.forRoot([
             { path: '', component: AppComponent },
+            { path: 'categories', component: CategoriesComponent },
+            { path: 'browse/genre/:genre', component: BrowseListComponent },
             { path: 'browse/rating/:rating', component: BrowseListComponent }
         ])
     ],

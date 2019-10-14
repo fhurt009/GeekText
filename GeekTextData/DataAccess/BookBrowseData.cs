@@ -10,23 +10,44 @@ namespace GeekTextData.DataAccess
 {
     public class BookBrowseData
     {
-        public List<BookBrowseModel> GetBooksByRating(int Rating, string Sort)
+        public List<string> GetAllGenres()
         {
             SqlDataAccess sql = new SqlDataAccess();
 
-            var p = new { Rating };
+            var output = sql.LoadData<string, dynamic>("dbo.uspGetAllGenres", null, "GeekTextDB");
 
-            string StoredProcedure;
-            if (Sort.ToLower().Equals("author"))
-            {
-                StoredProcedure = "dbo.uspGetBooksByRatingSortedByAuthor";
-            }
-            else
-            {
-                StoredProcedure = "dbo.uspGetBooksByRatingSortedByName";
-            }
+            return output;
+        }
 
-            var output = sql.LoadData<BookBrowseModel, dynamic>(StoredProcedure, p, "GeekTextDB");
+        public List<BookBrowseModel> GetBooksByTopSellers(bool SortAuthors)
+        {
+            SqlDataAccess sql = new SqlDataAccess();
+
+            var p = new { SortAuthors };
+
+            var output = sql.LoadData<BookBrowseModel, dynamic>("dbo.uspGetBooksByTopSellers", p, "GeekTextDB");
+
+            return output;
+        }
+
+        public List<BookBrowseModel> GetBooksByGenre(string Genre, bool SortAuthors)
+        {
+            SqlDataAccess sql = new SqlDataAccess();
+
+            var p = new { Genre, SortAuthors };
+
+            var output = sql.LoadData<BookBrowseModel, dynamic>("dbo.uspGetBooksByGenre", p, "GeekTextDB");
+
+            return output;
+        }
+
+        public List<BookBrowseModel> GetBooksByRating(int Rating, bool SortAuthors)
+        {
+            SqlDataAccess sql = new SqlDataAccess();
+
+            var p = new { Rating, SortAuthors };
+
+            var output = sql.LoadData<BookBrowseModel, dynamic>("dbo.uspGetBooksByRating", p, "GeekTextDB");
 
             return output;
         }

@@ -16,31 +16,21 @@ export class BrowseListComponent implements OnInit {
 
     ngOnInit() {
         this.sortBooks('name');
-
-
-        //setTimeout(() => this.sortBooks('author'), 5000);
-        
     }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
     sortBooks(sortBy: string) {
         this.route.paramMap.subscribe(params => {
-            this.bookBrowsingService.getBooks(parseInt(params.get('rating')), sortBy).subscribe(books => this.books = books);
+            var path: string = this.route.snapshot.url[1].path;
+
+            if (path === 'topsellers') {
+                this.bookBrowsingService.getBooksByTopSellers(sortBy).subscribe(books => this.books = books);
+            } else if (path === 'genre') {
+                var genre: string = params.get('genre');
+                this.bookBrowsingService.getBooksByGenre(genre, sortBy).subscribe(books => this.books = books);
+            } else if (path === 'rating') {
+                var rating: number = parseInt(params.get('rating'));
+                this.bookBrowsingService.getBooksByRating(rating, sortBy).subscribe(books => this.books = books);
+            }
         });
     }
-
 }

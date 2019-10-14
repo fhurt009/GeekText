@@ -7,25 +7,23 @@ import { HttpClient } from '@angular/common/http';
 })
 export class BookBrowsingService {
 
+    baseUrl: string = 'https://localhost:44323/api/BookBrowse';
+
     constructor(private http: HttpClient) { }
 
-    getBooks(rating: number, sortBy: string) {
-        /*
-        return [
-            {
-                id: 1,
-                name: 'Where the wild things go',
-                cover: 'https://images-na.ssl-images-amazon.com/images/I/51fNhv2wHoL._SX322_BO1,204,203,200_.jpg',
-                authors: 'james cordon'
-            },
-            {
-                id: 2,
-                name: 'The girl with the dragon tattoo',
-                cover: 'https://images-na.ssl-images-amazon.com/images/I/51fNhv2wHoL._SX322_BO1,204,203,200_.jpg',
-                authors: 'roey'
-            }
-        ]*/
+    getAllGenres() {
+        return this.http.get(this.baseUrl + '/AllGenres');
+    }
 
-        return this.http.get('https://localhost:44323/api/BookBrowse?Rating=' + rating + '&Sort=' + sortBy);
+    getBooksByTopSellers(sortBy: string) {
+        return this.http.get(this.baseUrl + '/TopSellers' + '?SortBy=' + sortBy);
+    }
+
+    getBooksByGenre(genre: string, sortBy: string) {
+        return this.http.get(this.baseUrl + '/Genre/' + genre + '?SortBy=' + sortBy);
+    }
+
+    getBooksByRating(rating: number, sortBy: string) {
+        return this.http.get(this.baseUrl + '/Rating/' + rating + '?SortBy=' + sortBy);
     }
 }
