@@ -1,0 +1,17 @@
+<p>categories works!</p>
+
+<h1>Top Sellers</h1>
+
+<h1>Genres</h1>
+<ul>
+  <li *ngFor="let genre of genres">
+    <a [routerLink]="['/browse/genre', genre]">{{ genre }}</a>
+  </li>
+</ul>
+
+<h1>Ratings</h1>
+<ul>
+  <li *ngFor="let rating of ratings">
+    <a [routerLink]="['/browse/rating', rating]">{{ rating }}</a>
+  </li>
+</ul>
