@@ -1,0 +1,26 @@
+<h1>Books</h1>
+
+<!--<div class="sort-bar"></div>-->
+<mat-toolbar class="sort-bar">
+  <mat-form-field>
+    <mat-select [(value)]="sortBy" (selectionChange)="sortBooks()">
+      <mat-option value="name">Name</mat-option>
+      <mat-option value="author">Author</mat-option>
+      <mat-option value="price">Retail Price</mat-option>
+      <mat-option value="rating">Avg. Rating</mat-option>
+      <mat-option value="date">Release Date</mat-option>
+    </mat-select>
+  </mat-form-field>
+</mat-toolbar>
+
+<div class="row main-grid">
+  <div class="browse"></div>
+
+
+  <ul class="list-view">
+    <li *ngFor="let book of books">
+      <app-browse-list-item [book]="book"></app-browse-list-item>
+    </li>
+  </ul>
+</div>
+
