@@ -1,7 +1,7 @@
 <div class="header-container" >
   <mat-toolbar color="primary" class="header-toolbar">
     <mat-toolbar-row class="toolbar-row">
-      <a [routerLink]="['/']"><img src="./assets/images/GeekTextLogo.png"></a>
+      <a [routerLink]="['/']"><h1>Geek Text</h1></a>
       <span class="material-spacer"></span>
       <a [routerLink]="['/shopping-cart']"><button [class.active]="toggleActive" mat-icon-button (click)="snav.toggle()" matTooltip="Expands Shopping Cart"
           aria-label="Shopping Cart"><mat-icon>shopping_cart</mat-icon></button></a>
@@ -16,6 +16,7 @@
                  [fixedInViewport]="mobileQuery.matches" fixedTopGap="56">
       <mat-nav-list>
         <a mat-list-item routerLink="." *ngFor="let nav of fillerNav">{{nav}}</a>
+        <a [routerLink]="['/Checkout']"><button>Checkout</button></a>
       </mat-nav-list>
     </mat-sidenav>
 
