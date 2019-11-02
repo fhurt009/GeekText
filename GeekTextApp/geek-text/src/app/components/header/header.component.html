@@ -6,7 +6,7 @@
       <a [routerLink]="['/shopping-cart']"><button [class.active]="toggleActive" mat-icon-button (click)="snav.toggle()" matTooltip="Expands Shopping Cart"
           aria-label="Shopping Cart"><mat-icon>shopping_cart</mat-icon></button></a>
       <button mat-icon-button (click)="snav.toggle()"><mat-icon>favorite</mat-icon></button>
-      <button mat-icon-button (click)="snav.toggle()"><mat-icon>account_circle</mat-icon></button>
+      <a [routerLink]="['/user/profile']"><button mat-icon-button><mat-icon>account_circle</mat-icon></button></a>
     </mat-toolbar-row>
   </mat-toolbar>
 

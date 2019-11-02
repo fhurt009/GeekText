@@ -1,0 +1,29 @@
+<p>login works!</p>
+
+<h2>Login</h2>
+
+<!-- Login forms -->
+<div class="login">
+  <p>
+    <!-- Username form -->
+    <mat-form-field appearance="outline">
+      <mat-label>Username</mat-label>
+      <input matInput placeholder="" [formControl]="username" required>
+      <mat-error *ngIf="username.invalid">{{getErrorMessageUsername()}}</mat-error>
+    </mat-form-field>
+
+    <!-- Password form -->
+    <mat-form-field appearance="outline">
+      <mat-label>Password</mat-label>
+      <input matInput placeholder="" [formControl]="pw" required [type]="hide ? 'password' : 'text'">
+      <mat-error *ngIf="pw.invalid">{{getErrorMessagePw()}}</mat-error>
+      <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
+        <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+      </button>
+    </mat-form-field>
+  </p>
+
+  <!-- Login button -->
+  <button mat-raised-button color="primary">Login</button>
+
+</div>

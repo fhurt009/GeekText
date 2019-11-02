@@ -6,6 +6,7 @@ import { AppComponent } from './app.component';
 import { HeaderComponent } from './components/header/header.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MaterialModule } from './material.module';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { HttpClientModule } from '@angular/common/http';
 import { ShoppingCartComponent } from './components/shopping-cart/shopping-cart.component';
@@ -13,6 +14,10 @@ import { RouterModule } from '@angular/router';
 import { BrowseListItemComponent } from './book-browsing/browse-list-item/browse-list-item.component';
 import { BrowseListComponent } from './book-browsing/browse-list/browse-list.component';
 import { CategoriesComponent } from './book-browsing/categories/categories.component';
+import { UserComponent } from './user/user.component';
+import { LoginComponent } from './user/login/login.component';
+import { RegistrationComponent } from './user/registration/registration.component';
+import { ProfileComponent } from './user/profile/profile.component';
 
 @NgModule({
     declarations: [
@@ -21,12 +26,18 @@ import { CategoriesComponent } from './book-browsing/categories/categories.compo
         ShoppingCartComponent,
         BrowseListItemComponent,
         BrowseListComponent,
-        CategoriesComponent
+        CategoriesComponent,
+        UserComponent,
+        LoginComponent,
+        RegistrationComponent,
+        ProfileComponent
     ],
     imports: [
         BrowserModule,
         AppRoutingModule,
         BrowserAnimationsModule,
+        FormsModule,
+        ReactiveFormsModule,
         MaterialModule,
         HttpClientModule,
         RouterModule.forRoot([
