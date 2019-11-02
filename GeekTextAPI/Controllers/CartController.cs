@@ -6,9 +6,11 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
+using System.Web.Http.Cors;
 
 namespace GeekTextAPI.Controllers
 {
+    [EnableCors(origins: "http://localhost:4200", headers: "*", methods: "*")]
     public class CartController : ApiController
     {
         // GET: api/Cart/5
@@ -19,7 +21,7 @@ namespace GeekTextAPI.Controllers
         //    return data.GetCartByUserId();
         //}
         [HttpGet]
-        [Route("cart")]
+        [Route("api/cart")]
         public List<CartModel> GetById(int id)
         {
             CartData data = new CartData();
@@ -30,6 +32,8 @@ namespace GeekTextAPI.Controllers
         // GET: api/Cart/5
 
         // POST: api/Cart
+        [HttpPost]
+        [Route("api/cart")]
         public void PostItem(int userId, [FromBody] int bookId)
         {
             CartData data = new CartData();
@@ -47,7 +51,7 @@ namespace GeekTextAPI.Controllers
         }
 
         [HttpPut]
-        [Route("cart/saveForLater/{bookId}")]
+        [Route("api/cart/saveForLater/{bookId}")]
         public void PutSaveForLater(int userId, int bookId, [FromBody]bool isSavedForLater)
         {
             CartData data = new CartData();
@@ -58,7 +62,7 @@ namespace GeekTextAPI.Controllers
 
         // DELETE: api/Cart/5
         [HttpDelete]
-        [Route("cart")]
+        [Route("api/cart")]
         public void DeleteCart(int userId)
         {
             CartData data = new CartData();
@@ -67,7 +71,7 @@ namespace GeekTextAPI.Controllers
         }
 
         [HttpDelete]
-        [Route("cart/{bookId}")]
+        [Route("api/cart/{bookId}")]
         public void DeleteItemCart(int userId, int bookId)
         {
             CartData data = new CartData();

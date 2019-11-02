@@ -1,12 +1,11 @@
 export interface Book {
-    Id: number;
+    UserId: number
+    BookId: number;
     Name: string;
     Author: string;
-    Rating: number;
-    Price: number;
-    ReleaseDate: string;
-    Cover: string;
-    SaveForLater: boolean;
+    RetailPrice: number;
+    Quantity: number;
+    IsSavedForLater: boolean;
 }
 
 

@@ -8,13 +8,37 @@ import { ShoppingCartDataService } from '../../services/shopping-cart-data.servi
   styleUrls: ['./shopping-cart.component.scss']
 })
 export class ShoppingCartComponent implements OnInit {
-  books;
-  dataSource = this.books;
-  displayedColumns: string[] = [ 'Name', 'Author', 'Price', 'SaveForLater']
+  dataSource = null;
+  displayedColumns: string[] = [ 'Name', 'Author', 'SaveForLater', 'Price', 'Quantity', 'Delete']
+  userId: number = 16;
   
   constructor(private shoppingCartService: ShoppingCartDataService) {  }
 
   ngOnInit() {
-    this.books = this.shoppingCartService.getBooks();
+    this.shoppingCartService.getBooks(this.userId)
+    .subscribe(
+      data => {
+        this.dataSource = data;
+      }
+    );
+  }
+
+  getTotalCost() {
+    if(this.dataSource){
+      return this.dataSource.map(t => t.RetailPrice * t.Quantity).reduce((acc, value) => acc + value, 0);
+    }
+  }
+
+  deleteBookFromCart(book) {
+    this.shoppingCartService.deleteBookFromCart(this.userId, book.BookId)
+    .subscribe((data)=>{
+      console.log("Success: " + book.Name + " was removed from cart!");
+      this.shoppingCartService.getBooks(this.userId)
+      .subscribe(
+        data => {
+          this.dataSource = data;
+        }
+      )
+    });
   }
 }
