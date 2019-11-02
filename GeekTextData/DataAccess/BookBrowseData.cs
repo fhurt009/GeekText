@@ -37,7 +37,7 @@ namespace GeekTextData.DataAccess
             var p = new { Genre, SortAuthors };
 
             var output = sql.LoadData<BookBrowseModel, dynamic>("dbo.uspGetBooksByGenre", p, "GeekTextDB");
-
+            
             return output;
         }
 
@@ -48,7 +48,7 @@ namespace GeekTextData.DataAccess
             var p = new { Rating, SortAuthors };
 
             var output = sql.LoadData<BookBrowseModel, dynamic>("dbo.uspGetBooksByRating", p, "GeekTextDB");
-
+            
             return output;
         }
     }
