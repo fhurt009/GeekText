@@ -13,6 +13,7 @@ import { RouterModule } from '@angular/router';
 import { BrowseListItemComponent } from './book-browsing/browse-list-item/browse-list-item.component';
 import { BrowseListComponent } from './book-browsing/browse-list/browse-list.component';
 import { CategoriesComponent } from './book-browsing/categories/categories.component';
+import { AddToCartComponent } from './components/add-to-cart/add-to-cart.component';
 
 @NgModule({
     declarations: [
@@ -21,7 +22,8 @@ import { CategoriesComponent } from './book-browsing/categories/categories.compo
         ShoppingCartComponent,
         BrowseListItemComponent,
         BrowseListComponent,
-        CategoriesComponent
+        CategoriesComponent,
+        AddToCartComponent,
     ],
     imports: [
         BrowserModule,
@@ -31,7 +33,7 @@ import { CategoriesComponent } from './book-browsing/categories/categories.compo
         HttpClientModule,
         RouterModule.forRoot([
             { path: '', component: AppComponent },
-            { path: 'shopping-cart', component: ShoppingCartComponent }
+            { path: 'cart', component: ShoppingCartComponent }
         ])
     ],
     providers: [],

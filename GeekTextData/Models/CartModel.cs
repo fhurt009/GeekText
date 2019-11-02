@@ -11,6 +11,7 @@ namespace GeekTextData.Models
         public int Id { get; set; }
         public int BookId { get; set; }
         public string Name { get; set; }
+        public string Author { get; set; }
         public double RetailPrice { get; set; }
         public bool IsSavedForLater{ get; set; }
     }
