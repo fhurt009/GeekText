@@ -1,13 +1,12 @@
-<div class="header-container" >
+<div class="header-container" [class.menu-is-mobile]="mobileQuery.matches">
   <mat-toolbar color="primary" class="header-toolbar">
-    <mat-toolbar-row class="toolbar-row">
-      <a [routerLink]="['/']"><img src="./assets/images/GeekTextLogo.png"></a>
-      <span class="material-spacer"></span>
-      <a [routerLink]="['/shopping-cart']"><button [class.active]="toggleActive" mat-icon-button (click)="snav.toggle()" matTooltip="Expands Shopping Cart"
-          aria-label="Shopping Cart"><mat-icon>shopping_cart</mat-icon></button></a>
-      <button mat-icon-button (click)="snav.toggle()"><mat-icon>favorite</mat-icon></button>
-      <button mat-icon-button (click)="snav.toggle()"><mat-icon>account_circle</mat-icon></button>
-    </mat-toolbar-row>
+    <a [routerLink]="['/']"><h1 class="mat-display-4">Geek Text</h1></a>
+    <span class="material-spacer"></span>
+    <a [routerLink]="['/cart']"><button [class.active]="toggleActive" mat-icon-button matTooltip="Expands Shopping Cart"
+        aria-label="Shopping Cart"><mat-icon>shopping_cart</mat-icon></button>
+    </a>
+    <button mat-icon-button><mat-icon>favorite</mat-icon></button>
+    <button mat-icon-button><mat-icon>account_circle</mat-icon></button>
   </mat-toolbar>
 
   <mat-sidenav-container class="header-sidenav-container"
@@ -15,10 +14,8 @@
     <mat-sidenav position="end" #snav [mode]="mobileQuery.matches ? 'over' : 'over'"
                  [fixedInViewport]="mobileQuery.matches" fixedTopGap="56">
       <mat-nav-list>
-        <a mat-list-item routerLink="." *ngFor="let nav of fillerNav">{{nav}}</a>
       </mat-nav-list>
     </mat-sidenav>
-
     <mat-sidenav-content>
       <router-outlet></router-outlet>
     </mat-sidenav-content>
