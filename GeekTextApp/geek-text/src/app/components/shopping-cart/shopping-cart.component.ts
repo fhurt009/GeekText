@@ -1,38 +1,44 @@
-import {MediaMatcher} from '@angular/cdk/layout';
-import {ChangeDetectorRef, Component, OnDestroy} from '@angular/core';
+import { Component, OnInit} from '@angular/core';
+import { Book } from '../../models/book.model';
+import { ShoppingCartDataService } from '../../services/shopping-cart-data.service';
 
 @Component({
   selector: 'app-shopping-cart',
   templateUrl: './shopping-cart.component.html',
   styleUrls: ['./shopping-cart.component.scss']
 })
-export class ShoppingCartComponent implements OnDestroy {
+export class ShoppingCartComponent implements OnInit {
+  dataSource = null;
+  displayedColumns: string[] = [ 'Name', 'Author', 'SaveForLater', 'Price', 'Quantity', 'Delete']
+  userId: number = 16;
   
-    mobileQuery: MediaQueryList;
-  
-    fillerNav = Array.from({length: 50}, (_, i) => `Nav Item ${i + 1}`);
-  
-    fillerContent = Array.from({length: 50}, () =>
-        `Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
-         labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco
-         laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in
-         voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat
-         cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.`);
-  
-    private _mobileQueryListener: () => void;
-  
-    constructor(changeDetectorRef: ChangeDetectorRef, media: MediaMatcher) {
-      this.mobileQuery = media.matchMedia('(max-width: 600px)');
-      this._mobileQueryListener = () => changeDetectorRef.detectChanges();
-      this.mobileQuery.addListener(this._mobileQueryListener);
-    }
-  
-    ngOnDestroy(): void {
-      this.mobileQuery.removeListener(this._mobileQueryListener);
+  constructor(private shoppingCartService: ShoppingCartDataService) {  }
+
+  ngOnInit() {
+    this.shoppingCartService.getBooks(this.userId)
+    .subscribe(
+      data => {
+        this.dataSource = data;
+      }
+    );
+  }
+
+  getTotalCost() {
+    if(this.dataSource){
+      return this.dataSource.map(t => t.RetailPrice * t.Quantity).reduce((acc, value) => acc + value, 0);
     }
   }
-  
-  
-  /**  Copyright 2019 Google Inc. All Rights Reserved.
-      Use of this source code is governed by an MIT-style license that
-      can be found in the LICENSE file at http://angular.io/license */
+
+  deleteBookFromCart(book) {
+    this.shoppingCartService.deleteBookFromCart(this.userId, book.BookId)
+    .subscribe((data)=>{
+      console.log("Success: " + book.Name + " was removed from cart!");
+      this.shoppingCartService.getBooks(this.userId)
+      .subscribe(
+        data => {
+          this.dataSource = data;
+        }
+      )
+    });
+  }
+}

@@ -1,26 +1,72 @@
-<h1>Books</h1>
+<div class="body" id="body">
+  <h1 class="title">{{title | titlecase}}</h1>
 
-<!--<div class="sort-bar"></div>-->
-<mat-toolbar class="sort-bar">
-  <mat-form-field>
-    <mat-select [(value)]="sortBy" (selectionChange)="sortBooks()">
-      <mat-option value="name">Name</mat-option>
-      <mat-option value="author">Author</mat-option>
-      <mat-option value="price">Retail Price</mat-option>
-      <mat-option value="rating">Avg. Rating</mat-option>
-      <mat-option value="date">Release Date</mat-option>
-    </mat-select>
-  </mat-form-field>
-</mat-toolbar>
+  <div class="main-grid">
+    <div class="toolbar">
+      <mat-form-field class="choose-sort">
+        <mat-label>Sort By</mat-label>
+        <mat-select [(value)]="sortBy" [disabled]="books.length == 0" (selectionChange)="sortBooks()">
+          <mat-option value="name">Name</mat-option>
+          <mat-option value="author">Author</mat-option>
+          <mat-option value="price">Retail Price</mat-option>
+          <mat-option value="rating">Avg. Rating</mat-option>
+          <mat-option value="date">Release Date</mat-option>
+        </mat-select>
+      </mat-form-field>
 
-<div class="row main-grid">
-  <div class="browse"></div>
+      <span class="toolbar-fill-space"></span>
 
+      <mat-paginator [length]="books.length"
+                     [pageSizeOptions]="pageSizeOptions"
+                     [pageIndex]="pageIndex"
+                     [pageSize]="pageSize"
+                     [showFirstLastButtons]="true"
+                     [disabled]="books.length == 0"
+                     (page)="pageChange($event)">
+      </mat-paginator>
+    </div>
 
-  <ul class="list-view">
-    <li *ngFor="let book of books">
-      <app-browse-list-item [book]="book"></app-browse-list-item>
-    </li>
-  </ul>
+    <div class="row">
+      <div class="browse">
+        <h2 class="category-header">Categories</h2>
+        <mat-nav-list>
+          <a mat-list-item [routerLink]="['/browse/topsellers']" routerLinkActive="active-link" (click)="reload()">Top Sellers</a>
+          <mat-divider></mat-divider>
+          <a mat-list-item *ngFor="let genre of genres" [routerLink]="['/browse/genre', genre]" routerLinkActive="active-link" (click)="reload()">{{genre}}</a>
+          <mat-divider></mat-divider>
+          <a mat-list-item *ngFor="let rating of [1, 2, 3, 4, 5]" [routerLink]="['/browse/rating', rating]" routerLinkActive="active-link" (click)="reload()">
+            <span *ngFor="let x of getStars(rating)">&#9733;</span>
+          </a>
+        </mat-nav-list>
+      </div>
+
+      <mat-spinner class="progress-spinner" *ngIf="!booksLoaded; else list"></mat-spinner>
+
+      <ng-template #list>
+        <mat-list class="book-list" *ngIf="books.length > 0; else noResults">
+          <mat-list-item class="book-list-item" *ngFor="let book of books | slice:startIndex:endIndex">
+            <app-browse-list-item [book]="book"></app-browse-list-item>
+            <mat-divider></mat-divider>
+          </mat-list-item>
+        </mat-list>
+
+        <ng-template #noResults>
+          <p class="book-list no-results">No Results Found :(</p>
+        </ng-template>
+      </ng-template>
+    </div>
+
+    <div class="toolbar">
+      <span class="toolbar-fill-space"></span>
+
+      <mat-paginator [length]="books.length"
+                     [pageSizeOptions]="pageSizeOptions"
+                     [pageIndex]="pageIndex"
+                     [pageSize]="pageSize"
+                     [showFirstLastButtons]="true"
+                     [disabled]="books.length == 0"
+                     (page)="pageChange($event)">
+      </mat-paginator>
+    </div>
+  </div>
 </div>
-

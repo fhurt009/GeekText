@@ -1,9 +1,52 @@
-<!--<div *ngFor="let cart of carts: index as modifiedDate">
-  <h3>
-    <a [title]="test.name + ' test'" [routerLink]="['/shopping-cart', username]">
-      {{bookName}}
-    </a>
-  </h3>
-  
+<div class="shopping-div">
+  <mat-card>
+    <mat-card-header>
+      <mat-card-title>Shopping Cart</mat-card-title>
+        <mat-card-subtitle *ngIf="dataSource == 0 "><br>Your Cart is Empty. Start shopping now!<br><br>
+          <a color="primary" mat-raised-button [routerLink]="['/']">Shop Now</a>
+        </mat-card-subtitle>
+    </mat-card-header>    
+    <ng-container *ngIf="dataSource != 0">
+        <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+          <ng-container matColumnDef="Name">
+              <th mat-header-cell *matHeaderCellDef> Name </th>
+              <td mat-cell *matCellDef="let book"> {{book.Name}} </td>
+              <td mat-footer-cell *matFooterCellDef> Total </td>
+          </ng-container>
+          <ng-container matColumnDef="Author">
+              <th mat-header-cell *matHeaderCellDef> Author </th>
+              <td mat-cell *matCellDef="let book"> By {{book.Author}} </td>
+              <td mat-footer-cell *matFooterCellDef></td>
+          </ng-container>
+          <ng-container matColumnDef="SaveForLater">
+              <th mat-header-cell *matHeaderCellDef> Save For Later </th>
+              <td mat-cell *matCellDef="let book"> {{book.IsSavedForLater}} </td>
+              <td mat-footer-cell *matFooterCellDef></td>
+          </ng-container>
+          <ng-container matColumnDef="Price">
+              <th mat-header-cell *matHeaderCellDef> Price </th>
+              <td mat-cell *matCellDef="let book"> {{book.RetailPrice | currency}} </td>
+              <td mat-footer-cell *matFooterCellDef> {{getTotalCost() | currency}} </td>
+          </ng-container>
+          <ng-container matColumnDef="Quantity">
+              <th mat-header-cell *matHeaderCellDef> Quantity </th>
+              <td mat-cell *matCellDef="let book"> {{book.Quantity}} </td>
+              <td mat-footer-cell *matFooterCellDef></td>
+          </ng-container>
+          <ng-container matColumnDef="Delete">
+              <th mat-header-cell *matHeaderCellDef> Delete </th>
+              <td mat-cell *matCellDef="let book">
+                <button mat-icon-button style="color:red" (click)="deleteBookFromCart(book)">
+                  <mat-icon>clear</mat-icon>
+                </button> 
+              </td>
+              <td mat-footer-cell *matFooterCellDef></td>
+          </ng-container>
+          <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+          <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+          <tr mat-footer-row *matFooterRowDef="displayedColumns"></tr>
+        </table>
+    </ng-container>
+  </mat-card>
 </div>
--->
+

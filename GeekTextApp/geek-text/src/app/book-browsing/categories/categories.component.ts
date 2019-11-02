@@ -16,7 +16,7 @@ export class CategoriesComponent implements OnInit {
 
     ngOnInit() {
         this.bookBrowsingService.getAllGenres().subscribe(genres => this.genres = genres);
-        this.ratings = [0, 1, 2, 3, 4, 5];
+        this.ratings = [1, 2, 3, 4, 5];
     }
 
 }

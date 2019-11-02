@@ -6,9 +6,11 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
+using System.Web.Http.Cors;
 
 namespace GeekTextAPI.Controllers
 {
+    [EnableCors(origins: "http://localhost:4200", headers: "*", methods: "*")]
     public class CartController : ApiController
     {
         // GET: api/Cart/5
@@ -18,6 +20,8 @@ namespace GeekTextAPI.Controllers
 
         //    return data.GetCartByUserId();
         //}
+        [HttpGet]
+        [Route("api/cart")]
         public List<CartModel> GetById(int id)
         {
             CartData data = new CartData();
@@ -28,18 +32,51 @@ namespace GeekTextAPI.Controllers
         // GET: api/Cart/5
 
         // POST: api/Cart
-        public void Post([FromBody]string value)
+        [HttpPost]
+        [Route("api/cart")]
+        public void PostItem(int userId, [FromBody] int bookId)
         {
+            CartData data = new CartData();
+
+            data.PostItemCart(userId, bookId);
         }
 
         // PUT: api/Cart/5
-        public void Put(int id, [FromBody]string value)
+        public void Put(int userId, int bookId, [FromBody]int quantity)
         {
+            CartData data = new CartData();
+
+            data.UpdateItemQuantity(userId, bookId, quantity);
+
+        }
+
+        [HttpPut]
+        [Route("api/cart/saveForLater/{bookId}")]
+        public void PutSaveForLater(int userId, int bookId, [FromBody]bool isSavedForLater)
+        {
+            CartData data = new CartData();
+
+            data.UpdateItemSavedForLater(userId, bookId, isSavedForLater);
+
         }
 
         // DELETE: api/Cart/5
-        public void Delete(int id)
+        [HttpDelete]
+        [Route("api/cart")]
+        public void DeleteCart(int userId)
         {
+            CartData data = new CartData();
+
+            data.DeleteCart(userId);
+        }
+
+        [HttpDelete]
+        [Route("api/cart/{bookId}")]
+        public void DeleteItemCart(int userId, int bookId)
+        {
+            CartData data = new CartData();
+
+            data.DeleteItemCart(userId, bookId);
         }
     }
 }
