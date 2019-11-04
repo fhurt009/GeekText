@@ -10,6 +10,7 @@ import { MaterialModule } from './material.module';
 import { HttpClientModule } from '@angular/common/http';
 import { ShoppingCartComponent } from './components/shopping-cart/shopping-cart.component';
 import { RouterModule } from '@angular/router';
+<<<<<<< Updated upstream
 
 @NgModule({
   declarations: [
@@ -29,5 +30,37 @@ import { RouterModule } from '@angular/router';
   ],
   providers: [],
   bootstrap: [AppComponent]
+=======
+import { BrowseListItemComponent } from './book-browsing/browse-list-item/browse-list-item.component';
+import { BrowseListComponent } from './book-browsing/browse-list/browse-list.component';
+import { CategoriesComponent } from './book-browsing/categories/categories.component';
+import { AddToCartComponent } from './components/add-to-cart/add-to-cart.component';
+import { BooksComponent } from './books/books.component';
+
+@NgModule({
+    declarations: [
+        AppComponent,
+        HeaderComponent,
+        ShoppingCartComponent,
+        BrowseListItemComponent,
+        BrowseListComponent,
+        CategoriesComponent,
+        AddToCartComponent,
+        BooksComponent,
+    ],
+    imports: [
+        BrowserModule,
+        AppRoutingModule,
+        BrowserAnimationsModule,
+        MaterialModule,
+        HttpClientModule,
+        RouterModule.forRoot([
+            { path: '', component: AppComponent },
+            { path: 'cart', component: ShoppingCartComponent }
+        ])
+    ],
+    providers: [],
+    bootstrap: [AppComponent]
+>>>>>>> Stashed changes
 })
 export class AppModule { }
