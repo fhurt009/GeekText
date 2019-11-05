@@ -15,5 +15,6 @@ namespace GeekTextData.Models
         public double RetailPrice { get; set; }
         public int Quantity { get; set; }
         public bool IsSavedForLater{ get; set; }
+        public string CoverUrl { get; set; }
     }
 }

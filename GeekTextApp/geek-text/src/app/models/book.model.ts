@@ -6,6 +6,7 @@ export interface Book {
     RetailPrice: number;
     Quantity: number;
     IsSavedForLater: boolean;
+    CoverUrl: string;
 }
 
 
