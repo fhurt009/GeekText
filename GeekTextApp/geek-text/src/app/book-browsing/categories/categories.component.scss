@@ -1,0 +1,25 @@
+.top-sellers {
+  font-size: 40px;
+}
+
+mat-grid-list {
+  margin-left: 12%;
+  margin-right: 12%;
+  min-width: 700px;
+}
+
+.grid-item {
+  display: flex;
+  flex-direction: column;
+}
+
+img {
+  height: 200px;
+  width: auto;
+  margin-bottom: 10px;
+  box-shadow: 0px 6px 10px 0px lightgray, 0px 2px 4px 0px black;
+}
+
+.genre-name {
+  text-align: center;
+}

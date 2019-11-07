@@ -16,7 +16,8 @@
 
       <span class="toolbar-fill-space"></span>
 
-      <mat-paginator [length]="books.length"
+      <mat-paginator class="top-paginator"
+                     [length]="books.length"
                      [pageSizeOptions]="pageSizeOptions"
                      [pageIndex]="pageIndex"
                      [pageSize]="pageSize"
@@ -59,7 +60,8 @@
     <div class="toolbar">
       <span class="toolbar-fill-space"></span>
 
-      <mat-paginator [length]="books.length"
+      <mat-paginator class="bottom-paginator"
+                     [length]="books.length"
                      [pageSizeOptions]="pageSizeOptions"
                      [pageIndex]="pageIndex"
                      [pageSize]="pageSize"

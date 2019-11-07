@@ -36,6 +36,10 @@ export class BrowseListComponent implements OnInit {
     }
 
     pageChange(event: PageEvent) {
+        if (this.pageSize == event.pageSize) {
+            this.scrollToPageTop();
+        }
+
         // update the page index and size so that all paginators get updated
         this.pageIndex = event.pageIndex;
         this.pageSize = event.pageSize;
@@ -45,6 +49,7 @@ export class BrowseListComponent implements OnInit {
         this.endIndex = this.startIndex + this.pageSize;
     }
 
+    // return an array of size equal to 'rating'
     getStars(rating: number) {
         return Array(rating).fill(0);
     }
@@ -53,13 +58,17 @@ export class BrowseListComponent implements OnInit {
     reload() {
         this.booksLoaded = false;
         this.pageIndex = 0;
+        this.scrollToPageTop();
+    }
+
+    scrollToPageTop() {
         document.querySelector('#body').scrollIntoView();
     }
 
     sortBooks() {
-        this.booksLoaded = false;
-
         this.route.paramMap.subscribe(params => {
+            this.booksLoaded = false;
+
             var path: string = this.route.snapshot.url[1].path;
             var $books: Observable<any>;
 
@@ -72,7 +81,11 @@ export class BrowseListComponent implements OnInit {
                 $books = this.bookBrowsingService.getBooksByGenre(genre, this.sortBy);
             } else if (path === 'rating') {
                 var rating: number = parseInt(params.get('rating'));
-                this.title = "ratings " + rating + " and higher";
+                if (rating == 5) {
+                    this.title = rating + " star ratings ";
+                } else {
+                    this.title = rating + " star ratings and higher";
+                }
                 $books = this.bookBrowsingService.getBooksByRating(rating, this.sortBy);
             }
 

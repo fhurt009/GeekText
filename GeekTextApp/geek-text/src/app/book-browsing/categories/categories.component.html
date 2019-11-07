@@ -1,13 +1,24 @@
-<p>categories works!</p>
-
-<h1>Top Sellers</h1>
+<a class="top-sellers" [routerLink]="['/browse/topsellers', '']">Top Sellers</a>
 
 <h1>Genres</h1>
+
+<mat-grid-list cols="5" rowHeight="275">
+  <mat-grid-tile *ngFor="let genre of genres">
+    <div class="grid-item">
+      <a [routerLink]="['/browse/genre', genre]">
+        <img src="https://images-na.ssl-images-amazon.com/images/I/51fNhv2wHoL._SX322_BO1,204,203,200_.jpg" />
+      </a>
+      <a class="genre-name" [routerLink]="['/browse/genre', genre]">{{ genre }}</a>
+    </div>
+  </mat-grid-tile>
+</mat-grid-list>
+
+<!--
 <ul>
   <li *ngFor="let genre of genres">
     <a [routerLink]="['/browse/genre', genre]">{{ genre }}</a>
   </li>
-</ul>
+</ul>-->
 
 <h1>Ratings</h1>
 <ul>

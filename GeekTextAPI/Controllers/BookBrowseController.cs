@@ -13,7 +13,7 @@ namespace GeekTextAPI.Controllers
     public class BookBrowseController : ApiController
     {
         [Route("AllGenres")]
-        public List<String> GetAllGenres()
+        public List<GenreModel> GetAllGenres()
         {
             BookBrowseData data = new BookBrowseData();
             return data.GetAllGenres();
