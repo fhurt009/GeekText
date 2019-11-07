@@ -49,11 +49,6 @@ export class BrowseListComponent implements OnInit {
         this.endIndex = this.startIndex + this.pageSize;
     }
 
-    // return an array of size equal to 'rating'
-    getStars(rating: number) {
-        return Array(rating).fill(0);
-    }
-
     // when a category link is clicked, go to first page in the paginator, and scroll to top of the page
     reload() {
         this.pageIndex = 0;
