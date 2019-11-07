@@ -8,26 +8,10 @@ import { Input } from '@angular/core';
 })
 export class BrowseListItemComponent implements OnInit {
 
-    @Input() book;
+    @Input() book: any;
 
     constructor() { }
 
     ngOnInit() {
-    }
-
-    // get string representation of book rating
-    getStars(rating: number) {
-        var stars = "";
-
-        for (let i = 0; i < rating; i++) {
-            stars = stars + "&#9733;";
-        }
-
-        for (let i = rating; i < 5; i++) {
-            stars = stars + "&#9734;";
-        }
-
-        console.log(stars);
-        return stars;
     }
 }

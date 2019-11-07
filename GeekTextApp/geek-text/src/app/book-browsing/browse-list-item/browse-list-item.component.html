@@ -1,22 +1,29 @@
 <div class="row browse-list-item">
   <a [routerLink]="['/bookdetails', book.Id]">
-    <img src="https://images-na.ssl-images-amazon.com/images/I/51fNhv2wHoL._SX322_BO1,204,203,200_.jpg" />
+    <img src="{{book.CoverUrl}}" *ngIf="book.CoverUrl !== null; else noImage"/>
+
+    <ng-template #noImage>
+      <img src="https://islandpress.org/sites/default/files/400px%20x%20600px-r01BookNotPictured.jpg"/>
+    </ng-template>
   </a>
 
   <div class="browse-list-item-details">
-    <a class="book-name" [routerLink]="['/bookdetails', book.Id]">{{ book.Name }}</a>
-    <h4>by {{ book.Authors }}</h4>
+    <a class="book-name" [routerLink]="['/bookdetails', book.Id]">{{book.Name}}</a>
+    <h4>by {{book.Authors}}</h4>
 
     <div class="rating">
       <span *ngFor="let x of [1, 2, 3, 4, 5]">
-        <span class="stars" *ngIf="x <= book.Rating">&#9733;</span>
-        <span class="stars" *ngIf="x > book.Rating">&#9734;</span>
+        <span class="stars" *ngIf="x <= book.Rating; else blankStar">&#9733;</span>
+
+        <ng-template #blankStar>
+          <span class="stars">&#9734;</span>
+        </ng-template>
       </span>
-      <span class="reviews">{{ book.Reviews }} {{ book.Reviews > 1 ? "Reviews" : "Review" }}</span>
+      <span class="reviews">{{book.Reviews}} {{book.Reviews > 1 ? "Reviews" : "Review"}}</span>
     </div>
 
-    <h2>{{ book.RetailPrice | currency }}</h2>
-    <h5>Released on {{ book.ReleaseDate | date: 'mediumDate' }}</h5>
+    <h2>{{book.RetailPrice | currency}}</h2>
+    <h5>Released on {{book.ReleaseDate | date: 'mediumDate'}}</h5>
   </div>
 
   <button>Add To Cart</button>

@@ -36,7 +36,7 @@ export class BrowseListComponent implements OnInit {
     }
 
     pageChange(event: PageEvent) {
-        if (this.pageSize == event.pageSize) {
+        if (this.pageSize == event.pageSize) {  // do not scroll to top if user only changes # of items per page
             this.scrollToPageTop();
         }
 
@@ -56,7 +56,6 @@ export class BrowseListComponent implements OnInit {
 
     // when a category link is clicked, go to first page in the paginator, and scroll to top of the page
     reload() {
-        this.booksLoaded = false;
         this.pageIndex = 0;
         this.scrollToPageTop();
     }

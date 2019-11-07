@@ -10,6 +10,7 @@ namespace GeekTextData.Models
     {
         public int Id { get; set; }
         public string Name { get; set; }
+        public string CoverUrl { get; set; }
         public string Authors { get; set; }
         public double Rating { get; set; }
         public int Reviews { get; set; }

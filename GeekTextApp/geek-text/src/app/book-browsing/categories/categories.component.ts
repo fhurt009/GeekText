@@ -9,14 +9,11 @@ import { BookBrowsingService } from '../../services/book-browsing.service';
 })
 export class CategoriesComponent implements OnInit {
 
-    genres;
-    ratings;
+    genres: any;
 
     constructor(private bookBrowsingService: BookBrowsingService) { }
 
     ngOnInit() {
         this.bookBrowsingService.getAllGenres().subscribe(genres => this.genres = genres);
-        this.ratings = [1, 2, 3, 4, 5];
     }
-
 }

@@ -33,7 +33,7 @@
         <mat-nav-list>
           <a mat-list-item [routerLink]="['/browse/topsellers']" routerLinkActive="active-link" (click)="reload()">Top Sellers</a>
           <mat-divider></mat-divider>
-          <a mat-list-item *ngFor="let genre of genres" [routerLink]="['/browse/genre', genre]" routerLinkActive="active-link" (click)="reload()">{{genre}}</a>
+          <a mat-list-item *ngFor="let genre of genres" [routerLink]="['/browse/genre', genre.Genre]" routerLinkActive="active-link" (click)="reload()">{{genre.Genre}}</a>
           <mat-divider></mat-divider>
           <a mat-list-item *ngFor="let rating of [1, 2, 3, 4, 5]" [routerLink]="['/browse/rating', rating]" routerLinkActive="active-link" (click)="reload()">
             <span *ngFor="let x of getStars(rating)">&#9733;</span>
