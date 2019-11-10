@@ -1,8 +1,15 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpErrorResponse } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
 import { Book } from '../models/book.model';
 import { catchError } from 'rxjs/operators';
+
+const httpOptions = {
+  headers: new HttpHeaders({
+    'Content-Type':  'application/json',
+    'Authorization': 'my-auth-token'
+  })
+};
 
 
 @Injectable({
@@ -20,15 +27,27 @@ export class ShoppingCartDataService {
   }
 
   
-  addBookToCart(userId:number, bookId: number) {
+  addBookToCart(userId: number, bookId: number) {
     return this.httpClient.post(this.url + "cart?userId="+ userId, bookId);
   }
 
-  getBooks(id:number): Observable<Book[]> {
+  getBooks(id: number): Observable<Book[]> {
     return this.httpClient.get<Book[]>(this.url + "cart?id=" + id)
     .pipe(
       catchError(this.handleError)
     );
+  }
+
+  getSavedForLaterBooks(id: number): Observable<Book[]> {
+    return this.httpClient.get<Book[]>(this.url + "cart/booksSavedForLater?id=" + id)
+    .pipe(
+      catchError(this.handleError)
+    );
+  }
+
+  saveForLater(id: number, bookId: number, isSaved: boolean) {
+    return this.httpClient.put(this.url + "cart/booksSavedForLater/" + bookId + "?userId=" + id, isSaved, httpOptions)
+
   }
 
   deleteBookFromCart(userId:number, bookId:number) {
@@ -48,7 +67,7 @@ export class ShoppingCartDataService {
       )
     }
     return throwError(
-      'Something bad happened: Please try agaon later.'
+      'Something bad happened: Please try again later.'
     )
   }
   
