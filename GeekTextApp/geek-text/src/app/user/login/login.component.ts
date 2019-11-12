@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Validators, FormControl } from '@angular/forms';
+import { UserService } from '../../services/user.service';
 
 @Component({
   selector: 'app-login',
@@ -14,8 +15,7 @@ export class LoginComponent implements OnInit {
     username = new FormControl('', [Validators.required]);
     pw = new FormControl('', [Validators.required]);
 
-    constructor() { }
-
+    constructor(private UserService: UserService) { }
 
     //error handler methods for login
     getErrorMessageUsername() {
@@ -29,7 +29,14 @@ export class LoginComponent implements OnInit {
                 '';
     }
 
-  ngOnInit() {
-  }
+    clickMessage = '';
+
+    ngOnInit() {
+    }
+
+    login() {
+        //this.UserService.userLogin(this.username, this.password);
+        this.clickMessage = 'CLICK';
+    }
 
 }

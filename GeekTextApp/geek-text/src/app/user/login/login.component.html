@@ -24,6 +24,7 @@
   </p>
 
   <!-- Login button -->
-  <button mat-raised-button color="primary">Login</button>
+  <a [routerLink]="['/user/registration']"><button mat-raised-button color="primary">Register</button></a><br /><br />
+  <button mat-raised-button (click)="login()" color="primary">Login</button>{{clickMessage}}
 
 </div>

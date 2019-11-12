@@ -13,7 +13,6 @@ export class ProfileComponent implements OnInit {
     username = new FormControl('', [Validators.required]);
     fname = new FormControl('', [Validators.required]);
     lname = new FormControl('', [Validators.required]);
-    phone = new FormControl('', [Validators.required]);
 
     panelOpenState = false; //sets both billing and cc expansions closed
 
@@ -60,12 +59,6 @@ export class ProfileComponent implements OnInit {
         return this.lname.hasError('required') ? 'You must enter your last name' :
             '';
     }
-
-    getErrorMessagePhone() {
-        return this.phone.hasError('required') ? 'You must enter a phone number' :
-            '';
-    }
-
 
     //error handler methods for billing
     getErrorMessageAddress() {

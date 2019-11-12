@@ -39,12 +39,6 @@
       </button>
     </mat-form-field><br />
 
-    <!-- Optional Nickname form -->
-    <mat-form-field appearance="outline">
-      <mat-label>Nickname (optional)</mat-label>
-      <input matInput placeholder="">
-    </mat-form-field><br />
-
     <!-- First Name form -->
     <mat-form-field appearance="outline">
       <mat-label>First Name</mat-label>
@@ -59,43 +53,10 @@
       <mat-error *ngIf="lname.invalid">{{getErrorMessageLname()}}</mat-error>
     </mat-form-field><br />
 
-    <!-- Street Address form -->
-    <mat-form-field appearance="outline">
-      <mat-label>Street Address</mat-label>
-      <input matInput placeholder="" [formControl]="address" required>
-      <mat-error *ngIf="address.invalid">{{getErrorMessageAddress()}}</mat-error>
-    </mat-form-field><br />
+    <!-- Login button -->
+    <a [routerLink]="['/user/login']"><button mat-raised-button color="primary">Login</button></a><br />
 
-    <!-- City form -->
-    <mat-form-field appearance="outline">
-      <mat-label>City</mat-label>
-      <input matInput placeholder="" [formControl]="city" required>
-      <mat-error *ngIf="city.invalid">{{getErrorMessageCity()}}</mat-error>
-    </mat-form-field><br />
-
-    <!-- State form -->
-    <mat-form-field appearance="outline">
-      <mat-label>State</mat-label>
-      <input matInput placeholder="" [formControl]="state" required>
-      <mat-error *ngIf="state.invalid">{{getErrorMessageState()}}</mat-error>
-    </mat-form-field><br />
-
-    <!-- Zip Code form -->
-    <mat-form-field appearance="outline">
-      <mat-label>Zip Code</mat-label>
-      <input matInput placeholder="" [formControl]="zip" required>
-      <mat-error *ngIf="zip.invalid">{{getErrorMessageZip()}}</mat-error>
-    </mat-form-field><br />
-
-    <!-- Phone Number form -->
-    <mat-form-field appearance="outline">
-      <mat-label>Phone Number</mat-label>
-      <input matInput placeholder="" [formControl]="phone" required>
-      <mat-error *ngIf="phone.invalid">{{getErrorMessagePhone()}}</mat-error>
-    </mat-form-field><br />
-  </p>
-
-  <!-- Signup button -->
-  <button mat-raised-button color="primary">Login</button>
+    <!-- Signup button -->
+    <button mat-raised-button color="primary">Sign Up</button>
 
 </div>

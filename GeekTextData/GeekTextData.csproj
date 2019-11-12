@@ -50,8 +50,10 @@
   <ItemGroup>
     <Compile Include="DataAccess\BookBrowseData.cs" />
     <Compile Include="DataAccess\CartData.cs" />
+    <Compile Include="DataAccess\UserData.cs" />
     <Compile Include="Models\BookBrowseModel.cs" />
     <Compile Include="Models\CartModel.cs" />
+    <Compile Include="Models\UserModel.cs" />
     <Compile Include="Sql\SqlDataAccess.cs" />
   </ItemGroup>
   <ItemGroup />

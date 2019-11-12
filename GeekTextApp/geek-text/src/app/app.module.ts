@@ -18,6 +18,8 @@ import { UserComponent } from './user/user.component';
 import { LoginComponent } from './user/login/login.component';
 import { RegistrationComponent } from './user/registration/registration.component';
 import { ProfileComponent } from './user/profile/profile.component';
+import { AddToCartComponent } from './components/add-to-cart/add-to-cart.component';
+
 
 @NgModule({
     declarations: [
@@ -30,7 +32,8 @@ import { ProfileComponent } from './user/profile/profile.component';
         UserComponent,
         LoginComponent,
         RegistrationComponent,
-        ProfileComponent
+        ProfileComponent,
+        AddToCartComponent
     ],
     imports: [
         BrowserModule,
@@ -42,7 +45,8 @@ import { ProfileComponent } from './user/profile/profile.component';
         HttpClientModule,
         RouterModule.forRoot([
             { path: '', component: AppComponent },
-            { path: 'shopping-cart', component: ShoppingCartComponent }
+            { path: 'shopping-cart', component: ShoppingCartComponent },
+            { path: 'cart', component: ShoppingCartComponent }
         ])
     ],
     providers: [],

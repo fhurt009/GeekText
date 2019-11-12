@@ -39,15 +39,6 @@
       <mat-error *ngIf="lname.invalid">{{getErrorMessageLname()}}</mat-error>
     </mat-form-field><br />
 
-    <!-- Phone Number form -->
-    <mat-form-field appearance="outline">
-      <mat-label>Phone Number</mat-label>
-      <input matInput placeholder="" [formControl]="phone" required>
-      <mat-error *ngIf="phone.invalid">{{getErrorMessagePhone()}}</mat-error>
-    </mat-form-field><br />
-  </p>
-</div>
-
 <!-- Billing accordians (3) -->
 <div class="billing">
   <mat-accordion>
@@ -340,5 +331,11 @@
 <!-- Save Changes Button -->
 <div>
   <button mat-raised-button color="primary">Save Changes</button>
+  <br />
+</div>
+
+<!-- Logout Button -->
+<div>
+  <a [routerLink]="['/user/login']"><button mat-raised-button color="primary">Logout</button></a>
   <br /><br /><br />
 </div>

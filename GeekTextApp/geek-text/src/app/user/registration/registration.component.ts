@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Validators, FormControl } from '@angular/forms';
+import { UserService } from 'src/app/services/user.service';
 
 @Component({
   selector: 'app-registration',
@@ -17,11 +18,6 @@ export class RegistrationComponent implements OnInit {
     cpw = new FormControl('', [Validators.required]);
     fname = new FormControl('', [Validators.required]);
     lname = new FormControl('', [Validators.required]);
-    address = new FormControl('', [Validators.required]);
-    city = new FormControl('', [Validators.required]);
-    state = new FormControl('', [Validators.required]);
-    zip = new FormControl('', [Validators.required]);
-    phone = new FormControl('', [Validators.required]);
 
     constructor() { }
 
@@ -60,32 +56,6 @@ export class RegistrationComponent implements OnInit {
         return this.lname.hasError('required') ? 'You must enter your last name' :
             '';
     }
-
-    getErrorMessageAddress() {
-        return this.address.hasError('required') ? 'You must enter an address' :
-            '';
-    }
-
-    getErrorMessageCity() {
-        return this.city.hasError('required') ? 'You must enter a city' :
-            '';
-    }
-
-    getErrorMessageState() {
-        return this.state.hasError('required') ? 'You must enter a state' :
-            '';
-    }
-
-    getErrorMessageZip() {
-        return this.zip.hasError('required') ? 'You must enter a zip code' :
-            '';
-    }
-
-    getErrorMessagePhone() {
-        return this.phone.hasError('required') ? 'You must enter a phone number' :
-            '';
-    }
-
 
   ngOnInit() {
   }
