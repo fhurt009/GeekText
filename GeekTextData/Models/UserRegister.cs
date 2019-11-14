@@ -6,20 +6,14 @@ using System.Threading.Tasks;
 
 namespace GeekTextData.Models
 {
-    public class UserModel
+    class UserRegister
     {
-        public int id { get; set; }
+
         public string username { get; set; }
         public string password { get; set; }
         public string email { get; set; }
         public string firstname { get; set; }
         public string lastname { get; set; }
-        public string nickname { get; set; }
-        public string streetAddress { get; set; }
-        public string city { get; set; }
-        public string state { get; set; }
-        public string zipcode { get; set; }
-        public string phonenumber { get; set; }
 
     }
 }

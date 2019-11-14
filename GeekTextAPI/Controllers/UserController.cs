@@ -15,11 +15,18 @@ namespace GeekTextAPI.Controllers
     {
         [HttpGet]
         [Route("api/user")]
-        public List<UserModel> getUser(string username, string password)
+        public List<UserLogin> getUser(string username, string password)
         {
             UserData data = new UserData();
 
             return data.check_login(username, password);
+        }
+
+        public List<UserUnique> getUniqueUsername(string username)
+        {
+            UserData data = new UserData();
+
+            return data.unique_username(username);
         }
     }
 }

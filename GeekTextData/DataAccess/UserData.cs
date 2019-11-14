@@ -10,16 +10,28 @@ namespace GeekTextData.DataAccess
 {
     public class UserData
     {
-        public List<UserModel> check_login(string username, string password)
+        public List<UserLogin> check_login(string username, string password)
         {
             SqlDataAccess sql = new SqlDataAccess();
 
             var p = new { username, password };
 
-            List<UserModel> output = sql.LoadData<UserModel, dynamic>("dbo.check_login", p, "GeekTextDB");
+            List<UserLogin> output = sql.LoadData<UserLogin, dynamic>("dbo.check_login", p, "GeekTextDB");
 
             return output;
         }
 
+        //FIXIT; hindering UserController > user.service
+        public List<UserUnique> unique_username(string username) 
+        { 
+
+            SqlDataAccess sql = new SqlDataAccess();
+
+            var p = new { username };
+
+            var output = sql.LoadData<UserUnique, dynamic>("dbo.unique_username", p, "GeekTextDB");
+
+            return output;
+        }
     }
 }

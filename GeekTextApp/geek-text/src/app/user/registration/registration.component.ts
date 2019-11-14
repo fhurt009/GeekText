@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { Validators, FormControl } from '@angular/forms';
+import { Validators, FormGroup, FormBuilder } from '@angular/forms';
 import { UserService } from 'src/app/services/user.service';
+import { MustMatch } from 'src/app/user/Must-Match.validator';
+import { Observable } from 'rxjs';
+import { Router } from "@angular/router";
 
 @Component({
   selector: 'app-registration',
@@ -9,55 +12,64 @@ import { UserService } from 'src/app/services/user.service';
 })
 export class RegistrationComponent implements OnInit {
 
-    hide = true;//variable for hidden pw
+    registerForm: FormGroup;
+    submitted = false;
 
-    //variables for signup
-    email = new FormControl('', [Validators.required, Validators.email]);
-    username = new FormControl('', [Validators.required]);
-    pw = new FormControl('', [Validators.required]);
-    cpw = new FormControl('', [Validators.required]);
-    fname = new FormControl('', [Validators.required]);
-    lname = new FormControl('', [Validators.required]);
+    constructor(private formBuilder: FormBuilder, private UserService: UserService, private router: Router) { }
 
-    constructor() { }
-
-
-    //error handler methods for signup
-    getErrorMessageEmail() {
-        return this.email.hasError('required') ? 'You must enter an email address' :
-            this.email.hasError('email') ? 'Not a valid email address' :
-                '';
+    ngOnInit() {
+        this.registerForm = this.formBuilder.group({
+            firstName: ['', Validators.required],
+            lastName: ['', Validators.required],
+            username: ['', Validators.required],
+            email: ['', [Validators.required, Validators.email]],
+            password: ['', [Validators.required, Validators.minLength(6)]],
+            confirmPassword: ['', Validators.required],
+        }, {
+            validator: MustMatch('password', 'confirmPassword')
+            //add password criteria validator
+        });
     }
 
-    getErrorMessageUsername() {
-        return this.username.hasError('required') ? 'You must enter a username' :
-            this.username.hasError('username') ? 'Not a valid username' :
-                '';
+    // convenience getter for easy access to form fields
+    get f() { return this.registerForm.controls; }
+
+  //register button clicked
+    onSubmit() {
+        this.submitted = true;
+
+        // stop here if form is invalid
+        if (this.registerForm.invalid) {
+            return;
+        }
+
+        var usernameS: string = this.registerForm.get('username').value;
+        var passwordS: string = this.registerForm.get('password').value;
+        var fNameS: string = this.registerForm.get('firstName').value;
+        var lNameS: string = this.registerForm.get('lastName').value;
+        var emailS: string = this.registerForm.get('email').value;
+
+        /*
+        make sure username is unique with uniqueUsername
+
+        use service to add all strings of forms
+        $id = this.UserService.userLogin(usernameS, passwordS);
+
+        then subscribe them appropriately
+        $id.subscribe(login => {
+            this.id = login[0].id;
+        });
+
+        async to validate
+
+        then route to the login page
+
+        ======================= To Do =======================
+        -fix API for unique usernames
+        -fix API for user registration
+        -finish registration.component.ts
+        */
+
+        
     }
-
-    getErrorMessagePw() {
-        return this.pw.hasError('required') ? 'You must enter a password' :
-            this.pw.hasError('password') ? 'Not a valid password' :
-                '';
-    }
-
-    getErrorMessageCPw() {
-        return this.cpw.hasError('required') ? 'You must confirm password' :
-            this.cpw.hasError('password') ? 'Passwords do not match' :
-                '';
-    }
-
-    getErrorMessageFname() {
-        return this.fname.hasError('required') ? 'You must enter your first name' :
-            '';
-    }
-
-    getErrorMessageLname() {
-        return this.lname.hasError('required') ? 'You must enter your last name' :
-            '';
-    }
-
-  ngOnInit() {
-  }
-
 }

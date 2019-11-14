@@ -13,4 +13,9 @@ export class UserService {
     userLogin(username: string, password: string) {
         return this.http.get(this.baseUrl + 'user?username=' + username + '&password=' + password);
     }
+
+    //api does not get username if_taken; FIXIT
+    uniqueUsername(username: string) {
+        return this.http.get(this.baseUrl + 'user?username=' + username);
+    }
 }

@@ -1,62 +1,65 @@
 <p>registration works!</p>
 
-<h2>Sign Up</h2>
-
-<!-- Registration Forms -->
-<div class="registration">
-  <p>
-    <!-- Email form -->
-    <mat-form-field appearance="outline">
-      <mat-label>Email Address</mat-label>
-      <input matInput placeholder="" [formControl]="email" required>
-      <mat-error *ngIf="email.invalid">{{getErrorMessageEmail()}}</mat-error>
-    </mat-form-field><br />
-
-    <!-- Username form -->
-    <mat-form-field appearance="outline">
-      <mat-label>Username</mat-label>
-      <input matInput placeholder="" [formControl]="username" required>
-      <mat-error *ngIf="username.invalid">{{getErrorMessageUsername()}}</mat-error>
-    </mat-form-field><br />
-
-    <!-- Password form -->
-    <mat-form-field appearance="outline">
-      <mat-label>Password</mat-label>
-      <input matInput placeholder="" [formControl]="pw" required [type]="hide ? 'password' : 'text'">
-      <mat-error *ngIf="pw.invalid">{{getErrorMessagePw()}}</mat-error>
-      <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
-        <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
-      </button>
-    </mat-form-field><br />
-
-    <!-- Confirm Password form -->
-    <mat-form-field appearance="outline">
-      <mat-label>Confirm Password</mat-label>
-      <input matInput placeholder="" [formControl]="cpw" required [type]="hide ? 'password' : 'text'">
-      <mat-error *ngIf="cpw.invalid">{{getErrorMessageCPw()}}</mat-error>
-      <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
-        <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
-      </button>
-    </mat-form-field><br />
-
-    <!-- First Name form -->
-    <mat-form-field appearance="outline">
-      <mat-label>First Name</mat-label>
-      <input matInput placeholder="" [formControl]="fname" required>
-      <mat-error *ngIf="fname.invalid">{{getErrorMessageFname()}}</mat-error>
-    </mat-form-field><br />
-
-    <!-- Last Name form -->
-    <mat-form-field appearance="outline">
-      <mat-label>Last Name</mat-label>
-      <input matInput placeholder="" [formControl]="lname" required>
-      <mat-error *ngIf="lname.invalid">{{getErrorMessageLname()}}</mat-error>
-    </mat-form-field><br />
-
-    <!-- Login button -->
-    <a [routerLink]="['/user/login']"><button mat-raised-button color="primary">Login</button></a><br />
-
-    <!-- Signup button -->
-    <button mat-raised-button color="primary">Sign Up</button>
-
+<div class="card m-3">
+  <h5 class="card-header">Sign Up</h5>
+  <div class="card-body">
+    <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+      <div class="form-row">
+        <div class="form-group col-5">
+          <label>Username</label>
+          <input type="text" formControlName="username" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.username.errors }" />
+          <div *ngIf="submitted && f.username.errors" class="invalid-feedback">
+            <div *ngIf="f.username.errors.required">Username is required</div>
+            <div *ngIf="f.username.errors.username">Username is already taken</div>
+          </div>
+        </div>
+        <div class="form-group col-5">
+          <label>Email</label>
+          <input type="text" formControlName="email" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.email.errors }" />
+          <div *ngIf="submitted && f.email.errors" class="invalid-feedback">
+            <div *ngIf="f.email.errors.required">Email is required</div>
+            <div *ngIf="f.email.errors.email">Email must be a valid email address</div>
+          </div>
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-group col-5">
+          <label>First Name</label>
+          <input type="text" formControlName="firstName" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.firstName.errors }" />
+          <div *ngIf="submitted && f.firstName.errors" class="invalid-feedback">
+            <div *ngIf="f.firstName.errors.required">First Name is required</div>
+          </div>
+        </div>
+        <div class="form-group col-5">
+          <label>Last Name</label>
+          <input type="text" formControlName="lastName" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.lastName.errors }" />
+          <div *ngIf="submitted && f.lastName.errors" class="invalid-feedback">
+            <div *ngIf="f.lastName.errors.required">Last Name is required</div>
+          </div>
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-group col-5">
+          <label>Password</label>
+          <input type="password" formControlName="password" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.password.errors }" />
+          <div *ngIf="submitted && f.password.errors" class="invalid-feedback">
+            <div *ngIf="f.password.errors.required">Password is required</div>
+            <div *ngIf="f.password.errors.minlength">Password must be at least 6 characters</div>
+          </div>
+        </div>
+        <div class="form-group col-5">
+          <label>Confirm Password</label>
+          <input type="password" formControlName="confirmPassword" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.confirmPassword.errors }" />
+          <div *ngIf="submitted && f.confirmPassword.errors" class="invalid-feedback">
+            <div *ngIf="f.confirmPassword.errors.required">Confirm Password is required</div>
+            <div *ngIf="f.confirmPassword.errors.mustMatch">Passwords must match</div>
+          </div>
+        </div>
+      </div>
+      <div class="text-center">
+        <button class="btn btn-primary mr-1">Register</button>
+        <a [routerLink]="['/user/login']"><button class="btn btn-secondary">Login</button></a>
+      </div>
+    </form>
+  </div>
 </div>
