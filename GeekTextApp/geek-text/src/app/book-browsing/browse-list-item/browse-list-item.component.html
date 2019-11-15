@@ -12,14 +12,18 @@
     <h4>by {{book.Authors}}</h4>
 
     <div class="rating">
-      <span *ngFor="let x of [1, 2, 3, 4, 5]">
-        <span class="stars" *ngIf="x <= book.Rating; else blankStar">&#9733;</span>
+      <span class="rating-stars">
+        <span *ngFor="let x of [1, 2, 3, 4, 5]">
+          <span class="star" *ngIf="x <= book.Rating; else blankStar">&#9733;</span>
 
-        <ng-template #blankStar>
-          <span class="stars">&#9734;</span>
-        </ng-template>
+          <ng-template #blankStar>
+            <span class="star">&#9734;</span>
+          </ng-template>
+        </span>
+
+        <span class="rating-tooltip">{{book.Rating | number: '1.0-1'}}</span>
       </span>
-      <span class="reviews">{{book.Reviews}} {{book.Reviews > 1 ? "Reviews" : "Review"}}</span>
+      <span class="rating-reviews">{{book.Reviews}} {{book.Reviews > 1 ? "Reviews" : "Review"}}</span>
     </div>
 
     <h2>{{book.RetailPrice | currency}}</h2>

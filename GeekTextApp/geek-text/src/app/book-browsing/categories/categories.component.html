@@ -10,7 +10,7 @@
         <a [routerLink]="['/browse/genre', 'mystery']">
           <img src="{{topSeller.CoverUrl}}" *ngIf="topSeller.CoverUrl !== null; else noImage" />
         </a>
-        <a class="text-link" [routerLink]="['/browse/genre', 'mystery']">{{topSeller.Name}}</a>
+        <!--<a class="text-link" [routerLink]="['/browse/genre', 'mystery']">{{topSeller.Name}}</a>-->
       </div>
     </mat-grid-tile>
   </mat-grid-list>

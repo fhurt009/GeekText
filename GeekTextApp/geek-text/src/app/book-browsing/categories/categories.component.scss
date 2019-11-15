@@ -50,7 +50,7 @@ hr {
 mat-grid-list {
   margin-left: 12%;
   margin-right: 12%;
-  min-width: 700px;
+  min-width: 800px;
 }
 
 .grid-item {
@@ -67,6 +67,7 @@ img {
 
 .text-link {
   text-align: center;
+  white-space: nowrap;
 }
 
 .stars {
