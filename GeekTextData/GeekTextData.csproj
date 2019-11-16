@@ -53,9 +53,7 @@
     <Compile Include="DataAccess\UserData.cs" />
     <Compile Include="Models\BookBrowseModel.cs" />
     <Compile Include="Models\CartModel.cs" />
-    <Compile Include="Models\UserUnique.cs" />
-    <Compile Include="Models\UserRegister.cs" />
-    <Compile Include="Models\UserLogin.cs" />
+    <Compile Include="Models\UserModel.cs" />
     <Compile Include="Sql\SqlDataAccess.cs" />
   </ItemGroup>
   <ItemGroup />

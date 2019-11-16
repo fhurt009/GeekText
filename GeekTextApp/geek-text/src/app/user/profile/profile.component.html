@@ -1,341 +1,186 @@
-<p>profile works!</p>
-
-<h2>Edit Profile</h2>
-
-<!-- Edit Profile forms -->
-<div class="profile">
-  <p>
-    <!-- Email form -->
-    <mat-form-field appearance="outline">
-      <mat-label>Email Address</mat-label>
-      <input matInput placeholder="" [formControl]="email" required>
-      <mat-error *ngIf="email.invalid">{{getErrorMessageEmail()}}</mat-error>
-    </mat-form-field><br />
-
-    <!-- Username form -->
-    <mat-form-field appearance="outline">
-      <mat-label>Username</mat-label>
-      <input matInput placeholder="" [formControl]="username" required>
-      <mat-error *ngIf="username.invalid">{{getErrorMessageUsername()}}</mat-error>
-    </mat-form-field><br />
-
-    <!-- Optional Nickname form -->
-    <mat-form-field appearance="outline">
-      <mat-label>Nickname (optional)</mat-label>
-      <input matInput placeholder="">
-    </mat-form-field><br />
-
-    <!-- First Name form -->
-    <mat-form-field appearance="outline">
-      <mat-label>First Name</mat-label>
-      <input matInput placeholder="" [formControl]="fname" required>
-      <mat-error *ngIf="fname.invalid">{{getErrorMessageFname()}}</mat-error>
-    </mat-form-field><br />
-
-    <!-- Lasr Name form -->
-    <mat-form-field appearance="outline">
-      <mat-label>Last Name</mat-label>
-      <input matInput placeholder="" [formControl]="lname" required>
-      <mat-error *ngIf="lname.invalid">{{getErrorMessageLname()}}</mat-error>
-    </mat-form-field><br />
-
-<!-- Billing accordians (3) -->
-<div class="billing">
-  <mat-accordion>
-    <mat-expansion-panel>
-      <mat-expansion-panel-header>
-        <mat-panel-title>
-          Billing Address 1
-        </mat-panel-title>
-      </mat-expansion-panel-header>
-
-      <!-- Street Address form -->
-      <mat-form-field appearance="outline">
-        <mat-label>Street Address</mat-label>
-        <input matInput placeholder="" [formControl]="address" required>
-        <mat-error *ngIf="address.invalid">{{getErrorMessageAddress()}}</mat-error>
-      </mat-form-field><br />
-
-      <!-- City form -->
-      <mat-form-field appearance="outline">
-        <mat-label>City</mat-label>
-        <input matInput placeholder="" [formControl]="city" required>
-        <mat-error *ngIf="city.invalid">{{getErrorMessageCity()}}</mat-error>
-      </mat-form-field><br />
-
-      <!-- State form -->
-      <mat-form-field appearance="outline">
-        <mat-label>State</mat-label>
-        <input matInput placeholder="" [formControl]="state" required>
-        <mat-error *ngIf="state.invalid">{{getErrorMessageState()}}</mat-error>
-      </mat-form-field><br />
-
-      <!-- Zip Code form -->
-      <mat-form-field appearance="outline">
-        <mat-label>Zip Code</mat-label>
-        <input matInput placeholder="" [formControl]="zip" required>
-        <mat-error *ngIf="zip.invalid">{{getErrorMessageZip()}}</mat-error>
-      </mat-form-field><br />
-
-      <!-- Option to set to default -->
-      <mat-checkbox>Default billing address</mat-checkbox>
-
-    </mat-expansion-panel>
-    <mat-expansion-panel>
-      <mat-expansion-panel-header>
-        <mat-panel-title>
-          Billing Address 2
-        </mat-panel-title>
-      </mat-expansion-panel-header>
-
-      <!-- Street Address form -->
-      <mat-form-field appearance="outline">
-        <mat-label>Street Address</mat-label>
-        <input matInput placeholder="" [formControl]="address" required>
-        <mat-error *ngIf="address.invalid">{{getErrorMessageAddress()}}</mat-error>
-      </mat-form-field><br />
-
-      <!-- City form -->
-      <mat-form-field appearance="outline">
-        <mat-label>City</mat-label>
-        <input matInput placeholder="" [formControl]="city" required>
-        <mat-error *ngIf="city.invalid">{{getErrorMessageCity()}}</mat-error>
-      </mat-form-field><br />
-
-      <!-- State form -->
-      <mat-form-field appearance="outline">
-        <mat-label>State</mat-label>
-        <input matInput placeholder="" [formControl]="state" required>
-        <mat-error *ngIf="state.invalid">{{getErrorMessageState()}}</mat-error>
-      </mat-form-field><br />
-
-      <!-- Zip Code form -->
-      <mat-form-field appearance="outline">
-        <mat-label>Zip Code</mat-label>
-        <input matInput placeholder="" [formControl]="zip" required>
-        <mat-error *ngIf="zip.invalid">{{getErrorMessageZip()}}</mat-error>
-      </mat-form-field><br />
-
-      <!-- Option to set as default -->
-      <mat-checkbox>Default billing address</mat-checkbox>
-
-    </mat-expansion-panel>
-    <mat-expansion-panel>
-
-      <mat-expansion-panel-header>
-        <mat-panel-title>
-          Billing Address 3
-        </mat-panel-title>
-      </mat-expansion-panel-header>
-
-      <!-- Street Address form -->
-      <mat-form-field appearance="outline">
-        <mat-label>Street Address</mat-label>
-        <input matInput placeholder="" [formControl]="address" required>
-        <mat-error *ngIf="address.invalid">{{getErrorMessageAddress()}}</mat-error>
-      </mat-form-field><br />
-
-      <!-- City form -->
-      <mat-form-field appearance="outline">
-        <mat-label>City</mat-label>
-        <input matInput placeholder="" [formControl]="city" required>
-        <mat-error *ngIf="city.invalid">{{getErrorMessageCity()}}</mat-error>
-      </mat-form-field><br />
-
-      <!-- State form -->
-      <mat-form-field appearance="outline">
-        <mat-label>State</mat-label>
-        <input matInput placeholder="" [formControl]="state" required>
-        <mat-error *ngIf="state.invalid">{{getErrorMessageState()}}</mat-error>
-      </mat-form-field><br />
-
-      <!-- Zip Code form -->
-      <mat-form-field appearance="outline">
-        <mat-label>Zip Code</mat-label>
-        <input matInput placeholder="" [formControl]="zip" required>
-        <mat-error *ngIf="zip.invalid">{{getErrorMessageZip()}}</mat-error>
-      </mat-form-field><br />
-
-      <!-- Option to set as default -->
-      <mat-checkbox>Default billing address</mat-checkbox>
-    </mat-expansion-panel>
-  </mat-accordion><br /><br /><br />
+<div class="card m-3">
+  <h5 class="card-header">Profile</h5>
+  <div class="card-body">
+    <form [formGroup]="profileForm">
+      <div class="form-row">
+        <div class="form-group col-5">
+          <label>Username</label>
+          <input type="text" formControlName="username" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.username.errors }" />
+          <div *ngIf="submitted && f.username.errors" class="invalid-feedback">
+            <div *ngIf="f.username.errors.required">Username is required</div>
+          </div>
+        </div>
+        <div class="form-group col-5">
+          <label>Email</label>
+          <input type="text" formControlName="email" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.email.errors }" />
+          <div *ngIf="submitted && f.email.errors" class="invalid-feedback">
+            <div *ngIf="f.email.errors.required">Email is required</div>
+            <div *ngIf="f.email.errors.email">Email must be a valid email address</div>
+          </div>
+        </div>
+      </div>
+      <div><label *ngIf="!isHidden" style="color:red" [(ngModel)]="badUsername">Username already taken</label></div>
+      <div class="form-row">
+        <div class="form-group col-5">
+          <label>First Name</label>
+          <input type="text" formControlName="firstName" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.firstName.errors }" />
+          <div *ngIf="submitted && f.firstName.errors" class="invalid-feedback">
+            <div *ngIf="f.firstName.errors.required">First Name is required</div>
+          </div>
+        </div>
+        <div class="form-group col-5">
+          <label>Last Name</label>
+          <input type="text" formControlName="lastName" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.lastName.errors }" />
+          <div *ngIf="submitted && f.lastName.errors" class="invalid-feedback">
+            <div *ngIf="f.lastName.errors.required">Last Name is required</div>
+          </div>
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-group col-5">
+          <label>Nickname (Optional)</label>
+          <input type="text" formControlName="nickname" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.nickname.errors }" />
+          <div *ngIf="submitted && f.nickname.errors" class="invalid-feedback">
+          </div>
+        </div>
+        <div class="form-group col-5" style="visibility: hidden;">
+          <label>Nickname (Optional)</label>
+          <input type="text" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.nickname.errors }" />
+          <div *ngIf="submitted && f.nickname.errors" class="invalid-feedback">
+          </div>
+        </div>
+      </div>
+      <br /><h3 class="text-left">Credit Cards</h3><br />
+      <div class="form-row">
+        <div class="form-group col-5">
+          <label>Cardholder's Name</label>
+          <input type="text" formControlName="nameCC" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.nameCC.errors }" />
+          <div *ngIf="submitted && f.nameCC.errors" class="invalid-feedback">
+            <div *ngIf="f.nameCC.errors.required">Cardholder's Name is required</div>
+          </div>
+        </div>
+        <div class="form-group col-5">
+          <label>Credit Card Number</label>
+          <input type="text" formControlName="ccNum" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.ccNum.errors }" />
+          <div *ngIf="submitted && f.ccNum.errors" class="invalid-feedback">
+            <div *ngIf="f.ccNum.errors.required">Credit Card Number is required</div>
+          </div>
+        </div>
+        <div class="form-group col-5">
+          <label>Expiration Date</label>
+          <input type="text" formControlName="expire" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.expire.errors }" />
+          <div *ngIf="submitted && f.expire.errors" class="invalid-feedback">
+            <div *ngIf="f.expire.errors.required">Expiration Date is required</div>
+          </div>
+        </div>
+        <div class="form-group col-5">
+          <label>CSV</label>
+          <input type="text" formControlName="csv" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.csv.errors }" />
+          <div *ngIf="submitted && f.csv.errors" class="invalid-feedback">
+            <div *ngIf="f.csv.errors.required">CSV is required</div>
+          </div>
+        </div>
+      </div>
+      <br /> <br />
+      <div class="form-row">
+        <div class="form-group col-5">
+          <label>Cardholder's Name</label>
+          <input type="text" formControlName="nameCC2" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.nameCC2.errors }" />
+          <div *ngIf="submitted && f.nameCC2.errors" class="invalid-feedback">
+            <div *ngIf="f.nameCC2.errors.required">Cardholder's Name is required</div>
+          </div>
+        </div>
+        <div class="form-group col-5">
+          <label>Credit Card Number</label>
+          <input type="text" formControlName="ccNum2" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.ccNum2.errors }" />
+          <div *ngIf="submitted && f.ccNum2.errors" class="invalid-feedback">
+            <div *ngIf="f.ccNum2.errors.required">Credit Card Number is required</div>
+          </div>
+        </div>
+        <div class="form-group col-5">
+          <label>Expiration Date</label>
+          <input type="text" formControlName="expire2" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.expire2.errors }" />
+          <div *ngIf="submitted && f.expire2.errors" class="invalid-feedback">
+            <div *ngIf="f.expire2.errors.required">Expiration Date is required</div>
+          </div>
+        </div>
+        <div class="form-group col-5">
+          <label>CSV</label>
+          <input type="text" formControlName="csv2" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.csv2.errors }" />
+          <div *ngIf="submitted && f.csv2.errors" class="invalid-feedback">
+            <div *ngIf="f.csv2.errors.required">CSV is required</div>
+          </div>
+        </div>
+      </div>
+      <br /><h3 class="text-left">Shipping Addresses</h3><br />
+      <div class="form-row">
+        <div class="form-group col-5">
+          <label>Street Address</label>
+          <input type="text" formControlName="address" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.address.errors }" />
+          <div *ngIf="submitted && f.address.errors" class="invalid-feedback">
+            <div *ngIf="f.address.errors.required">Street Address is required</div>
+          </div>
+        </div>
+        <div class="form-group col-5">
+          <label>City</label>
+          <input type="text" formControlName="city" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.city.errors }" />
+          <div *ngIf="submitted && f.city.errors" class="invalid-feedback">
+            <div *ngIf="f.city.errors.required">City is required</div>
+          </div>
+        </div>
+        <div class="form-group col-5">
+          <label>State</label>
+          <input type="text" formControlName="state" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.state.errors }" />
+          <div *ngIf="submitted && f.state.errors" class="invalid-feedback">
+            <div *ngIf="f.state.errors.required">Expiration Date is required</div>
+          </div>
+        </div>
+        <div class="form-group col-5">
+          <label>Zip Code</label>
+          <input type="text" formControlName="zip" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.zip.errors }" />
+          <div *ngIf="submitted && f.zip.errors" class="invalid-feedback">
+            <div *ngIf="f.zip.errors.required">Zip Code is required</div>
+          </div>
+        </div>
+      </div>
+      <br /> <br />
+      <div class="form-row">
+        <div class="form-group col-5">
+          <label>Street Address</label>
+          <input type="text" formControlName="address2" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.address2.errors }" />
+          <div *ngIf="submitted && f.address2.errors" class="invalid-feedback">
+            <div *ngIf="f.address2.errors.required">Street Address is required</div>
+          </div>
+        </div>
+        <div class="form-group col-5">
+          <label>City</label>
+          <input type="text" formControlName="city2" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.city2.errors }" />
+          <div *ngIf="submitted && f.city2.errors" class="invalid-feedback">
+            <div *ngIf="f.city2.errors.required">City is required</div>
+          </div>
+        </div>
+        <div class="form-group col-5">
+          <label>State</label>
+          <input type="text" formControlName="state2" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.state2.errors }" />
+          <div *ngIf="submitted && f.state2.errors" class="invalid-feedback">
+            <div *ngIf="f.state2.errors.required">Expiration Date is required</div>
+          </div>
+        </div>
+        <div class="form-group col-5">
+          <label>Zip Code</label>
+          <input type="text" formControlName="zip2" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.zip2.errors }" />
+          <div *ngIf="submitted && f.zip2.errors" class="invalid-feedback">
+            <div *ngIf="f.zip2.errors.required">Zip Code is required</div>
+          </div>
+        </div>
+      </div>
+      <br /> <br />
+      <div class="text-left">
+        <button class="btn btn-primary mr-1" (click)="onSubmit()">Save Changes</button>
+        <a [routerLink]="['/user/changepw']"><button class="btn btn-secondary">Change Password</button></a>
+        <a [routerLink]="['/user/login']"><button class="btn btn-primary mr-1">Logout</button></a>
+</div>
+    </form>
+  </div>
 </div>
 
-
-<!-- Payment Methods accordian (3) -->
-<div class="paymentmethods">
-  <mat-accordion>
-    <mat-expansion-panel>
-      <mat-expansion-panel-header>
-        <mat-panel-title>
-          Credit Card 1
-        </mat-panel-title>
-      </mat-expansion-panel-header>
-
-      <!-- Cardholder Name form -->
-      <mat-form-field appearance="outline">
-        <mat-label>Cardholder's Name</mat-label>
-        <input matInput placeholder="" [formControl]="nameCC" required>
-        <mat-error *ngIf="nameCC.invalid">{{getErrorMessageNameCC()}}</mat-error>
-      </mat-form-field><br />
-
-      <!-- Card Num form -->
-      <mat-form-field appearance="outline">
-        <mat-label>Card's Number</mat-label>
-        <input matInput placeholder="" [formControl]="ccNum" required>
-        <mat-error *ngIf="ccNum.invalid">{{getErrorMessageccNum()}}</mat-error>
-      </mat-form-field><br />
-
-      <!-- Expire Date form -->
-      <mat-form-field appearance="outline">
-        <mat-label>Expiration Date</mat-label>
-        <input matInput placeholder="" [formControl]="expire" required>
-        <mat-error *ngIf="expire.invalid">{{getErrorMessageExpire()}}</mat-error>
-      </mat-form-field><br />
-
-      <!-- CSV form -->
-      <mat-form-field appearance="outline">
-        <mat-label>CSV</mat-label>
-        <input matInput placeholder="" [formControl]="csv" required>
-        <mat-error *ngIf="csv.invalid">{{getErrorMessageCSV()}}</mat-error>
-      </mat-form-field><br />
-
-      <!-- Option to set as default -->
-      <mat-checkbox>Default payment method</mat-checkbox>
-
-    </mat-expansion-panel>
-    <mat-expansion-panel>
-      <mat-expansion-panel-header>
-        <mat-panel-title>
-          Credit Card 2
-        </mat-panel-title>
-      </mat-expansion-panel-header>
-
-      <!-- Cardholder Name form -->
-      <mat-form-field appearance="outline">
-        <mat-label>Cardholder's Name</mat-label>
-        <input matInput placeholder="" [formControl]="nameCC" required>
-        <mat-error *ngIf="nameCC.invalid">{{getErrorMessageNameCC()}}</mat-error>
-      </mat-form-field><br />
-
-      <!-- Card Num form -->
-      <mat-form-field appearance="outline">
-        <mat-label>Card's Number</mat-label>
-        <input matInput placeholder="" [formControl]="ccNum" required>
-        <mat-error *ngIf="ccNum.invalid">{{getErrorMessageccNum()}}</mat-error>
-      </mat-form-field><br />
-
-      <!-- Expire Date form -->
-      <mat-form-field appearance="outline">
-        <mat-label>Expiration Date</mat-label>
-        <input matInput placeholder="" [formControl]="expire" required>
-        <mat-error *ngIf="expire.invalid">{{getErrorMessageExpire()}}</mat-error>
-      </mat-form-field><br />
-
-      <!-- CSV form -->
-      <mat-form-field appearance="outline">
-        <mat-label>CSV</mat-label>
-        <input matInput placeholder="" [formControl]="csv" required>
-        <mat-error *ngIf="csv.invalid">{{getErrorMessageCSV()}}</mat-error>
-      </mat-form-field><br />
-
-      <!-- Option to set as default -->
-      <mat-checkbox>Default payment method</mat-checkbox>
-    </mat-expansion-panel>
-    <mat-expansion-panel>
-
-      <mat-expansion-panel-header>
-        <mat-panel-title>
-          Credit Card 3
-        </mat-panel-title>
-      </mat-expansion-panel-header>
-
-      <!-- Cardholder Name form -->
-      <mat-form-field appearance="outline">
-        <mat-label>Cardholder's Name</mat-label>
-        <input matInput placeholder="" [formControl]="nameCC" required>
-        <mat-error *ngIf="nameCC.invalid">{{getErrorMessageNameCC()}}</mat-error>
-      </mat-form-field><br />
-
-      <!-- Card Num form -->
-      <mat-form-field appearance="outline">
-        <mat-label>Card's Number</mat-label>
-        <input matInput placeholder="" [formControl]="ccNum" required>
-        <mat-error *ngIf="ccNum.invalid">{{getErrorMessageccNum()}}</mat-error>
-      </mat-form-field><br />
-
-      <!-- Expire Date form -->
-      <mat-form-field appearance="outline">
-        <mat-label>Expiration Date</mat-label>
-        <input matInput placeholder="" [formControl]="expire" required>
-        <mat-error *ngIf="expire.invalid">{{getErrorMessageExpire()}}</mat-error>
-      </mat-form-field><br />
-
-      <!-- CSV form -->
-      <mat-form-field appearance="outline">
-        <mat-label>CSV</mat-label>
-        <input matInput placeholder="" [formControl]="csv" required>
-        <mat-error *ngIf="csv.invalid">{{getErrorMessageCSV()}}</mat-error>
-      </mat-form-field><br />
-
-      <!-- Option to set as default -->
-      <mat-checkbox>Default payment method</mat-checkbox>
-    </mat-expansion-panel>
-  </mat-accordion><br /><br /><br />
-</div>
-
-<!-- Change Password accordian (1) -->
-<div class="changepw">
-  <mat-accordion>
-    <mat-expansion-panel>
-      <mat-expansion-panel-header>
-        <mat-panel-title>
-          Change Password
-        </mat-panel-title>
-      </mat-expansion-panel-header>
-
-      <!-- Old Password form -->
-      <mat-form-field appearance="outline">
-        <mat-label>Old Password</mat-label>
-        <input matInput placeholder="" [formControl]="oldpw" required [type]="hide ? 'password' : 'text'">
-        <mat-error *ngIf="oldpw.invalid">{{getErrorMessageOldPw()}}</mat-error>
-        <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
-          <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
-        </button>
-      </mat-form-field><br />
-
-      <!-- New Password form -->
-      <mat-form-field appearance="outline">
-        <mat-label>New Password</mat-label>
-        <input matInput placeholder="" [formControl]="newpw" required [type]="hide ? 'password' : 'text'">
-        <mat-error *ngIf="newpw.invalid">{{getErrorMessageNewPw()}}</mat-error>
-        <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
-          <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
-        </button>
-      </mat-form-field><br />
-
-      <!-- Confirm Password form -->
-      <mat-form-field appearance="outline">
-        <mat-label>Confirm Password</mat-label>
-        <input matInput placeholder="" [formControl]="cpw" required [type]="hide ? 'password' : 'text'">
-        <mat-error *ngIf="cpw.invalid">{{getErrorMessageCPw()}}</mat-error>
-        <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
-          <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
-        </button>
-      </mat-form-field><br />
-    </mat-expansion-panel>
-  </mat-accordion><br /><br /><br />
-</div>
-
-<!-- Save Changes Button -->
-<div>
-  <button mat-raised-button color="primary">Save Changes</button>
-  <br />
-</div>
-
-<!-- Logout Button -->
-<div>
-  <a [routerLink]="['/user/login']"><button mat-raised-button color="primary">Logout</button></a>
-  <br /><br /><br />
-</div>

@@ -19,6 +19,7 @@ import { LoginComponent } from './user/login/login.component';
 import { RegistrationComponent } from './user/registration/registration.component';
 import { ProfileComponent } from './user/profile/profile.component';
 import { AddToCartComponent } from './components/add-to-cart/add-to-cart.component';
+import { ChangepwComponent } from './user/changepw/changepw.component';
 
 
 @NgModule({
@@ -33,7 +34,8 @@ import { AddToCartComponent } from './components/add-to-cart/add-to-cart.compone
         LoginComponent,
         RegistrationComponent,
         ProfileComponent,
-        AddToCartComponent
+        AddToCartComponent,
+        ChangepwComponent
     ],
     imports: [
         BrowserModule,

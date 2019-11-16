@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpErrorResponse } from '@angular/common/http';
+import { HttpClient, HttpParams, HttpHeaders } from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root'
@@ -11,11 +11,22 @@ export class UserService {
     constructor(private http: HttpClient) { }
 
     userLogin(username: string, password: string) {
-        return this.http.get(this.baseUrl + 'user?username=' + username + '&password=' + password);
+        return this.http.get(this.baseUrl + 'user/login?username=' + username + '&password=' + password);
     }
 
-    //api does not get username if_taken; FIXIT
     uniqueUsername(username: string) {
-        return this.http.get(this.baseUrl + 'user?username=' + username);
+        return this.http.get(this.baseUrl + 'user/uniqueUsername?username=' + username);
     }
+
+    pwMatch(id: number, password: string) {
+        return this.http.get(this.baseUrl + 'user/pwMatch?id=' + id + '&password=' + password);
+    }
+
+    register(username: string, password: string, email: string, firstname: string, lastname: string) {
+        const data = { 'username': username, 'password': password, 'email': email, 'firstname': firstname, 'lastname': lastname };
+        const config = { headers: new HttpHeaders().set('Content-Type', 'application/json') };
+
+        return this.http.post(this.baseUrl + 'user/register', data, config);
+    }
+
 }

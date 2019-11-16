@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { Validators, FormControl } from '@angular/forms';
+import { Validators, FormGroup, FormBuilder } from '@angular/forms';
+import { UserService } from '../../services/user.service';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-profile',
@@ -8,124 +10,60 @@ import { Validators, FormControl } from '@angular/forms';
 })
 export class ProfileComponent implements OnInit {
 
-    //profile variables
-    email = new FormControl('', [Validators.required, Validators.email]);
-    username = new FormControl('', [Validators.required]);
-    fname = new FormControl('', [Validators.required]);
-    lname = new FormControl('', [Validators.required]);
+    profileForm: FormGroup;
+    submitted = false;
 
-    panelOpenState = false; //sets both billing and cc expansions closed
+    isHidden: boolean = true;
+    badUsername: string = '';
 
-    //billing variables
-    address = new FormControl('', [Validators.required]);
-    city = new FormControl('', [Validators.required]);
-    state = new FormControl('', [Validators.required]);
-    zip = new FormControl('', [Validators.required]);
+    constructor(private formBuilder: FormBuilder, private UserService: UserService) { }
 
-    //cc variables
-    nameCC = new FormControl('', [Validators.required]);
-    ccNum = new FormControl('', [Validators.required]);
-    expire = new FormControl('', [Validators.required]);
-    csv = new FormControl('', [Validators.required]);
-
-    hide = true; //variable for hidden pw
-
-    //change password variables
-    oldpw = new FormControl('', [Validators.required]);
-    newpw = new FormControl('', [Validators.required]);
-    cpw = new FormControl('', [Validators.required]);
-
-    constructor() { }
-
-    //error handler methods for profile
-    getErrorMessageEmail() {
-        return this.email.hasError('required') ? 'You must enter an email address' :
-            this.email.hasError('email') ? 'Not a valid email address' :
-                '';
+    ngOnInit() {
+        this.profileForm = this.formBuilder.group({
+            username: ['', Validators.required],
+            email: ['', Validators.required],
+            firstName: ['', Validators.required],
+            lastName: ['', Validators.required],
+            nickname: ['', Validators.required],
+            opassword: ['', Validators.required],
+            npassword: ['', Validators.required],
+            confirmPassword: ['', [Validators.required]],
+            nameCC: ['', Validators.required],
+            ccNUm: ['', Validators.required],
+            expire: ['', Validators.required],
+            csv: ['', Validators.required],
+            nameCC2: ['', Validators.required],
+            ccNUm2: ['', Validators.required],
+            expire2: ['', Validators.required],
+            csv2: ['', Validators.required],
+            address: ['', Validators.required],
+            city: ['', Validators.required],
+            state: ['', Validators.required],
+            zip: ['', Validators.required],
+            address2: ['', Validators.required],
+            city2: ['', Validators.required],
+            state2: ['', Validators.required],
+            zip2: ['', Validators.required],
+        });
     }
 
-    getErrorMessageUsername() {
-        return this.username.hasError('required') ? 'You must enter a username' :
-            this.username.hasError('username') ? 'Not a valid username' :
-                '';
-    }
+    // convenience getter for easy access to form fields
+    get f() { return this.profileForm.controls; }
 
-    getErrorMessageFname() {
-        return this.fname.hasError('required') ? 'You must enter your first name' :
-            '';
-    }
+    //save changes button clicked
+    onSubmit() {
 
-    getErrorMessageLname() {
-        return this.lname.hasError('required') ? 'You must enter your last name' :
-            '';
-    }
+        this.submitted = true;
 
-    //error handler methods for billing
-    getErrorMessageAddress() {
-        return this.address.hasError('required') ? 'You must enter an address' :
-            '';
-    }
-
-    getErrorMessageCity() {
-        return this.city.hasError('required') ? 'You must enter a city' :
-            '';
-    }
-
-    getErrorMessageState() {
-        return this.state.hasError('required') ? 'You must enter a state' :
-            '';
-    }
-
-    getErrorMessageZip() {
-        return this.zip.hasError('required') ? 'You must enter a zip code' :
-            '';
+        // stop here if form is invalid
+        if (this.profileForm.invalid) {
+            return;
+        }
     }
 
 
-    //error handler methods for cc
-    getErrorMessageNameCC() {
-        return this.nameCC.hasError('required') ? 'You must enter the cardholders name' :
-            '';
+    //defines delays in ts
+    delay(ms: number) {
+        return new Promise(resolve => setTimeout(resolve, ms));
     }
-
-    getErrorMessageccNum() {
-        return this.ccNum.hasError('required') ? 'You must enter the cards number' :
-            this.ccNum.hasError('ccNum') ? 'Invalid card number' :
-                '';
-    }
-
-    getErrorMessageExpire() {
-        return this.expire.hasError('required') ? 'You must enter a valid expliration date' :
-            this.expire.hasError('expire') ? 'Card expired' :
-                '';
-    }
-
-    getErrorMessageCSV() {
-        return this.csv.hasError('required') ? 'You must enter a valid CSV' :
-            '';
-    }
-
-
-    //error handler methods for change password
-    getErrorMessageOldPw() {
-        return this.oldpw.hasError('required') ? 'You must enter your old password' :
-            this.oldpw.hasError('password') ? 'Not a valid password' :
-                '';
-    }
-
-    getErrorMessageNewPw() {
-        return this.newpw.hasError('required') ? 'You must enter a new password' :
-            this.newpw.hasError('password') ? 'Not a valid password' :
-                '';
-    }
-
-    getErrorMessageCPw() {
-        return this.cpw.hasError('required') ? 'You must confirm password' :
-            this.cpw.hasError('password') ? 'Passwords do not match' :
-                '';
-    }
-
-  ngOnInit() {
-  }
-
 }

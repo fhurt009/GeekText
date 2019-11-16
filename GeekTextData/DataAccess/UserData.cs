@@ -10,28 +10,49 @@ namespace GeekTextData.DataAccess
 {
     public class UserData
     {
-        public List<UserLogin> check_login(string username, string password)
+        public List<UserModel> check_login(string username, string password)
         {
             SqlDataAccess sql = new SqlDataAccess();
 
             var p = new { username, password };
 
-            List<UserLogin> output = sql.LoadData<UserLogin, dynamic>("dbo.check_login", p, "GeekTextDB");
+            List<UserModel> output = sql.LoadData<UserModel, dynamic>("dbo.check_login", p, "GeekTextDB");
 
             return output;
         }
 
-        //FIXIT; hindering UserController > user.service
-        public List<UserUnique> unique_username(string username) 
+        public List<UserModel> unique_username(string username) 
         { 
 
             SqlDataAccess sql = new SqlDataAccess();
 
             var p = new { username };
 
-            var output = sql.LoadData<UserUnique, dynamic>("dbo.unique_username", p, "GeekTextDB");
+            var output = sql.LoadData<UserModel, dynamic>("dbo.unique_username", p, "GeekTextDB");
 
             return output;
+        }
+
+        public List<UserModel> pwMatch(int id, string password)
+        {
+
+            SqlDataAccess sql = new SqlDataAccess();
+
+            var p = new { id, password };
+
+            var output = sql.LoadData<UserModel, dynamic>("dbo.check_password", p, "GeekTextDB");
+
+            return output;
+        }
+
+        public void register(string username, string password, string email, string firstname, string lastname)
+        {
+
+            SqlDataAccess sql = new SqlDataAccess();
+
+            var p = new { username, password, email, firstname, lastname };
+            
+            sql.SaveData("dbo.register_user", p, "GeekTextDB");
         }
     }
 }

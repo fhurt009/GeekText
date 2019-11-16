@@ -23,7 +23,7 @@ export class LoginComponent implements OnInit {
     ngOnInit() {
         this.loginForm = this.formBuilder.group({
             username: ['', Validators.required],
-            password: ['', [Validators.required, Validators.minLength(5)]]
+            password: ['', [Validators.required]]
         });
     }
 
@@ -53,12 +53,12 @@ export class LoginComponent implements OnInit {
         //subscribes user id into first index of login array
         $id.subscribe(login => {
             this.id = login[0].id;
-            //console.log('users Id: '+ this.id);
+            console.log('users Id: '+ this.id); //remove @ final product
         });
 
         //valid login redirects you to home page
         (async () => {
-            await this.delay(500);
+            await this.delay(1000);
 
             //redirects to homepage if the id is no longer 0 (a user is logged in)
             if (this.id != 0) {

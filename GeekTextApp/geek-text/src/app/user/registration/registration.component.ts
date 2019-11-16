@@ -15,6 +15,9 @@ export class RegistrationComponent implements OnInit {
     registerForm: FormGroup;
     submitted = false;
 
+    isHidden: boolean = true;
+    badUsername: string = '';
+
     constructor(private formBuilder: FormBuilder, private UserService: UserService, private router: Router) { }
 
     ngOnInit() {
@@ -23,19 +26,29 @@ export class RegistrationComponent implements OnInit {
             lastName: ['', Validators.required],
             username: ['', Validators.required],
             email: ['', [Validators.required, Validators.email]],
-            password: ['', [Validators.required, Validators.minLength(6)]],
+            password: ['',
+                [Validators.required,
+                Validators.pattern('(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[$@$!%*?&])[A-Za-z\d$@$!%*?&].{7,}')]
+            ],
             confirmPassword: ['', Validators.required],
         }, {
             validator: MustMatch('password', 'confirmPassword')
-            //add password criteria validator
         });
     }
 
     // convenience getter for easy access to form fields
     get f() { return this.registerForm.controls; }
 
-  //register button clicked
+    //holds username value
+    username: string = '';
+
+    //holds register value
+    register: string = '';
+
+    //register button clicked
     onSubmit() {
+        var $taken: Observable<any>;
+        var $newUser: Observable<any>;
         this.submitted = true;
 
         // stop here if form is invalid
@@ -49,27 +62,41 @@ export class RegistrationComponent implements OnInit {
         var lNameS: string = this.registerForm.get('lastName').value;
         var emailS: string = this.registerForm.get('email').value;
 
-        /*
-        make sure username is unique with uniqueUsername
+        //checks if username is taken
+        $taken = this.UserService.uniqueUsername(usernameS);
 
-        use service to add all strings of forms
-        $id = this.UserService.userLogin(usernameS, passwordS);
-
-        then subscribe them appropriately
-        $id.subscribe(login => {
-            this.id = login[0].id;
+        //subscribes string value into this.username
+        $taken.subscribe(is_Taken => {
+            this.username = is_Taken[0].is_taken;
+            console.log('is taken: '+ this.username); //remove @ final product
         });
 
-        async to validate
+        //validates username
+        (async () => {
+            await this.delay(200);
 
-        then route to the login page
+            //if username is taken, show error
+            if (this.username == 'true') {
+                this.isHidden = false;
+            }
+            //username is not taken and registration was successful. takes you to login page to login
+            else {
+                this.isHidden = true;
 
-        ======================= To Do =======================
-        -fix API for unique usernames
-        -fix API for user registration
-        -finish registration.component.ts
-        */
+                //posts new user in database
+                $newUser = this.UserService.register(usernameS, passwordS, emailS, fNameS, lNameS);
+                $newUser.subscribe();
+                console.log('new user: ' + usernameS, passwordS, emailS, fNameS, lNameS);
 
-        
+                this.router.navigate(['/user/login']);
+            }
+
+        })();
+
+    }
+
+    //defines delays in ts
+    delay(ms: number) {
+        return new Promise(resolve => setTimeout(resolve, ms));
     }
 }

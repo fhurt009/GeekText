@@ -7,6 +7,7 @@ using System.Web.Http;
 using GeekTextData.DataAccess;
 using GeekTextData.Models;
 using System.Web.Http.Cors;
+using Newtonsoft.Json.Linq;
 
 namespace GeekTextAPI.Controllers
 {
@@ -14,19 +15,46 @@ namespace GeekTextAPI.Controllers
     public class UserController : ApiController
     {
         [HttpGet]
-        [Route("api/user")]
-        public List<UserLogin> getUser(string username, string password)
+        [Route("api/user/login")]
+        public List<UserModel> getUser(string username, string password)
         {
             UserData data = new UserData();
 
             return data.check_login(username, password);
         }
 
-        public List<UserUnique> getUniqueUsername(string username)
+        [HttpGet]
+        [Route("api/user/uniqueUsername")]
+        public List<UserModel> getUniqueUsername(string username)
         {
             UserData data = new UserData();
 
             return data.unique_username(username);
         }
+
+        [HttpGet]
+        [Route("api/user/pwMatch")]
+        public List<UserModel> getPwMatch(int id, string password)
+        {
+            UserData data = new UserData();
+
+            return data.pwMatch(id, password);
+        }
+
+        [HttpPost]
+        [Route("api/user/register")]
+        public void postUser([FromBody] JObject obj)
+        {
+            UserData data = new UserData();
+
+            string username = obj["username"].Value<string>();
+            string password = obj["password"].Value<string>();
+            string email = obj["email"].Value<string>();
+            string firstname = obj["firstname"].Value<string>();
+            string lastname = obj["lastname"].Value<string>();
+
+            data.register(username, password, email, firstname, lastname);
+        }
+
     }
 }
