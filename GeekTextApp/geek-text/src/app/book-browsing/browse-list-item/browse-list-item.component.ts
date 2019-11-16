@@ -10,7 +10,7 @@ export class BrowseListItemComponent implements OnInit {
 
     @Input() book: any;
 
-    constructor() { }
+    constructor( ) { }
 
     ngOnInit() {
     }

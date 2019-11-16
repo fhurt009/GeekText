@@ -1,38 +1,97 @@
-import {MediaMatcher} from '@angular/cdk/layout';
-import {ChangeDetectorRef, Component, OnDestroy} from '@angular/core';
+import { Component, OnInit} from '@angular/core';
+import { Book } from '../../models/book.model';
+import { ShoppingCartDataService } from '../../services/shopping-cart-data.service';
 
 @Component({
   selector: 'app-shopping-cart',
   templateUrl: './shopping-cart.component.html',
   styleUrls: ['./shopping-cart.component.scss']
 })
-export class ShoppingCartComponent implements OnDestroy {
+export class ShoppingCartComponent implements OnInit {
+  cartDataSource = null;
+  savedForLaterDataSource = null;
+  displayedColumns: string[] = ['CoverUrl', 'Name', 'Author', 'SaveForLater', 'Price', 'Quantity', 'Delete' ]
+  userId: number = 16;
   
-    mobileQuery: MediaQueryList;
-  
-    fillerNav = Array.from({length: 50}, (_, i) => `Nav Item ${i + 1}`);
-  
-    fillerContent = Array.from({length: 50}, () =>
-        `Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
-         labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco
-         laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in
-         voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat
-         cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.`);
-  
-    private _mobileQueryListener: () => void;
-  
-    constructor(changeDetectorRef: ChangeDetectorRef, media: MediaMatcher) {
-      this.mobileQuery = media.matchMedia('(max-width: 600px)');
-      this._mobileQueryListener = () => changeDetectorRef.detectChanges();
-      this.mobileQuery.addListener(this._mobileQueryListener);
-    }
-  
-    ngOnDestroy(): void {
-      this.mobileQuery.removeListener(this._mobileQueryListener);
+  constructor(private shoppingCartService: ShoppingCartDataService) {  }
+
+  ngOnInit() {
+    this.shoppingCartService.getBooks(this.userId)
+    .subscribe(
+      data => {
+        this.cartDataSource = data;
+      }
+    );
+    this.shoppingCartService.getSavedForLaterBooks(this.userId)
+    .subscribe(
+      data => {
+        this.savedForLaterDataSource = data;
+      }
+    );
+  }
+
+  getTotalCost() {
+    if(this.cartDataSource){
+      return this.cartDataSource.map(t => t.RetailPrice * t.Quantity).reduce((acc, value) => acc + value, 0);
     }
   }
-  
-  
-  /**  Copyright 2019 Google Inc. All Rights Reserved.
-      Use of this source code is governed by an MIT-style license that
-      can be found in the LICENSE file at http://angular.io/license */
+
+  saveForLater(book)
+  {
+    if(book.IsSavedForLater){
+      this.shoppingCartService.saveForLater(this.userId, book.BookId, false)
+      .subscribe(data => {
+        console.log("Success: " + book.Name + " was added to the cart!");
+        this.shoppingCartService.getBooks(this.userId)
+        .subscribe(
+          data => {
+            this.cartDataSource = data;
+          }
+        );
+        this.shoppingCartService.getSavedForLaterBooks(this.userId)
+        .subscribe(
+          data => {
+            this.savedForLaterDataSource = data;
+          }
+        );
+      });
+    }else{
+      this.shoppingCartService.saveForLater(this.userId, book.BookId, true)
+      .subscribe(data => {
+        console.log("Success: " + book.Name + " was saved for later!");
+        this.shoppingCartService.getBooks(this.userId)
+        .subscribe(
+          data => {
+            this.cartDataSource = data;
+          }
+        );
+        this.shoppingCartService.getSavedForLaterBooks(this.userId)
+        .subscribe(
+          data => {
+            this.savedForLaterDataSource = data;
+          }
+        );
+      });
+    }
+  }
+
+  deleteBookFromCart(book) {
+    this.shoppingCartService.deleteBookFromCart(this.userId, book.BookId)
+    .subscribe(
+      data => {
+      console.log("Success: " + book.Name + " was removed from cart!");
+      this.shoppingCartService.getBooks(this.userId)
+      .subscribe(
+        data => {
+          this.cartDataSource = data;
+        }
+      );
+      this.shoppingCartService.getSavedForLaterBooks(this.userId)
+      .subscribe(
+        data => {
+          this.savedForLaterDataSource = data;
+      }
+    );
+    });
+  }
+}
