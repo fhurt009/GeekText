@@ -1,6 +1,6 @@
 import { Component, OnInit} from '@angular/core';
-import { Book } from '../../models/book.model';
 import { ShoppingCartDataService } from '../../services/shopping-cart-data.service';
+import { MatSelectChange, MatOption } from '@angular/material';
 
 @Component({
   selector: 'app-shopping-cart',
@@ -12,6 +12,7 @@ export class ShoppingCartComponent implements OnInit {
   savedForLaterDataSource = null;
   displayedColumns: string[] = ['CoverUrl', 'Name', 'Author', 'SaveForLater', 'Price', 'Quantity', 'Delete' ]
   userId: number = 16;
+  count: number;
   
   constructor(private shoppingCartService: ShoppingCartDataService) {  }
 
@@ -94,4 +95,42 @@ export class ShoppingCartComponent implements OnInit {
     );
     });
   }
+
+  checkoutcart() {
+    this.shoppingCartService.checkout(this.userId)
+    .subscribe(
+      data => {
+      console.log("The shopping cart was checked out!");
+      this.shoppingCartService.getBooks(this.userId)
+      .subscribe(
+        data => {
+          this.cartDataSource = data;
+        }
+      );
+      this.shoppingCartService.getSavedForLaterBooks(this.userId)
+      .subscribe(
+        data => {
+          this.savedForLaterDataSource = data;
+      }
+    );
+    });
+  }
+
+  selected(event: MatSelectChange, book) {
+    const selectedData = {
+        text: (event.source.selected as MatOption).viewValue,
+        value: event.source.value
+    }
+    this.count = selectedData.value;
+    this.updateBookQuantity(book, this.count)
+  }
+
+  updateBookQuantity(book, quantity:number) {
+    this.shoppingCartService.updateBookQuantity(this.userId, book.BookId, this.count)
+    .subscribe(
+      data => {
+      console.log("Success: " + book.Name + " was updated to quantity of " + this.count + " in the cart!");
+    });
+  }
+
 }

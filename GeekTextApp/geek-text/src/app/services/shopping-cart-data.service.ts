@@ -58,6 +58,18 @@ export class ShoppingCartDataService {
     this.books = [];
     return this.books;
   }
+
+  checkout(userId:number) {
+    return this.httpClient.post(this.url + "cart/checkout?userId=" + userId, userId, httpOptions)
+    .pipe(
+      catchError(this.handleError)
+    );
+  }
+
+  updateBookQuantity(userId:number, bookId:number, quantity:number) {
+    return this.httpClient.put(this.url + "cart/" + bookId + "?userId=" + userId, quantity, httpOptions)
+  }
+
   private handleError(error: HttpErrorResponse) {
     if(error.error instanceof ErrorEvent) {
       console.error('An Error Occured: ', error.error.message);
