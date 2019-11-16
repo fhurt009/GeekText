@@ -10,11 +10,11 @@ namespace GeekTextData.DataAccess
 {
     public class BookBrowseData
     {
-        public List<string> GetAllGenres()
+        public List<GenreModel> GetAllGenres()
         {
             SqlDataAccess sql = new SqlDataAccess();
 
-            var output = sql.LoadData<string, dynamic>("dbo.uspGetAllGenres", null, "GeekTextDB");
+            var output = sql.LoadData<GenreModel, dynamic>("dbo.uspGetAllGenres", null, "GeekTextDB");
 
             return output;
         }

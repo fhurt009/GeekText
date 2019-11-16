@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Observable } from 'rxjs';
 
 import { BookBrowsingService } from '../../services/book-browsing.service';
 
@@ -9,14 +10,13 @@ import { BookBrowsingService } from '../../services/book-browsing.service';
 })
 export class CategoriesComponent implements OnInit {
 
-    genres;
-    ratings;
+    topSellers: Observable<any>;
+    genres: any;
 
     constructor(private bookBrowsingService: BookBrowsingService) { }
 
     ngOnInit() {
+        this.topSellers = this.bookBrowsingService.getBooksByTopSellers('name');
         this.bookBrowsingService.getAllGenres().subscribe(genres => this.genres = genres);
-        this.ratings = [1, 2, 3, 4, 5];
     }
-
 }

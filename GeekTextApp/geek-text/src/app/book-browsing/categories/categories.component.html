@@ -1,15 +1,37 @@
-<h1>Top Sellers</h1>
+<div class="body">
+  <div class="section-header">
+    <hr class="left-line" />
+    <h1 class="section-title">Top Sellers</h1>
+    <hr class="right-line" />
+  </div>
+  <mat-grid-list cols="5" rowHeight="275">
+    <mat-grid-tile *ngFor="let topSeller of topSellers | async | slice:0:5">
+      <div class="grid-item">
+        <a [routerLink]="['/bookdetails', topSeller.Id]">
+          <img src="{{topSeller.CoverUrl}}" *ngIf="topSeller.CoverUrl !== null; else noImage" />
+        </a>
+        <a class="text-link" [routerLink]="['/bookdetails', topSeller.Id]">{{topSeller.Name}}</a>
+      </div>
+    </mat-grid-tile>
+  </mat-grid-list>
+  <div class="top-sellers">
+    <span></span>
+    <a [routerLink]="['/browse/topsellers']">View All Top Sellers >></a>
+  </div>
 
-<h1>Genres</h1>
-<ul>
-  <li *ngFor="let genre of genres">
-    <a [routerLink]="['/browse/genre', genre]">{{ genre }}</a>
-  </li>
-</ul>
-
-<h1>Ratings</h1>
-<ul>
-  <li *ngFor="let rating of ratings">
-    <a [routerLink]="['/browse/rating', rating]">{{ rating }}</a>
-  </li>
-</ul>
+  <div class="section-header">
+    <hr class="left-line" />
+    <h1 class="section-title">Genres</h1>
+    <hr class="right-line" />
+  </div>
+  <mat-grid-list cols="5" rowHeight="275">
+    <mat-grid-tile *ngFor="let genre of genres">
+      <div class="grid-item">
+        <a [routerLink]="['/browse/genre', genre.Genre]">
+          <img src="genre.Image" *ngIf="genre.Image !== null; else noImage" />
+        </a>
+        <a class="text-link" [routerLink]="['/browse/genre', genre.Genre]">{{genre.Genre}}</a>
+      </div>
+    </mat-grid-tile>
+  </mat-grid-list>
+</div>
