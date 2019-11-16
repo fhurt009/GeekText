@@ -7,16 +7,16 @@
   <mat-grid-list cols="5" rowHeight="275">
     <mat-grid-tile *ngFor="let topSeller of topSellers | async | slice:0:5">
       <div class="grid-item">
-        <a [routerLink]="['/browse/genre', 'mystery']">
+        <a [routerLink]="['/bookdetails', topSeller.Id]">
           <img src="{{topSeller.CoverUrl}}" *ngIf="topSeller.CoverUrl !== null; else noImage" />
         </a>
-        <!--<a class="text-link" [routerLink]="['/browse/genre', 'mystery']">{{topSeller.Name}}</a>-->
+        <a class="text-link" [routerLink]="['/bookdetails', topSeller.Id]">{{topSeller.Name}}</a>
       </div>
     </mat-grid-tile>
   </mat-grid-list>
   <div class="top-sellers">
     <span></span>
-    <a [routerLink]="['/browse/topsellers', '']">View All Top Sellers >></a>
+    <a [routerLink]="['/browse/topsellers']">View All Top Sellers >></a>
   </div>
 
   <div class="section-header">

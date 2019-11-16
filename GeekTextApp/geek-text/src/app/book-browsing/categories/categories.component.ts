@@ -16,7 +16,7 @@ export class CategoriesComponent implements OnInit {
     constructor(private bookBrowsingService: BookBrowsingService) { }
 
     ngOnInit() {
-        this.topSellers = this.bookBrowsingService.getBooksByRating(1, 'name');
+        this.topSellers = this.bookBrowsingService.getBooksByTopSellers('name');
         this.bookBrowsingService.getAllGenres().subscribe(genres => this.genres = genres);
     }
 }
