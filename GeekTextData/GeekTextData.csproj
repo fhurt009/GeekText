@@ -52,6 +52,7 @@
     <Compile Include="DataAccess\CartData.cs" />
     <Compile Include="Models\BookBrowseModel.cs" />
     <Compile Include="Models\CartModel.cs" />
+    <Compile Include="Models\GenreModel.cs" />
     <Compile Include="Sql\SqlDataAccess.cs" />
   </ItemGroup>
   <ItemGroup />

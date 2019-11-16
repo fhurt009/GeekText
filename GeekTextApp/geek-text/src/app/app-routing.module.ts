@@ -6,6 +6,7 @@ import { BrowseListComponent } from './book-browsing/browse-list/browse-list.com
 
 const routes: Routes = [
     { path: '', component: CategoriesComponent },
+    { path: 'browse/topsellers', component: BrowseListComponent },
     { path: 'browse/genre/:genre', component: BrowseListComponent },
     { path: 'browse/rating/:rating', component: BrowseListComponent }
 ];

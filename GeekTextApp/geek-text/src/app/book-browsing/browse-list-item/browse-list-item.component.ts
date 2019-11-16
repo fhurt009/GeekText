@@ -8,11 +8,10 @@ import { Input } from '@angular/core';
 })
 export class BrowseListItemComponent implements OnInit {
 
-    @Input() book;
+    @Input() book: any;
 
     constructor( ) { }
 
     ngOnInit() {
     }
-
 }
