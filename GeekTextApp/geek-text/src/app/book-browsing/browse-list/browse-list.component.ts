@@ -24,9 +24,9 @@ export class BrowseListComponent implements OnInit {
     sortBy: string = 'name';  // bound to mat-select value
 
     // input variables for the mat-paginator
-    pageSizeOptions: number[] = [1, 3, 10, 20];
+    pageSizeOptions: number[] = [10, 20];
     pageIndex: number = 0;
-    pageSize: number = this.pageSizeOptions[2];
+    pageSize: number = this.pageSizeOptions[0];
 
     // show books #startIndex - #endIndex
     startIndex: number = 0;

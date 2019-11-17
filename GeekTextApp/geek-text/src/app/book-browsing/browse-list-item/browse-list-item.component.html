@@ -21,9 +21,9 @@
           </ng-template>
         </span>
 
-        <span class="rating-tooltip">{{book.Rating | number: '1.0-1'}}</span>
+        <span class="rating-tooltip">{{book.Reviews === 0 ? 'Not Rated' : book.Rating | number: '1.0-1'}}</span>
       </span>
-      <span class="rating-reviews">{{book.Reviews}} {{book.Reviews > 1 ? "Reviews" : "Review"}}</span>
+      <span class="rating-reviews">{{book.Reviews}} {{book.Reviews !== 1 ? "Reviews" : "Review"}}</span>
     </div>
 
     <h2>{{book.RetailPrice | currency}}</h2>
