@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
-import { Observable, combineLatest, merge, of, from } from 'rxjs';
-import { startWith, map, filter, mergeMap, concatMap } from 'rxjs/operators';
+import { Observable } from 'rxjs';
+import { map, debounceTime, distinctUntilChanged } from 'rxjs/operators';
 import { BookBrowsingService } from '../../services/book-browsing.service';
 import { Router } from '@angular/router';
 
@@ -23,7 +23,10 @@ export class BookSearchComponent implements OnInit {
 
     ngOnInit() {
         this.bookBrowsingService.getAllBookNames().subscribe(books => this.books = books);
-        this.filteredBooks$ = this.formControl.valueChanges.pipe(map(value => this.filterBooks(value)));
+        this.filteredBooks$ = this.formControl.valueChanges.pipe(
+            debounceTime(100),
+            distinctUntilChanged(),
+            map(value => this.filterBooks(value)));
     }
 
     optionSelected(event): void {

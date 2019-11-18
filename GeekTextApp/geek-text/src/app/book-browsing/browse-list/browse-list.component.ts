@@ -49,8 +49,10 @@ export class BrowseListComponent implements OnInit {
                 var pageSize = parseInt(queryParams.get('pageSize'));
                 if (this.pageSizeOptions.includes(pageSize)) {
                     this.pageSize = pageSize;
+                    this.setBookIndexes();
                 }
             }
+
             this.sortBooks();
         });
 
@@ -63,10 +65,14 @@ export class BrowseListComponent implements OnInit {
         }
 
         // update the page index and size so that all paginators get updated
-        this.pageIndex = event.pageIndex;
+        //this.pageIndex = event.pageIndex;
         this.pageSize = event.pageSize;
 
         // recalculate the subset of books to show
+        this.setBookIndexes();
+    }
+
+    setBookIndexes(): void {
         this.startIndex = this.pageIndex * this.pageSize;
         this.endIndex = this.startIndex + this.pageSize;
     }
@@ -102,19 +108,19 @@ export class BrowseListComponent implements OnInit {
         this.books = [];
         this.booksLoaded = false;
 
-        var $books: Observable<any>;
+        var books$: Observable<any>;
 
         if (this.path === 'topsellers') {
-            $books = this.bookBrowsingService.getBooksByTopSellers(this.sortBy);
+            books$ = this.bookBrowsingService.getBooksByTopSellers(this.sortBy);
         } else if (this.path === 'genre') {
             var genre: string = this.params.get('genre');
-            $books = this.bookBrowsingService.getBooksByGenre(genre, this.sortBy);
+            books$ = this.bookBrowsingService.getBooksByGenre(genre, this.sortBy);
         } else if (this.path === 'rating') {
             var rating: number = parseInt(this.params.get('rating'));
-            $books = this.bookBrowsingService.getBooksByRating(rating, this.sortBy);
+            books$ = this.bookBrowsingService.getBooksByRating(rating, this.sortBy);
         }
 
-        $books.subscribe(books => {
+        books$.subscribe(books => {
             this.books = books;
             this.booksLoaded = true;
         });

@@ -1,11 +1,13 @@
 <div class="row browse-list-item">
-  <a [routerLink]="['/bookdetails', book.Id]">
-    <img src="{{book.CoverUrl}}" *ngIf="book.CoverUrl !== null; else noImage" />
+  <div class="cover">
+    <a [routerLink]="['/bookdetails', book.Id]">
+      <img src="{{book.CoverUrl}}" *ngIf="book.CoverUrl !== null; else noImage" />
 
-    <ng-template #noImage>
-      <img src="https://islandpress.org/sites/default/files/400px%20x%20600px-r01BookNotPictured.jpg" />
-    </ng-template>
-  </a>
+      <ng-template #noImage>
+        <img src="https://islandpress.org/sites/default/files/400px%20x%20600px-r01BookNotPictured.jpg" />
+      </ng-template>
+    </a>
+  </div>
 
   <div class="browse-list-item-details">
     <a class="book-name" [routerLink]="['/bookdetails', book.Id]">{{book.Name}}</a>

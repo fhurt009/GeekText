@@ -1,13 +1,42 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+
 form {
   font-size: 14px;
-  width: 350px;
+  width: 375px;
 }
 
 mat-form-field {
   width: 100%;
 }
 
+mat-option {
+  height: 51px;
+  padding-top: 6px;
+  padding-bottom: 9px;
+  font-size: 15px;
+}
+
 img {
-  height: 40px;
-  margin-right: 30px;
+  height: 45px;
+  width: 30px;
+  margin-right: 20px;
+}
+
+@media all and (max-width: 500px) {
+  form {
+    width: 135px;
+  }
+
+  mat-option {
+    font-size: 12px;
+  }
+
+  img {
+    height: 40px;
+    width: 25px;
+    margin-right: 10px;
+  }
 }

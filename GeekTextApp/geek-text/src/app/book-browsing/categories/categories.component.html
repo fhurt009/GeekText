@@ -10,7 +10,7 @@
         <a [routerLink]="['/bookdetails', topSeller.Id]">
           <img src="{{topSeller.CoverUrl}}" *ngIf="topSeller.CoverUrl !== null; else noImage" />
         </a>
-        <a class="text-link" [routerLink]="['/bookdetails', topSeller.Id]">{{topSeller.Name}}</a>
+        <a class="text-link" [routerLink]="['/bookdetails', topSeller.Id]" [queryParams]="{sortBy: 'name', pageSize: 10}">{{topSeller.Name}}</a>
       </div>
     </mat-grid-tile>
   </mat-grid-list>
@@ -27,7 +27,7 @@
   <mat-grid-list cols="5" rowHeight="275">
     <mat-grid-tile *ngFor="let genre of genres">
       <div class="grid-item">
-        <a [routerLink]="['/browse/genre', genre.Genre]">
+        <a [routerLink]="['/browse/genre', genre.Genre]" [queryParams]="{sortBy: 'name', pageSize: 10}">
           <img src="genre.Image" *ngIf="genre.Image !== null; else noImage" />
         </a>
         <a class="text-link" [routerLink]="['/browse/genre', genre.Genre]">{{genre.Genre}}</a>
@@ -46,7 +46,7 @@
   </div>
   <mat-grid-list cols="5" rowHeight="50">
     <mat-grid-tile *ngFor="let rating of [1, 2, 3, 4, 5]">
-      <a [routerLink]="['/browse/rating', rating]">
+      <a [routerLink]="['/browse/rating', rating]" [queryParams]="{sortBy: 'name', pageSize: 10}">
         <span class="stars" *ngFor="let x of [1, 2, 3, 4, 5]">
           <span *ngIf="x <= rating">&#9733;</span>
         </span>
