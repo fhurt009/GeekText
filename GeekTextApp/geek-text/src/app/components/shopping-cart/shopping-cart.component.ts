@@ -17,6 +17,10 @@ export class ShoppingCartComponent implements OnInit {
   constructor(private shoppingCartService: ShoppingCartDataService) {  }
 
   ngOnInit() {
+    this.getShoppingCart();
+  }
+
+  getShoppingCart() {
     this.shoppingCartService.getBooks(this.userId)
     .subscribe(
       data => {
@@ -43,35 +47,13 @@ export class ShoppingCartComponent implements OnInit {
       this.shoppingCartService.saveForLater(this.userId, book.BookId, false)
       .subscribe(data => {
         console.log("Success: " + book.Name + " was added to the cart!");
-        this.shoppingCartService.getBooks(this.userId)
-        .subscribe(
-          data => {
-            this.cartDataSource = data;
-          }
-        );
-        this.shoppingCartService.getSavedForLaterBooks(this.userId)
-        .subscribe(
-          data => {
-            this.savedForLaterDataSource = data;
-          }
-        );
+        this.getShoppingCart();
       });
     }else{
       this.shoppingCartService.saveForLater(this.userId, book.BookId, true)
       .subscribe(data => {
         console.log("Success: " + book.Name + " was saved for later!");
-        this.shoppingCartService.getBooks(this.userId)
-        .subscribe(
-          data => {
-            this.cartDataSource = data;
-          }
-        );
-        this.shoppingCartService.getSavedForLaterBooks(this.userId)
-        .subscribe(
-          data => {
-            this.savedForLaterDataSource = data;
-          }
-        );
+        this.getShoppingCart();
       });
     }
   }
@@ -81,18 +63,7 @@ export class ShoppingCartComponent implements OnInit {
     .subscribe(
       data => {
       console.log("Success: " + book.Name + " was removed from cart!");
-      this.shoppingCartService.getBooks(this.userId)
-      .subscribe(
-        data => {
-          this.cartDataSource = data;
-        }
-      );
-      this.shoppingCartService.getSavedForLaterBooks(this.userId)
-      .subscribe(
-        data => {
-          this.savedForLaterDataSource = data;
-      }
-    );
+      this.getShoppingCart();
     });
   }
 
@@ -101,18 +72,7 @@ export class ShoppingCartComponent implements OnInit {
     .subscribe(
       data => {
       console.log("The shopping cart was checked out!");
-      this.shoppingCartService.getBooks(this.userId)
-      .subscribe(
-        data => {
-          this.cartDataSource = data;
-        }
-      );
-      this.shoppingCartService.getSavedForLaterBooks(this.userId)
-      .subscribe(
-        data => {
-          this.savedForLaterDataSource = data;
-      }
-    );
+      this.getShoppingCart();
     });
   }
 
@@ -130,6 +90,7 @@ export class ShoppingCartComponent implements OnInit {
     .subscribe(
       data => {
       console.log("Success: " + book.Name + " was updated to quantity of " + this.count + " in the cart!");
+      this.getShoppingCart();
     });
   }
 
