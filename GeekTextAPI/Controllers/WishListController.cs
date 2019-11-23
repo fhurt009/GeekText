@@ -53,12 +53,21 @@ namespace GeekTextAPI.Controllers
         }
 
         [HttpGet]
-        [Route("api/wishList/getItem")]
-        public List<WishListModel> getUserWishList(int id, string wishListName)
+        [Route("api/wishList/getBooks")]
+        public List<WishlistBookModel> getWishListBooks(int UserId, string wishListName)
         {
             WishListData data = new WishListData();
 
-            return data.getUserWishList(id, wishListName);
+            return data.getWishListBooks(UserId, wishListName);
+        }
+
+        [HttpGet]
+        [Route("api/wishList")]
+        public List<WishlistModel> getUserWishList(int UserId)
+        {
+            WishListData data = new WishListData();
+
+            return data.getUserWishList(UserId);
         }
     }
 }

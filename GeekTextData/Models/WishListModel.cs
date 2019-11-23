@@ -6,14 +6,10 @@ using System.Threading.Tasks;
 
 namespace GeekTextData.Models
 {
-    public class WishListModel
+    public class WishlistModel
     {
-        public int UserId { get; set; }
-        public int BookId { get; set; }
+        public int Id { get; set; }
         public string Name { get; set; }
-        public string Author { get; set; }
-        public double RetailPrice { get; set; }
-        public int Quantity { get; set; }
-        public string CoverUrl { get; set; }
+        public int UserId { get; set; }
     }
 }

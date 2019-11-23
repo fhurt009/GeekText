@@ -8,6 +8,8 @@ import { LoginComponent } from './user/login/login.component';
 import { ProfileComponent } from './user/profile/profile.component';
 import { ChangepwComponent } from './user/changepw/changepw.component';
 import { ShoppingCartComponent } from './components/shopping-cart/shopping-cart.component';
+import { WishListComponent } from './components/wish-list/wish-list.component';
+import { WishListsSectionComponent } from './components/wish-lists-section/wish-lists-section.component';
 
 
 const routes: Routes = [
@@ -21,6 +23,8 @@ const routes: Routes = [
     { path: 'user/profile', component: ProfileComponent },
     { path: 'user/changepw', component: ChangepwComponent },
     { path: 'cart', component: ShoppingCartComponent },
+    { path: 'wishlist', component: WishListComponent },
+    { path: 'wishlistSection', component: WishListsSectionComponent },
 
     // otherwise redirect to home
     { path: '**', redirectTo: '' }

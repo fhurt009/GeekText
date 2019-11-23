@@ -55,9 +55,10 @@
     <Compile Include="Models\BookBrowseModel.cs" />
     <Compile Include="Models\BookSearchModel.cs" />
     <Compile Include="Models\CartModel.cs" />
-    <Compile Include="Models\WishListModel.cs" />
+    <Compile Include="Models\WishlistBookModel.cs" />
     <Compile Include="Models\GenreModel.cs" />
     <Compile Include="Models\UserModel.cs" />
+    <Compile Include="Models\WishlistModel.cs" />
     <Compile Include="Sql\SqlDataAccess.cs" />
   </ItemGroup>
   <ItemGroup />

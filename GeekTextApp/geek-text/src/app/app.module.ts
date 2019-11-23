@@ -21,6 +21,9 @@ import { ProfileComponent } from './user/profile/profile.component';
 import { AddToCartComponent } from './components/add-to-cart/add-to-cart.component';
 import { BookSearchComponent } from './book-browsing/book-search/book-search.component';
 import { ChangepwComponent } from './user/changepw/changepw.component';
+import { WishListComponent } from './components/wish-list/wish-list.component';
+import { WishListsSectionComponent } from './components/wish-lists-section/wish-lists-section.component';
+import { WishlistButtonComponent } from './components/wishlist-button/wishlist-button.component';
 
 @NgModule({
     declarations: [
@@ -36,7 +39,10 @@ import { ChangepwComponent } from './user/changepw/changepw.component';
         ProfileComponent,
         AddToCartComponent,
         BookSearchComponent,
-        ChangepwComponent
+        ChangepwComponent,
+        WishListComponent,
+        WishListsSectionComponent,
+        WishlistButtonComponent,
     ],
     imports: [
         BrowserModule,
@@ -51,7 +57,8 @@ import { ChangepwComponent } from './user/changepw/changepw.component';
         RouterModule.forRoot([
             { path: '', component: AppComponent },
             { path: 'shopping-cart', component: ShoppingCartComponent },
-            { path: 'cart', component: ShoppingCartComponent }
+            { path: 'cart', component: ShoppingCartComponent },
+            { path: 'wishlist', component: WishListComponent }
         ])
     ],
     providers: [],

@@ -23,47 +23,58 @@ namespace GeekTextData.DataAccess
             return output;
         }
 
-        public List<string> addItemToWishList(int id, int bookId, string wishListName)
+        public List<string> addItemToWishList(int UserId, int bookId, string wishListName)
         {
             SqlDataAccess sql = new SqlDataAccess();
 
-            var p = new { id, bookId, wishListName };
+            var p = new { UserId, bookId, wishListName };
 
             var output = sql.LoadData<string, dynamic>("dbo.addItemWishList", p, "GeekTextDB");
 
             return output;
         }
 
-        public List<string> removeItemFromWishList(int id, int bookId, string wishListName)
+        public List<string> removeItemFromWishList(int UserId, int bookId, string wishListName)
         {
             SqlDataAccess sql = new SqlDataAccess();
 
-            var p = new { id, bookId, wishListName };
+            var p = new { UserId, bookId, wishListName };
 
             var output = sql.LoadData<string, dynamic>("dbo.removeItemWishList", p, "GeekTextDB");
 
             return output;
         }
 
-        public List<string> transferItemFromWishList(int id, int bookId, 
-            string wishListNameOrigin, string wishListNameDestination)
+        public List<string> transferItemFromWishList(int UserId, int bookId, 
+            string WishListName_a, string WishListName_b)
         {
             SqlDataAccess sql = new SqlDataAccess();
 
-            var p = new { id, bookId, wishListNameOrigin, wishListNameDestination };
+            var p = new { UserId, bookId, WishListName_a, WishListName_b };
 
             var output = sql.LoadData<string, dynamic>("dbo.transferItemWishList", p, "GeekTextDB");
 
             return output;
         }
 
-        public List<WishListModel> getUserWishList(int UserId, string wishListName)
+        public List<WishlistBookModel> getWishListBooks(int UserId, string wishListName)
         {
             SqlDataAccess sql = new SqlDataAccess();
 
             var p = new { UserId, wishListName };
 
-            var output = sql.LoadData<WishListModel, dynamic>("dbo.getUserWishList", p, "GeekTextDB");
+            var output = sql.LoadData<WishlistBookModel, dynamic>("dbo.getUserWishListBooks", p, "GeekTextDB");
+
+            return output;
+        }
+
+        public List<WishlistModel> getUserWishList(int UserId)
+        {
+            SqlDataAccess sql = new SqlDataAccess();
+
+            var p = new { UserId};
+
+            var output = sql.LoadData<WishlistModel, dynamic>("dbo.getUserWishList", p, "GeekTextDB");
 
             return output;
         }
