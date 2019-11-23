@@ -10,6 +10,8 @@ namespace GeekTextData.DataAccess
 {
     public class CartData
     {
+
+        //Gets the Cart by UserId
         public List<CartModel> GetCartByUserId(int Id)
         {
             SqlDataAccess sql = new SqlDataAccess();
@@ -21,6 +23,19 @@ namespace GeekTextData.DataAccess
             return output;
         }
 
+        //Gets the Saved for Later books by UserId
+        public List<CartModel> GetSavedForLaterByUserId(int Id, bool IsSavedForLater)
+        {
+            SqlDataAccess sql = new SqlDataAccess();
+
+            var p = new { Id, IsSavedForLater };
+
+            var output = sql.LoadData<CartModel, dynamic>("dbo.spGetUserCart", p, "GeekTextDB");
+
+            return output;
+        }
+
+        //Posts an item to a user's cart
         public void PostItemCart(int userId, int bookId)
         {
             SqlDataAccess sql = new SqlDataAccess();
@@ -30,13 +45,13 @@ namespace GeekTextData.DataAccess
             sql.SaveData("dbo.spPostItemCart", p, "GeekTextDB");
         }
 
-        public void DeleteCart(int userId)
+        public void CheckoutCart(int userId)
         {
             SqlDataAccess sql = new SqlDataAccess();
 
             var p = new { userId};
 
-            sql.SaveData("dbo.spDeleteAllItemsCart", p, "GeekTextDB");
+            sql.SaveData("dbo.spCheckout", p, "GeekTextDB");
         }
 
         public void DeleteItemCart(int userId, int bookId)

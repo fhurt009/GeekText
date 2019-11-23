@@ -1,0 +1,288 @@
+<div class="card m-3">
+  <h5 class="card-header">Profile</h5>
+  <div class="card-body">
+    <form *ngIf="profileForm" [formGroup]="profileForm">
+      <div class="form-row">
+        <div class="form-group col-5">
+          <label>Username</label>
+          <input type="text" formControlName="username" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.username.errors }" />
+          <div *ngIf="submitted && f.username.errors" class="invalid-feedback">
+            <div *ngIf="f.username.errors.required">Username is required</div>
+          </div>
+        </div>
+        <div class="form-group col-5">
+          <label>Email</label>
+          <input type="text" formControlName="email" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.email.errors }" />
+          <div *ngIf="submitted && f.email.errors" class="invalid-feedback">
+            <div *ngIf="f.email.errors.required">Email is required</div>
+            <div *ngIf="f.email.errors.email">Email must be a valid email address</div>
+          </div>
+        </div>
+      </div>
+      <div><label *ngIf="!isHiddenUname" style="color:red" class="badUsername">Username already taken</label></div>
+      <div class="form-row">
+        <div class="form-group col-5">
+          <label>First Name</label>
+          <input type="text" formControlName="firstName" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.firstName.errors }" />
+          <div *ngIf="submitted && f.firstName.errors" class="invalid-feedback">
+            <div *ngIf="f.firstName.errors.required">First Name is required</div>
+          </div>
+        </div>
+        <div class="form-group col-5">
+          <label>Last Name</label>
+          <input type="text" formControlName="lastName" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.lastName.errors }" />
+          <div *ngIf="submitted && f.lastName.errors" class="invalid-feedback">
+            <div *ngIf="f.lastName.errors.required">Last Name is required</div>
+          </div>
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-group col-5">
+          <label>Nickname (Optional)</label>
+          <input type="text" formControlName="nickname" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.nickname.errors }" />
+          <div *ngIf="submitted && f.nickname.errors" class="invalid-feedback">
+          </div>
+        </div>
+        <div class="form-group col-5" style="visibility: hidden;">
+          <label>Nickname (Optional)</label>
+          <input type="text" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.nickname.errors }" />
+          <div *ngIf="submitted && f.nickname.errors" class="invalid-feedback">
+          </div>
+        </div>
+      </div>
+      <br /><h3 class="text-left">Credit Cards</h3><br />
+      <div class="form-row">
+        <div class="form-group col-5">
+          <label>Cardholder's Name</label>
+          <input type="text" formControlName="nameCC" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.nameCC.errors }" />
+          <div *ngIf="submitted && f.nameCC.errors" class="invalid-feedback">
+            <div *ngIf="f.nameCC.errors.required">Cardholder's Name is required</div>
+          </div>
+        </div>
+        <div class="form-group col-5">
+          <label>Credit Card Number</label>
+          <input type="text" formControlName="ccNum" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.ccNum.errors }" />
+          <div *ngIf="submitted && f.ccNum.errors" class="invalid-feedback">
+            <div *ngIf="f.ccNum.errors.required">Credit Card Number is required</div>
+            <div *ngIf="f.ccNum.errors.pattern">This field must be numbers only and 16 characters long.</div>
+          </div>
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-group col-5">
+          <label>Expiration Date</label>
+          <input type="text" formControlName="expire" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.expire.errors }" />
+          <div *ngIf="submitted && f.expire.errors" class="invalid-feedback">
+            <div *ngIf="f.expire.errors.required">Expiration Date is required</div>
+            <div *ngIf="f.expire.errors.pattern">This field must be numbers only and 4 characters long.</div>
+          </div>
+        </div>
+        <div class="form-group col-5">
+          <label>CSV</label>
+          <input type="text" formControlName="csv" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.csv.errors }" />
+          <div *ngIf="submitted && f.csv.errors" class="invalid-feedback">
+            <div *ngIf="f.csv.errors.required">CSV is required</div>
+            <div *ngIf="f.csv.errors.pattern">This field must be numbers only and 3 characters long.</div>
+          </div>
+        </div>
+      </div>
+      <div class="form-row" *ngIf="!isHiddenCC">
+        <div class="form-group col-5">
+          <br /><br />
+          <label>Cardholder's Name</label>
+          <input type="text" formControlName="nameCC2" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.nameCC2.errors }" />
+          <div *ngIf="submitted && f.nameCC2.errors" class="invalid-feedback">
+            <div *ngIf="f.nameCC2.errors.required">Cardholder's Name is required</div>
+          </div>
+        </div>
+        <div class="form-group col-5">
+          <br /><br />
+          <label>Credit Card Number</label>
+          <input type="text" formControlName="ccNum2" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.ccNum2.errors }" />
+          <div *ngIf="submitted && f.ccNum2.errors" class="invalid-feedback">
+            <div *ngIf="f.ccNum2.errors.required">Credit Card Number is required</div>
+            <div *ngIf="f.ccNum2.errors.pattern">This field must be numbers only and 16 characters long.</div>
+          </div>
+        </div>
+        <div class="form-group col-5">
+          <label>Expiration Date</label>
+          <input type="text" formControlName="expire2" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.expire2.errors }" />
+          <div *ngIf="submitted && f.expire2.errors" class="invalid-feedback">
+            <div *ngIf="f.expire2.errors.required">Expiration Date is required</div>
+            <div *ngIf="f.expire2.errors.pattern">This field must be numbers only and 4 characters long.</div>
+          </div>
+        </div>
+        <div class="form-group col-5">
+          <label>CSV</label>
+          <input type="text" formControlName="csv2" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.csv2.errors }" />
+          <div *ngIf="submitted && f.csv2.errors" class="invalid-feedback">
+            <div *ngIf="f.csv2.errors.required">CSV is required</div>
+            <div *ngIf="f.csv2.errors.pattern">This field must be numbers only and 3 characters long.</div>
+          </div>
+        </div>
+      </div>
+      <u><label *ngIf="isHiddenCCtext" style="color:blue; cursor: pointer" (click)="addCC()"><u>Add Credit Card</u></label></u>
+      <u><label *ngIf="!isHiddenCCtext" style="color:blue; cursor: pointer" (click)="addCC()"><u>Remove Credit Card</u></label></u>
+      <br /><br />
+      <div class="form-row" *ngIf="!isHiddenCC2">
+        <div class="form-group col-5">
+          <br /><br />
+          <label>Cardholder's Name</label>
+          <input type="text" formControlName="nameCC3" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.nameCC3.errors }" />
+          <div *ngIf="submitted && f.nameCC3.errors" class="invalid-feedback">
+            <div *ngIf="f.nameCC3.errors.required">Cardholder's Name is required</div>
+          </div>
+        </div>
+        <div class="form-group col-5">
+          <br /><br />
+          <label>Credit Card Number</label>
+          <input type="text" formControlName="ccNum3" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.ccNum3.errors }" />
+          <div *ngIf="submitted && f.ccNum3.errors" class="invalid-feedback">
+            <div *ngIf="f.ccNum3.errors.required">Credit Card Number is required</div>
+            <div *ngIf="f.ccNum3.errors.pattern">This field must be numbers only and 16 characters long.</div>
+          </div>
+        </div>
+      </div>
+      <div class="form-row" *ngIf="!isHiddenCC2">
+        <div class="form-group col-5">
+          <label>Expiration Date</label>
+          <input type="text" formControlName="expire3" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.expire3.errors }" />
+          <div *ngIf="submitted && f.expire3.errors" class="invalid-feedback">
+            <div *ngIf="f.expire3.errors.required">Expiration Date is required</div>
+            <div *ngIf="f.expire3.errors.pattern">This field must be numbers only and 4 characters long.</div>
+          </div>
+        </div>
+        <div class="form-group col-5">
+          <label>CSV</label>
+          <input type="text" formControlName="csv3" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.csv3.errors }" />
+          <div *ngIf="submitted && f.csv3.errors" class="invalid-feedback">
+            <div *ngIf="f.csv3.errors.required">CSV is required</div>
+            <div *ngIf="f.csv3.errors.pattern">This field must be numbers only and 3 characters long.</div>
+          </div>
+        </div>
+      </div>
+      <u><label *ngIf="isHiddenCCtext2" style="color:blue; cursor: pointer" (click)="addCC2()"><u>Add Credit Card</u></label></u>
+      <u><label *ngIf="!isHiddenCCtext2" style="color:blue; cursor: pointer" (click)="addCC2()"><u>Remove Credit Card</u></label></u>
+      <br /><br />
+      <br /><h3 class="text-left">Shipping Addresses</h3><br />
+      <div class="form-row">
+        <div class="form-group col-5">
+          <label>Street Address</label>
+          <input type="text" formControlName="address" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.address.errors }" />
+          <div *ngIf="submitted && f.address.errors" class="invalid-feedback">
+            <div *ngIf="f.address.errors.required">Street Address is required</div>
+          </div>
+        </div>
+        <div class="form-group col-5">
+          <label>City</label>
+          <input type="text" formControlName="city" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.city.errors }" />
+          <div *ngIf="submitted && f.city.errors" class="invalid-feedback">
+            <div *ngIf="f.city.errors.required">City is required</div>
+          </div>
+        </div>
+        <div class="form-group col-5">
+          <label>State</label>
+          <input type="text" formControlName="state" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.state.errors }" />
+          <div *ngIf="submitted && f.state.errors" class="invalid-feedback">
+            <div *ngIf="f.state.errors.required">State is required</div>
+          </div>
+        </div>
+        <div class="form-group col-5">
+          <label>Zip Code</label>
+          <input type="text" formControlName="zip" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.zip.errors }" />
+          <div *ngIf="submitted && f.zip.errors" class="invalid-feedback">
+            <div *ngIf="f.zip.errors.required">Zip Code is required</div>
+            <div *ngIf="f.zip.errors.pattern">This field must be numbers only and 5 characters long.</div>
+          </div>
+        </div>
+      </div>
+      <div class="form-row" *ngIf="!isHiddenSA">
+        <div class="form-group col-5">
+          <br /><br />
+          <label>Street Address</label>
+          <input type="text" formControlName="address2" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.address2.errors }" />
+          <div *ngIf="submitted && f.address2.errors" class="invalid-feedback">
+            <div *ngIf="f.address2.errors.required">Street Address is required</div>
+          </div>
+        </div>
+        <div class="form-group col-5">
+          <br /> <br />
+          <label>City</label>
+          <input type="text" formControlName="city2" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.city2.errors }" />
+          <div *ngIf="submitted && f.city2.errors" class="invalid-feedback">
+            <div *ngIf="f.city2.errors.required">City is required</div>
+          </div>
+        </div>
+        <div class="form-group col-5">
+          <label>State</label>
+          <input type="text" formControlName="state2" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.state2.errors }" />
+          <div *ngIf="submitted && f.state2.errors" class="invalid-feedback">
+            <div *ngIf="f.state2.errors.required">State is required</div>
+          </div>
+        </div>
+        <div class="form-group col-5">
+          <label>Zip Code</label>
+          <input type="text" formControlName="zip2" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.zip2.errors }" />
+          <div *ngIf="submitted && f.zip2.errors" class="invalid-feedback">
+            <div *ngIf="f.zip2.errors.required">Zip Code is required</div>
+            <div *ngIf="f.zip2.errors.pattern">This field must be numbers only and 5 characters long.</div>
+          </div>
+        </div>
+      </div>
+      <u><label *ngIf="isHiddenSAtext" style="color:blue; cursor: pointer" (click)="addAddress()"><u>Add Shipping Address</u></label></u>
+      <u><label *ngIf="!isHiddenSAtext" style="color:blue; cursor: pointer" (click)="addAddress()"><u>Remove Shipping Address</u></label></u>
+      <br /> <br />
+      <div class="form-row" *ngIf="!isHiddenSA2">
+        <div class="form-group col-5">
+          <br /> <br />
+          <label>Street Address</label>
+          <input type="text" formControlName="address3" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.address3.errors }" />
+          <div *ngIf="submitted && f.address3.errors" class="invalid-feedback">
+            <div *ngIf="f.address3.errors.required">Street Address is required</div>
+          </div>
+        </div>
+        <div class="form-group col-5">
+          <br /> <br />
+          <label>City</label>
+          <input type="text" formControlName="city3" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.city3.errors }" />
+          <div *ngIf="submitted && f.city3.errors" class="invalid-feedback">
+            <div *ngIf="f.city3.errors.required">City is required</div>
+          </div>
+        </div>
+        <div class="form-group col-5">
+          <label>State</label>
+          <input type="text" formControlName="state3" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.state3.errors }" />
+          <div *ngIf="submitted && f.state3.errors" class="invalid-feedback">
+            <div *ngIf="f.state3.errors.required">State is required</div>
+          </div>
+        </div>
+        <div class="form-group col-5">
+          <label>Zip Code</label>
+          <input type="text" formControlName="zip3" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.zip3.errors }" />
+          <div *ngIf="submitted && f.zip3.errors" class="invalid-feedback">
+            <div *ngIf="f.zip3.errors.required">Zip Code is required</div>
+            <div *ngIf="f.zip3.errors.pattern">This field must be numbers only and 5 characters long.</div>
+          </div>
+        </div>
+      </div>
+      <u><label *ngIf="isHiddenSAtext2" style="color:blue; cursor: pointer" (click)="addAddress2()"><u>Add Shipping Address</u></label></u>
+      <u><label *ngIf="!isHiddenSAtext2" style="color:blue; cursor: pointer" (click)="addAddress2()"><u>Remove Shipping Address</u></label></u>
+      <br /> <br />
+      <div class="text-left"><label *ngIf="!isHiddenInvalidCC" style="color:red" class="invalidCard">Credit Card 1 is invalid</label></div>
+      <div class="text-left"><label *ngIf="!isHiddenExpiredCC" style="color:red" class="expiredCC">Credit Card 1 is expired</label></div>
+      <div class="text-left"><label *ngIf="!isHiddenInvalidMM" style="color:red" class="invalidMM">Credit Card 1 has an invalid month</label></div>
+      <div class="text-left"><label *ngIf="!isHiddenInvalidCC2" style="color:red" class="invalidCard2">Credit Card 2 is invalid</label></div>
+      <div class="text-left"><label *ngIf="!isHiddenExpiredCC2" style="color:red" class="expiredCC2">Credit Card 2 is expired</label></div>
+      <div class="text-left"><label *ngIf="!isHiddenInvalidMM2" style="color:red" class="invalidMM2">Credit Card 2 has an invalid month</label></div>
+      <div class="text-left"><label *ngIf="!isHiddenInvalidCC3" style="color:red" class="invalidCard3">Credit Card 3 is invalid</label></div>
+      <div class="text-left"><label *ngIf="!isHiddenExpiredCC3" style="color:red" class="expiredCC3">Credit Card 3 is expired</label></div>
+      <div class="text-left"><label *ngIf="!isHiddenInvalidMM3" style="color:red" class="invalidMM3">Credit Card 3 has an invalid month</label></div>
+      <div class="text-left">
+        <br />
+        <button class="btn btn-primary mr-1" (click)="onSubmit()">Save Changes</button>
+        <a [routerLink]="['/user/changepw']"><button class="btn btn-secondary">Change Password</button></a>
+        <button class="btn btn-primary mr-1" (click)="logout()">Logout</button>
+      </div>
+    </form>
+  </div>
+</div>

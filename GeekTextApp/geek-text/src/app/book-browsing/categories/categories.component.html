@@ -1,15 +1,57 @@
-<h1>Top Sellers</h1>
+<div class="body">
+  <div class="section-header">
+    <hr class="left-line" />
+    <h1 class="section-title">Top Sellers</h1>
+    <hr class="right-line" />
+  </div>
+  <mat-grid-list cols="5" rowHeight="275">
+    <mat-grid-tile *ngFor="let topSeller of topSellers | async | slice:0:5">
+      <div class="grid-item">
+        <a [routerLink]="['/bookdetails', topSeller.Id]">
+          <img src="{{topSeller.CoverUrl}}" *ngIf="topSeller.CoverUrl !== null; else noImage" />
+        </a>
+        <a class="text-link" [routerLink]="['/bookdetails', topSeller.Id]">{{topSeller.Name}}</a>
+      </div>
+    </mat-grid-tile>
+  </mat-grid-list>
+  <div class="top-sellers">
+    <span></span>
+    <a [routerLink]="['/browse/topsellers']" [queryParams]="{sortBy: 'sold', pageSize: 10}">View All Top Sellers >></a>
+  </div>
 
-<h1>Genres</h1>
-<ul>
-  <li *ngFor="let genre of genres">
-    <a [routerLink]="['/browse/genre', genre]">{{ genre }}</a>
-  </li>
-</ul>
+  <div class="section-header">
+    <hr class="left-line" />
+    <h1 class="section-title">Genres</h1>
+    <hr class="right-line" />
+  </div>
+  <mat-grid-list cols="5" rowHeight="275">
+    <mat-grid-tile *ngFor="let genre of genres">
+      <div class="grid-item">
+        <a [routerLink]="['/browse/genre', genre.Genre]" [queryParams]="{sortBy: 'name', pageSize: 10}">
+          <img src="genre.Image" *ngIf="genre.Image !== null; else noImage" />
+        </a>
+        <a class="text-link" [routerLink]="['/browse/genre', genre.Genre]">{{genre.Genre}}</a>
+      </div>
+    </mat-grid-tile>
+  </mat-grid-list>
 
-<h1>Ratings</h1>
-<ul>
-  <li *ngFor="let rating of ratings">
-    <a [routerLink]="['/browse/rating', rating]">{{ rating }}</a>
-  </li>
-</ul>
+  <ng-template #noImage>
+    <img src="https://islandpress.org/sites/default/files/400px%20x%20600px-r01BookNotPictured.jpg" />
+  </ng-template>
+
+  <div class="section-header">
+    <hr class="left-line" />
+    <h1 class="section-title">Ratings</h1>
+    <hr class="right-line" />
+  </div>
+  <mat-grid-list cols="5" rowHeight="50">
+    <mat-grid-tile *ngFor="let rating of [1, 2, 3, 4, 5]">
+      <a [routerLink]="['/browse/rating', rating]" [queryParams]="{sortBy: 'name', pageSize: 10}">
+        <span class="stars" *ngFor="let x of [1, 2, 3, 4, 5]">
+          <span *ngIf="x <= rating">&#9733;</span>
+        </span>
+      </a>
+      <span class="and-up" *ngIf="rating < 5">and up</span>
+    </mat-grid-tile>
+  </mat-grid-list>
+</div>

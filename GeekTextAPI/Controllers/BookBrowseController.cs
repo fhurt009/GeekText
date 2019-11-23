@@ -14,8 +14,15 @@ namespace GeekTextAPI.Controllers
     [RoutePrefix("api/BookBrowse")]
     public class BookBrowseController : ApiController
     {
+        [Route("AllBookNames")]
+        public List<BookSearchModel> GetAllBookNames()
+        {
+            BookBrowseData data = new BookBrowseData();
+            return data.GetAllBookNames();
+        }
+
         [Route("AllGenres")]
-        public List<String> GetAllGenres()
+        public List<GenreModel> GetAllGenres()
         {
             BookBrowseData data = new BookBrowseData();
             return data.GetAllGenres();
@@ -45,6 +52,7 @@ namespace GeekTextAPI.Controllers
             return this.SortList(list, SortBy.ToLower());
         }
 
+
         private List<BookBrowseModel> SortList(List<BookBrowseModel> list, string SortBy)
         {
             IOrderedEnumerable<BookBrowseModel> ordered;
@@ -64,6 +72,9 @@ namespace GeekTextAPI.Controllers
                 case "date":
                     ordered = list.OrderByDescending(b => b.ReleaseDate);
                     break;
+                case "sold":
+                    ordered = list.OrderByDescending(b => b.UnitsSold);
+                    break;
                 default:
                     ordered = list.OrderBy(b => b.Name);
                     break;
@@ -71,35 +82,6 @@ namespace GeekTextAPI.Controllers
 
             // secondary sort by book name
             return ordered.ThenBy(b => b.Name).ToList();
-        }
-
-        /*
-        // GET: api/BookBrowse
-        public IEnumerable<string> Get()
-        {
-            return new string[] { "value1", "value2" };
-        }
-
-        // GET: api/BookBrowse/5
-        public string Get(int id)
-        {
-            return "value";
-        }
-        */
-
-        // POST: api/BookBrowse
-        public void Post([FromBody]string value)
-        {
-        }
-
-        // PUT: api/BookBrowse/5
-        public void Put(int id, [FromBody]string value)
-        {
-        }
-
-        // DELETE: api/BookBrowse/5
-        public void Delete(int id)
-        {
         }
     }
 }

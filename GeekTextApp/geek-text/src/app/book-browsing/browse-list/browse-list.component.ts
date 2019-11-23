@@ -12,74 +12,120 @@ import { Observable } from 'rxjs';
 })
 export class BrowseListComponent implements OnInit {
 
-    title: string = "";
+    path: string = '';  // current url path
+    params: any;        // params for this route
+
+    title: string = '';
     genres: any = [];
 
     books: any = [];
-    sortBy: string = 'name';  // bound to mat-select value
     booksLoaded: boolean = false;
 
+    sortBy: string = 'name';  // bound to mat-select value
+
     // input variables for the mat-paginator
-    pageSizeOptions: number[] = [1, 3, 10, 20];
+    pageSizeOptions: number[] = [10, 20];
     pageIndex: number = 0;
-    pageSize: number = this.pageSizeOptions[2];
+    pageSize: number = this.pageSizeOptions[0];
 
     // show books #startIndex - #endIndex
     startIndex: number = 0;
     endIndex: number = this.pageSize;
 
+
     constructor(private route: ActivatedRoute, private bookBrowsingService: BookBrowsingService) { }
 
     ngOnInit() {
+        this.path = this.route.snapshot.url[1].path;
+        this.route.paramMap.subscribe(params => {
+            this.params = params;
+            this.setTitle();
+
+            var queryParams: any = this.route.snapshot.queryParamMap;
+            if (queryParams.has('sortBy')) {
+                this.sortBy = queryParams.get('sortBy');
+                if (this.path !== 'topsellers' && this.sortBy === 'sold') {
+                    this.sortBy = 'name';
+                }
+            }
+            if (queryParams.has('pageSize')) {
+                var pageSize = parseInt(queryParams.get('pageSize'));
+                if (this.pageSizeOptions.includes(pageSize)) {
+                    this.pageSize = pageSize;
+                    this.setBookIndexes();
+                }
+            }
+
+            this.sortBooks();
+        });
+
         this.bookBrowsingService.getAllGenres().subscribe(genres => this.genres = genres);
-        this.sortBooks();
     }
 
-    pageChange(event: PageEvent) {
+    pageChange(event: PageEvent): void {
+        if (this.pageSize == event.pageSize) {  // do not scroll to top if user only changes # of items per page
+            this.scrollToPageTop();
+        }
+
         // update the page index and size so that all paginators get updated
-        this.pageIndex = event.pageIndex;
+        //this.pageIndex = event.pageIndex;
         this.pageSize = event.pageSize;
 
         // recalculate the subset of books to show
+        this.setBookIndexes();
+    }
+
+    setBookIndexes(): void {
         this.startIndex = this.pageIndex * this.pageSize;
         this.endIndex = this.startIndex + this.pageSize;
     }
 
-    getStars(rating: number) {
-        return Array(rating).fill(0);
+    // when a category link is clicked, go to first page in the paginator, and scroll to top of the page
+    reload(): void {
+        this.pageIndex = 0;
+        this.scrollToPageTop();
     }
 
-    // when a category link is clicked, go to first page in the paginator, and scroll to top of the page
-    reload() {
-        this.booksLoaded = false;
-        this.pageIndex = 0;
+    scrollToPageTop(): void {
         document.querySelector('#body').scrollIntoView();
     }
 
-    sortBooks() {
+    setTitle(): void {
+        if (this.path === 'topsellers') {
+            this.title = "top sellers";
+        } else if (this.path === 'genre') {
+            var genre: string = this.params.get('genre');
+            this.title = genre + " books";
+        } else if (this.path === 'rating') {
+            var rating: number = parseInt(this.params.get('rating'));
+            if (rating === 5) {
+                this.title = rating + " star ratings ";
+            } else if (rating >= 1 && rating <= 4) {
+                this.title = rating + " star ratings and higher";
+            }
+        }
+    }
+
+    sortBooks(): void {
+        // sorting is done in backend, so books must be reloaded
+        this.books = [];
         this.booksLoaded = false;
 
-        this.route.paramMap.subscribe(params => {
-            var path: string = this.route.snapshot.url[1].path;
-            var $books: Observable<any>;
+        var books$: Observable<any>;
 
-            if (path === 'topsellers') {
-                this.title = "top sellers";
-                $books = this.bookBrowsingService.getBooksByTopSellers(this.sortBy);
-            } else if (path === 'genre') {
-                var genre: string = params.get('genre');
-                this.title = genre + " books";
-                $books = this.bookBrowsingService.getBooksByGenre(genre, this.sortBy);
-            } else if (path === 'rating') {
-                var rating: number = parseInt(params.get('rating'));
-                this.title = "ratings " + rating + " and higher";
-                $books = this.bookBrowsingService.getBooksByRating(rating, this.sortBy);
-            }
+        if (this.path === 'topsellers') {
+            books$ = this.bookBrowsingService.getBooksByTopSellers(this.sortBy);
+        } else if (this.path === 'genre') {
+            var genre: string = this.params.get('genre');
+            books$ = this.bookBrowsingService.getBooksByGenre(genre, this.sortBy);
+        } else if (this.path === 'rating') {
+            var rating: number = parseInt(this.params.get('rating'));
+            books$ = this.bookBrowsingService.getBooksByRating(rating, this.sortBy);
+        }
 
-            $books.subscribe(books => {
-                this.books = books;
-                this.booksLoaded = true;
-            });
+        books$.subscribe(books => {
+            this.books = books;
+            this.booksLoaded = true;
         });
     }
 }
