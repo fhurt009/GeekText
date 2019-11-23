@@ -7,6 +7,7 @@ import { RegistrationComponent } from './user/registration/registration.componen
 import { LoginComponent } from './user/login/login.component';
 import { ProfileComponent } from './user/profile/profile.component';
 import { ChangepwComponent } from './user/changepw/changepw.component';
+import { ShoppingCartComponent } from './components/shopping-cart/shopping-cart.component';
 
 
 const routes: Routes = [
@@ -19,6 +20,7 @@ const routes: Routes = [
     { path: 'user/login', component: LoginComponent },
     { path: 'user/profile', component: ProfileComponent },
     { path: 'user/changepw', component: ChangepwComponent },
+    { path: 'cart', component: ShoppingCartComponent },
 
     // otherwise redirect to home
     { path: '**', redirectTo: '' }
