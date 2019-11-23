@@ -1,6 +1,6 @@
 <div class="row browse-list-item">
   <div class="cover">
-    <a [routerLink]="['/bookdetails', book.Id]">
+    <a [routerLink]="['/book-detail', book.Id]">
       <img src="{{book.CoverUrl}}" *ngIf="book.CoverUrl !== null; else noImage" />
 
       <ng-template #noImage>
@@ -10,7 +10,7 @@
   </div>
 
   <div class="browse-list-item-details">
-    <a class="book-name" [routerLink]="['/bookdetails', book.Id]">{{book.Name}}</a>
+    <a class="book-name" [routerLink]="['/book-detail', book.Id]">{{book.Name}}</a>
     <h4>by {{book.Authors}}</h4>
 
     <div class="rating">

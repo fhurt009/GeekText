@@ -68,7 +68,7 @@ export class BrowseListComponent implements OnInit {
         }
 
         // update the page index and size so that all paginators get updated
-        //this.pageIndex = event.pageIndex;
+        this.pageIndex = event.pageIndex;
         this.pageSize = event.pageSize;
 
         // recalculate the subset of books to show
