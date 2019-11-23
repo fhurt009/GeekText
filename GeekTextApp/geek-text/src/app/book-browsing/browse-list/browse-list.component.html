@@ -6,6 +6,7 @@
       <mat-form-field class="choose-sort">
         <mat-label>Sort By</mat-label>
         <mat-select [(value)]="sortBy" [disabled]="books.length == 0" (selectionChange)="sortBooks()">
+          <mat-option *ngIf="path === 'topsellers'" value="sold">Most Sold</mat-option>
           <mat-option value="name">Name</mat-option>
           <mat-option value="author">Author</mat-option>
           <mat-option value="price">Retail Price</mat-option>

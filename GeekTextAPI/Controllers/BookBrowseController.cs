@@ -52,6 +52,7 @@ namespace GeekTextAPI.Controllers
             return this.SortList(list, SortBy.ToLower());
         }
 
+
         private List<BookBrowseModel> SortList(List<BookBrowseModel> list, string SortBy)
         {
             IOrderedEnumerable<BookBrowseModel> ordered;
@@ -70,6 +71,9 @@ namespace GeekTextAPI.Controllers
                     break;
                 case "date":
                     ordered = list.OrderByDescending(b => b.ReleaseDate);
+                    break;
+                case "sold":
+                    ordered = list.OrderByDescending(b => b.UnitsSold);
                     break;
                 default:
                     ordered = list.OrderBy(b => b.Name);

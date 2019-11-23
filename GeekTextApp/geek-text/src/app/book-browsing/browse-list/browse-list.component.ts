@@ -44,6 +44,9 @@ export class BrowseListComponent implements OnInit {
             var queryParams: any = this.route.snapshot.queryParamMap;
             if (queryParams.has('sortBy')) {
                 this.sortBy = queryParams.get('sortBy');
+                if (this.path !== 'topsellers' && this.sortBy === 'sold') {
+                    this.sortBy = 'name';
+                }
             }
             if (queryParams.has('pageSize')) {
                 var pageSize = parseInt(queryParams.get('pageSize'));

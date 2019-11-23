@@ -10,13 +10,13 @@
         <a [routerLink]="['/bookdetails', topSeller.Id]">
           <img src="{{topSeller.CoverUrl}}" *ngIf="topSeller.CoverUrl !== null; else noImage" />
         </a>
-        <a class="text-link" [routerLink]="['/bookdetails', topSeller.Id]" [queryParams]="{sortBy: 'name', pageSize: 10}">{{topSeller.Name}}</a>
+        <a class="text-link" [routerLink]="['/bookdetails', topSeller.Id]">{{topSeller.Name}}</a>
       </div>
     </mat-grid-tile>
   </mat-grid-list>
   <div class="top-sellers">
     <span></span>
-    <a [routerLink]="['/browse/topsellers']">View All Top Sellers >></a>
+    <a [routerLink]="['/browse/topsellers']" [queryParams]="{sortBy: 'sold', pageSize: 10}">View All Top Sellers >></a>
   </div>
 
   <div class="section-header">
