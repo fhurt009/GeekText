@@ -6,6 +6,7 @@
       <mat-form-field class="choose-sort">
         <mat-label>Sort By</mat-label>
         <mat-select [(value)]="sortBy" [disabled]="books.length == 0" (selectionChange)="sortBooks()">
+          <mat-option *ngIf="path === 'topsellers'" value="sold">Most Sold</mat-option>
           <mat-option value="name">Name</mat-option>
           <mat-option value="author">Author</mat-option>
           <mat-option value="price">Retail Price</mat-option>
@@ -43,12 +44,12 @@
              routerLinkActive="active-link"
              (click)="reload()">{{genre.Genre}}</a>
           <mat-divider></mat-divider>
-          <a mat-list-item *ngFor="let rating of [1, 2, 3, 4, 5]"
+          <a mat-list-item *ngFor="let rating of [5, 4, 3, 2, 1]"
              [routerLink]="['/browse/rating', rating]"
              [queryParams]="{sortBy: sortBy, pageSize: pageSize}"
              routerLinkActive="active-link"
              (click)="reload()">
-            <span *ngFor="let x of [1, 2, 3, 4, 5]">
+            <span *ngFor="let x of [5, 4, 3, 2, 1]">
               <span *ngIf="x <= rating">&#9733;</span>
             </span>
           </a>

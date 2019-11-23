@@ -18,14 +18,19 @@
   flex-wrap: nowrap;
 }
 
+.cover {
+  width: 200px;
+}
+
 img {
   height: 200px;
   width: auto;
+  max-width: 100%;
   box-shadow: 0px 6px 10px 0px lightgray, 0px 2px 4px 0px black;
 }
 
 .browse-list-item-details {
-  margin-left: 50px;
+  margin-left: 20px;
 }
 
 h2 {
@@ -35,13 +40,14 @@ h2 {
 
 .book-name {
   font-size: 22px;
+  white-space: nowrap;
   color: black;
 }
 
 h4 {
-  margin: 0;
   font-size: 15px;
-  color: darkslategray
+  white-space: nowrap;
+  color: darkslategray;
 }
 
 h5 {
@@ -61,7 +67,6 @@ h5 {
 .star {
   font-size: 20px;
   color: royalblue;
-  margin-right: 0px;
 }
 
 .rating-tooltip {
@@ -84,7 +89,7 @@ h5 {
   margin-left: 10px;
 }
 
-button {
+app-add-to-cart {
   position: absolute;
   bottom: 0;
   right: 0;

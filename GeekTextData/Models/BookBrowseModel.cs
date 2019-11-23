@@ -16,5 +16,6 @@ namespace GeekTextData.Models
         public int Reviews { get; set; }
         public double RetailPrice { get; set; }
         public DateTime ReleaseDate { get; set; }
+        public int UnitsSold { get; set; }
     }
 }
