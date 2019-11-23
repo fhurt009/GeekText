@@ -11,6 +11,7 @@ import { ChangepwComponent } from './user/changepw/changepw.component';
 
 const routes: Routes = [
     { path: '', component: CategoriesComponent },
+    { path: 'browse/topsellers', component: BrowseListComponent },
     { path: 'browse/genre/:genre', component: BrowseListComponent },
     { path: 'browse/rating/:rating', component: BrowseListComponent },
     { path: 'user', component: UserComponent, redirectTo: '' },

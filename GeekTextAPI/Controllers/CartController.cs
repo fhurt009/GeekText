@@ -29,8 +29,15 @@ namespace GeekTextAPI.Controllers
             return data.GetCartByUserId(id);
         }
 
-        // GET: api/Cart/5
+        [HttpGet]
+        [Route("api/cart/booksSavedForLater")]
+        public List<CartModel> GetSavedForLaterById(int id)
+        {
+            CartData data = new CartData();
 
+            return data.GetSavedForLaterByUserId(id , true);
+        }
+        
         // POST: api/Cart
         [HttpPost]
         [Route("api/cart")]
@@ -51,7 +58,7 @@ namespace GeekTextAPI.Controllers
         }
 
         [HttpPut]
-        [Route("api/cart/saveForLater/{bookId}")]
+        [Route("api/cart/booksSavedForLater/{bookId}")]
         public void PutSaveForLater(int userId, int bookId, [FromBody]bool isSavedForLater)
         {
             CartData data = new CartData();
@@ -60,14 +67,23 @@ namespace GeekTextAPI.Controllers
 
         }
 
-        // DELETE: api/Cart/5
-        [HttpDelete]
-        [Route("api/cart")]
-        public void DeleteCart(int userId)
+        [HttpPut]
+        [Route("api/cart/{bookId}")]
+        public void PutBookQuantity(int userId, int bookId, [FromBody]int quantity)
         {
             CartData data = new CartData();
 
-            data.DeleteCart(userId);
+            data.UpdateItemQuantity(userId, bookId, quantity);
+
+        }
+
+        [HttpPost]
+        [Route("api/cart/checkout")]
+        public void CheckoutCart([FromBody]int userId)
+        {
+            CartData data = new CartData();
+
+            data.CheckoutCart(userId);
         }
 
         [HttpDelete]

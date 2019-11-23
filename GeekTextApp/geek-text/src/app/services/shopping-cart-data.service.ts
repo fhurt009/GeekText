@@ -1,8 +1,15 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpErrorResponse } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
 import { Book } from '../models/book.model';
 import { catchError } from 'rxjs/operators';
+
+const httpOptions = {
+  headers: new HttpHeaders({
+    'Content-Type':  'application/json',
+    'Authorization': 'my-auth-token'
+  })
+};
 
 
 @Injectable({
@@ -20,15 +27,27 @@ export class ShoppingCartDataService {
   }
 
   
-  addBookToCart(userId:number, bookId: number) {
+  addBookToCart(userId: number, bookId: number) {
     return this.httpClient.post(this.url + "cart?userId="+ userId, bookId);
   }
 
-  getBooks(id:number): Observable<Book[]> {
+  getBooks(id: number): Observable<Book[]> {
     return this.httpClient.get<Book[]>(this.url + "cart?id=" + id)
     .pipe(
       catchError(this.handleError)
     );
+  }
+
+  getSavedForLaterBooks(id: number): Observable<Book[]> {
+    return this.httpClient.get<Book[]>(this.url + "cart/booksSavedForLater?id=" + id)
+    .pipe(
+      catchError(this.handleError)
+    );
+  }
+
+  saveForLater(id: number, bookId: number, isSaved: boolean) {
+    return this.httpClient.put(this.url + "cart/booksSavedForLater/" + bookId + "?userId=" + id, isSaved, httpOptions)
+
   }
 
   deleteBookFromCart(userId:number, bookId:number) {
@@ -39,6 +58,18 @@ export class ShoppingCartDataService {
     this.books = [];
     return this.books;
   }
+
+  checkout(userId:number) {
+    return this.httpClient.post(this.url + "cart/checkout?userId=" + userId, userId, httpOptions)
+    .pipe(
+      catchError(this.handleError)
+    );
+  }
+
+  updateBookQuantity(userId:number, bookId:number, quantity:number) {
+    return this.httpClient.put(this.url + "cart/" + bookId + "?userId=" + userId, quantity, httpOptions)
+  }
+
   private handleError(error: HttpErrorResponse) {
     if(error.error instanceof ErrorEvent) {
       console.error('An Error Occured: ', error.error.message);
@@ -48,7 +79,7 @@ export class ShoppingCartDataService {
       )
     }
     return throwError(
-      'Something bad happened: Please try agaon later.'
+      'Something bad happened: Please try again later.'
     )
   }
   
