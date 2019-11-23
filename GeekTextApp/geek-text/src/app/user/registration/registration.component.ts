@@ -42,9 +42,6 @@ export class RegistrationComponent implements OnInit {
     //holds username value
     username: string = '';
 
-    //holds register value
-    register: string = '';
-
     //register button clicked
     onSubmit() {
         var $taken: Observable<any>;
@@ -68,7 +65,6 @@ export class RegistrationComponent implements OnInit {
         //subscribes string value into this.username
         $taken.subscribe(is_Taken => {
             this.username = is_Taken[0].is_taken;
-            console.log('is taken: '+ this.username); //remove @ final product
         });
 
         //validates username
@@ -86,7 +82,6 @@ export class RegistrationComponent implements OnInit {
                 //posts new user in database
                 $newUser = this.UserService.register(usernameS, passwordS, emailS, fNameS, lNameS);
                 $newUser.subscribe();
-                console.log('new user: ' + usernameS, passwordS, emailS, fNameS, lNameS);
 
                 this.router.navigate(['/user/login']);
             }

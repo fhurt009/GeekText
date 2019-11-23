@@ -1,29 +1,30 @@
 <div class="card m-3">
-  <h5 class="card-header">Change Password</h5>
+  <h5 class="card-header">Login</h5>
   <div class="card-body">
-    <form [formGroup]="changepwForm" (ngSubmit)="onSubmit()">
+    <form [formGroup]="changepwForm">
       <div class="form-row">
         <div class="form-group col-5">
-          <label>Old Password</label>
+          <label>Current Password</label>
           <input type="password" formControlName="opassword" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.opassword.errors }" />
           <div *ngIf="submitted && f.opassword.errors" class="invalid-feedback">
-            <div *ngIf="f.opassword.errors.required">Old Password is required</div>
-            <div *ngIf="f.opassword.errors.pattern">Password must be at least 8 characters and contain at least one capital letter, number, and unique character</div>
+            <div *ngIf="f.opassword.errors.required">Current password is required</div>
           </div>
         </div>
         <div class="form-group col-5" style="visibility: hidden;">
-          <label>placeholder (Optional)</label>
-          <input type="text" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.filler.errors }" />
-          <div *ngIf="submitted && f.filler.errors" class="invalid-feedback">
+          <label>Current Password</label>
+          <input type="password" formControlName="opassword" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.opassword.errors }" />
+          <div *ngIf="submitted && f.opassword.errors" class="invalid-feedback">
+            <div *ngIf="f.opassword.errors.required">Current password is required</div>
           </div>
-        </div>--
+        </div>
       </div>
+      <div><label *ngIf="!isHidden" style="color:red" [(ngModel)]="badPW">Incorrect Password</label></div>
       <div class="form-row">
         <div class="form-group col-5">
           <label>New Password</label>
           <input type="password" formControlName="npassword" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.npassword.errors }" />
           <div *ngIf="submitted && f.npassword.errors" class="invalid-feedback">
-            <div *ngIf="f.npassword.errors.required">New Password is required</div>
+            <div *ngIf="f.npassword.errors.required">New password is required</div>
             <div *ngIf="f.npassword.errors.pattern">Password must be at least 8 characters and contain at least one capital letter, number, and unique character</div>
           </div>
         </div>
@@ -31,15 +32,15 @@
           <label>Confirm Password</label>
           <input type="password" formControlName="confirmPassword" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.confirmPassword.errors }" />
           <div *ngIf="submitted && f.confirmPassword.errors" class="invalid-feedback">
-            <div *ngIf="f.confirmPassword.errors.required">Confirm Password is required</div>
+            <div *ngIf="f.confirmPassword.errors.required">New password is required</div>
             <div *ngIf="f.confirmPassword.errors.mustMatch">Passwords must match</div>
           </div>
         </div>
-        <div class="text-center">
-          <button class="btn btn-primary mr-1" (click)="onSubmit()">Change Password</button>
-          <a [routerLink]="['/user/profile']"><button class="btn btn-secondary">Cancel</button></a>
-        </div>
       </div>
-      </form>
+      <div class="text-left">
+        <button class="btn btn-primary mr-1" (click)="onSubmit()">Save changes</button>
+        <a [routerLink]="['/user/profile']"><button class="btn btn-secondary">Cancel</button></a>
+      </div>
+    </form>
   </div>
 </div>

@@ -16,6 +16,7 @@ export class LoginComponent implements OnInit {
 
     isHidden: boolean = true;
     badLogin: string = '';
+    userId: number;
 
     constructor(private formBuilder: FormBuilder, private UserService: UserService, private router: Router) { }
 
@@ -25,6 +26,7 @@ export class LoginComponent implements OnInit {
             username: ['', Validators.required],
             password: ['', [Validators.required]]
         });
+        this.UserService.currentUser.subscribe(userId => this.userId = userId);
     }
 
     // convenience getter for easy access to form fields
@@ -53,7 +55,6 @@ export class LoginComponent implements OnInit {
         //subscribes user id into first index of login array
         $id.subscribe(login => {
             this.id = login[0].id;
-            console.log('users Id: '+ this.id); //remove @ final product
         });
 
         //valid login redirects you to home page
@@ -62,6 +63,7 @@ export class LoginComponent implements OnInit {
 
             //redirects to homepage if the id is no longer 0 (a user is logged in)
             if (this.id != 0) {
+                this.UserService.changeUserId(this.id);
                 this.router.navigate(['']);
                 this.isHidden = true;
             }
