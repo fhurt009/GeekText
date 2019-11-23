@@ -7,7 +7,7 @@ import { HttpClient } from '@angular/common/http';
 })
 export class BookBrowsingService {
 
-    baseUrl: string = 'https://localhost:44323/api/BookBrowse';
+    baseUrl: string = 'http://127.0.0.1:8080/api/BookBrowse';
 
     constructor(private http: HttpClient) { }
 

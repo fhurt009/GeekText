@@ -14,6 +14,9 @@ import { BrowseListItemComponent } from './book-browsing/browse-list-item/browse
 import { BrowseListComponent } from './book-browsing/browse-list/browse-list.component';
 import { CategoriesComponent } from './book-browsing/categories/categories.component';
 import { AddToCartComponent } from './components/add-to-cart/add-to-cart.component';
+import { BooksComponent } from './books/books.component';
+import { BookDetailsComponent } from './book-details/book-details.component';
+import { BookAuthorComponent } from './book-author/book-author.component';
 
 @NgModule({
     declarations: [
@@ -24,6 +27,9 @@ import { AddToCartComponent } from './components/add-to-cart/add-to-cart.compone
         BrowseListComponent,
         CategoriesComponent,
         AddToCartComponent,
+        BooksComponent,
+        BookDetailsComponent,
+        BookAuthorComponent,
     ],
     imports: [
         BrowserModule,
@@ -33,7 +39,10 @@ import { AddToCartComponent } from './components/add-to-cart/add-to-cart.compone
         HttpClientModule,
         RouterModule.forRoot([
             { path: '', component: AppComponent },
-            { path: 'cart', component: ShoppingCartComponent }
+            { path: 'cart', component: ShoppingCartComponent },
+            { path: 'book-detail/:Id', component: BookDetailsComponent },
+            { path: 'Author/:id', component: BookAuthorComponent}
+            
         ])
     ],
     providers: [],
