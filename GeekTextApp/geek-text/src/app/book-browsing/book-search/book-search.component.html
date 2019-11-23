@@ -1,0 +1,13 @@
+<form>
+  <mat-form-field>
+    <input type="text" placeholder="Search a Book" matInput [formControl]="formControl" [matAutocomplete]="auto">
+    <mat-autocomplete #auto="matAutocomplete" autoActiveFirstOption [displayWith]="clearBookName" (optionSelected)="optionSelected($event)">
+      <mat-option *ngFor="let book of filteredBooks$ | async | slice:0:5" [value]="book.Id">
+        <img src="{{book.CoverUrl}}" />
+        <span>{{book.Name}}</span>
+      </mat-option>
+
+      <mat-option *ngIf="search.length !== 0 && (filteredBooks$ | async)?.length === 0" [value]="0">No Results Found</mat-option>
+    </mat-autocomplete>
+  </mat-form-field>
+</form>

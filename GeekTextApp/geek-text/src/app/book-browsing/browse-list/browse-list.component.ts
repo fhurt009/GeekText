@@ -24,9 +24,9 @@ export class BrowseListComponent implements OnInit {
     sortBy: string = 'name';  // bound to mat-select value
 
     // input variables for the mat-paginator
-    pageSizeOptions: number[] = [1, 3, 10, 20];
+    pageSizeOptions: number[] = [10, 20];
     pageIndex: number = 0;
-    pageSize: number = this.pageSizeOptions[2];
+    pageSize: number = this.pageSizeOptions[0];
 
     // show books #startIndex - #endIndex
     startIndex: number = 0;
@@ -44,13 +44,18 @@ export class BrowseListComponent implements OnInit {
             var queryParams: any = this.route.snapshot.queryParamMap;
             if (queryParams.has('sortBy')) {
                 this.sortBy = queryParams.get('sortBy');
+                if (this.path !== 'topsellers' && this.sortBy === 'sold') {
+                    this.sortBy = 'name';
+                }
             }
             if (queryParams.has('pageSize')) {
                 var pageSize = parseInt(queryParams.get('pageSize'));
                 if (this.pageSizeOptions.includes(pageSize)) {
                     this.pageSize = pageSize;
+                    this.setBookIndexes();
                 }
             }
+
             this.sortBooks();
         });
 
@@ -63,10 +68,14 @@ export class BrowseListComponent implements OnInit {
         }
 
         // update the page index and size so that all paginators get updated
-        this.pageIndex = event.pageIndex;
+        //this.pageIndex = event.pageIndex;
         this.pageSize = event.pageSize;
 
         // recalculate the subset of books to show
+        this.setBookIndexes();
+    }
+
+    setBookIndexes(): void {
         this.startIndex = this.pageIndex * this.pageSize;
         this.endIndex = this.startIndex + this.pageSize;
     }
@@ -102,19 +111,19 @@ export class BrowseListComponent implements OnInit {
         this.books = [];
         this.booksLoaded = false;
 
-        var $books: Observable<any>;
+        var books$: Observable<any>;
 
         if (this.path === 'topsellers') {
-            $books = this.bookBrowsingService.getBooksByTopSellers(this.sortBy);
+            books$ = this.bookBrowsingService.getBooksByTopSellers(this.sortBy);
         } else if (this.path === 'genre') {
             var genre: string = this.params.get('genre');
-            $books = this.bookBrowsingService.getBooksByGenre(genre, this.sortBy);
+            books$ = this.bookBrowsingService.getBooksByGenre(genre, this.sortBy);
         } else if (this.path === 'rating') {
             var rating: number = parseInt(this.params.get('rating'));
-            $books = this.bookBrowsingService.getBooksByRating(rating, this.sortBy);
+            books$ = this.bookBrowsingService.getBooksByRating(rating, this.sortBy);
         }
 
-        $books.subscribe(books => {
+        books$.subscribe(books => {
             this.books = books;
             this.booksLoaded = true;
         });
