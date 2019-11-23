@@ -1,11 +1,13 @@
 <div class="row browse-list-item">
-  <a [routerLink]="['/bookdetails', book.Id]">
-    <img src="{{book.CoverUrl}}" *ngIf="book.CoverUrl !== null; else noImage" />
+  <div class="cover">
+    <a [routerLink]="['/bookdetails', book.Id]">
+      <img src="{{book.CoverUrl}}" *ngIf="book.CoverUrl !== null; else noImage" />
 
-    <ng-template #noImage>
-      <img src="https://islandpress.org/sites/default/files/400px%20x%20600px-r01BookNotPictured.jpg" />
-    </ng-template>
-  </a>
+      <ng-template #noImage>
+        <img src="https://islandpress.org/sites/default/files/400px%20x%20600px-r01BookNotPictured.jpg" />
+      </ng-template>
+    </a>
+  </div>
 
   <div class="browse-list-item-details">
     <a class="book-name" [routerLink]="['/bookdetails', book.Id]">{{book.Name}}</a>
@@ -21,9 +23,9 @@
           </ng-template>
         </span>
 
-        <span class="rating-tooltip">{{book.Rating | number: '1.0-1'}}</span>
+        <span class="rating-tooltip">{{book.Reviews === 0 ? 'Not Rated' : book.Rating | number: '1.0-1'}}</span>
       </span>
-      <span class="rating-reviews">{{book.Reviews}} {{book.Reviews > 1 ? "Reviews" : "Review"}}</span>
+      <span class="rating-reviews">{{book.Reviews}} {{book.Reviews !== 1 ? "Reviews" : "Review"}}</span>
     </div>
 
     <h2>{{book.RetailPrice | currency}}</h2>

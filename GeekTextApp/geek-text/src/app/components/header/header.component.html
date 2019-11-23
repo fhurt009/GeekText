@@ -2,11 +2,12 @@
   <mat-toolbar color="primary" class="header-toolbar">
     <a [routerLink]="['/']"><h1 class="mat-display-4">Geek Text</h1></a>
     <span class="material-spacer"></span>
+    <app-book-search></app-book-search>
     <a [routerLink]="['/cart']"><button [class.active]="toggleActive" mat-icon-button matTooltip="Redirects to Shopping Cart"
         aria-label="Shopping Cart"><mat-icon>shopping_cart</mat-icon></button>
     </a>
     <button mat-icon-button><mat-icon>favorite</mat-icon></button>
-    <button mat-icon-button><mat-icon>account_circle</mat-icon></button>
+    <a [routerLink]="['/user/profile']"><button mat-icon-button><mat-icon>account_circle</mat-icon></button></a>
   </mat-toolbar>
 
   <mat-sidenav-container class="header-sidenav-container"
