@@ -67,13 +67,23 @@ namespace GeekTextAPI.Controllers
 
         }
 
-        [HttpDelete]
-        [Route("api/cart")]
-        public void DeleteCart(int userId)
+        [HttpPut]
+        [Route("api/cart/{bookId}")]
+        public void PutBookQuantity(int userId, int bookId, [FromBody]int quantity)
         {
             CartData data = new CartData();
 
-            data.DeleteCart(userId);
+            data.UpdateItemQuantity(userId, bookId, quantity);
+
+        }
+
+        [HttpPost]
+        [Route("api/cart/checkout")]
+        public void CheckoutCart([FromBody]int userId)
+        {
+            CartData data = new CartData();
+
+            data.CheckoutCart(userId);
         }
 
         [HttpDelete]

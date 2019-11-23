@@ -7,7 +7,7 @@
         aria-label="Shopping Cart"><mat-icon>shopping_cart</mat-icon></button>
     </a>
     <button mat-icon-button><mat-icon>favorite</mat-icon></button>
-    <button mat-icon-button><mat-icon>account_circle</mat-icon></button>
+    <a [routerLink]="['/user/profile']"><button mat-icon-button><mat-icon>account_circle</mat-icon></button></a>
   </mat-toolbar>
 
   <mat-sidenav-container class="header-sidenav-container"

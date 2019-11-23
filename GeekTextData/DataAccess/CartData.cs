@@ -45,13 +45,13 @@ namespace GeekTextData.DataAccess
             sql.SaveData("dbo.spPostItemCart", p, "GeekTextDB");
         }
 
-        public void DeleteCart(int userId)
+        public void CheckoutCart(int userId)
         {
             SqlDataAccess sql = new SqlDataAccess();
 
             var p = new { userId};
 
-            sql.SaveData("dbo.spDeleteAllItemsCart", p, "GeekTextDB");
+            sql.SaveData("dbo.spCheckout", p, "GeekTextDB");
         }
 
         public void DeleteItemCart(int userId, int bookId)
