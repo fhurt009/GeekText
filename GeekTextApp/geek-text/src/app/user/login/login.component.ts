@@ -63,9 +63,9 @@ export class LoginComponent implements OnInit {
 
             //redirects to homepage if the id is no longer 0 (a user is logged in)
             if (this.id != 0) {
-                this.UserService.changeUserId(this.id);
-                this.router.navigate(['']);
+                this.UserService.changeUserId(this.id); //changes global variable
                 this.isHidden = true;
+                this.router.navigate(['']);
             }
             //incorrect login information, making warning visible
             else {

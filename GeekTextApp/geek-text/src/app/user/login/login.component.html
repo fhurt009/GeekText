@@ -20,7 +20,7 @@
           </div>
         </div>
       </div>
-      <div><label *ngIf="!isHidden" style="color:red" [(ngModel)]="badLogin">Username or Password is incorrect</label></div>
+      <div><label *ngIf="!isHidden" style="color:red" class="badLogin">Username or Password is incorrect</label></div>
       <div class="text-left">
         <button class="btn btn-primary mr-1" (click)="onSubmit()">Login</button>
         <a [routerLink]="['/user/registration']"><button class="btn btn-secondary">Register</button></a>
