@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { BookDetailService } from '/Users/user/Documents/GitHub/GeekText/GeekTextApp/geek-text/src/app/services/book-detail.service';
+import { BookDetailService } from '../services/book-detail.service';
 import { Book } from '../models/book.model';
 import { BookDetailsComponent } from '../book-details/book-details.component';
 import { ActivatedRoute, Router } from '@angular/router';

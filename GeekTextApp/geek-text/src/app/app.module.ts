@@ -56,9 +56,7 @@ import { ChangepwComponent } from './user/changepw/changepw.component';
         ReactiveFormsModule,
         RouterModule.forRoot([
             { path: '', component: AppComponent },
-            { path: 'cart', component: ShoppingCartComponent },
-            { path: 'book-detail/:Id', component: BookDetailsComponent },
-            { path: 'Author/:id', component: BookAuthorComponent},
+            
             { path: 'shopping-cart', component: ShoppingCartComponent }
         ])
     ],

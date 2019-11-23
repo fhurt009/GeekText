@@ -7,10 +7,10 @@
   <mat-grid-list cols="5" rowHeight="275">
     <mat-grid-tile *ngFor="let topSeller of topSellers | async | slice:0:5">
       <div class="grid-item">
-        <a [routerLink]="['/bookdetails', topSeller.Id]">
+        <a [routerLink]="['/book-detail', topSeller.Id]">
           <img src="{{topSeller.CoverUrl}}" *ngIf="topSeller.CoverUrl !== null; else noImage" />
         </a>
-        <a class="text-link" [routerLink]="['/bookdetails', topSeller.Id]">{{topSeller.Name}}</a>
+        <a class="text-link" [routerLink]="['/book-detail', topSeller.Id]">{{topSeller.Name}}</a>
       </div>
     </mat-grid-tile>
   </mat-grid-list>
@@ -28,7 +28,7 @@
     <mat-grid-tile *ngFor="let genre of genres">
       <div class="grid-item">
         <a [routerLink]="['/browse/genre', genre.Genre]" [queryParams]="{sortBy: 'name', pageSize: 10}">
-          <img src="genre.Image" *ngIf="genre.Image !== null; else noImage" />
+          <img src="{{genre.Image}}" *ngIf="genre.Image !== null; else noImage" />
         </a>
         <a class="text-link" [routerLink]="['/browse/genre', genre.Genre]">{{genre.Genre}}</a>
       </div>
