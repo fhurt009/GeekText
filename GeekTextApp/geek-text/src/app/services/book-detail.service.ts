@@ -20,6 +20,7 @@ export class BookDetailService {
     getBooks(): Book[] {
         return [
             {
+                "CoverUrl": '',
                 "UserId": 1,
                 "BookId": 1,
                 "Name": "Harry Potter",
@@ -30,6 +31,7 @@ export class BookDetailService {
 
             },
             {
+                "CoverUrl": '',
                 "UserId": 2,
                 "BookId": 2,
                 "Name": "Pototo",

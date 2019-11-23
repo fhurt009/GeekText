@@ -1,6 +1,6 @@
 import { Component, OnInit ,Input} from '@angular/core';
 import { Book } from '../models/book.model';
-import { BookDetailService } from '/Users/user/Documents/GitHub/GeekText/GeekTextApp/geek-text/src/app/services/book-detail.service';
+import { BookDetailService } from '../services/book-detail.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Location } from '@angular/common';
 @Component({
