@@ -5,6 +5,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <TypeScriptCompile Remove="geek-text\src\app\user\Must-Match.validator.ts" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Dapper" Version="2.0.30" />
     <PackageReference Include="Microsoft.TypeScript.MSBuild" Version="3.6.3">
       <PrivateAssets>all</PrivateAssets>
@@ -15,6 +19,7 @@
   <ItemGroup>
     <Folder Include="geek-text\src\app\book-browsing\" />
     <Folder Include="geek-text\src\app\services\" />
+    <Folder Include="geek-text\src\app\user\changepw\" />
   </ItemGroup>
 
 </Project>

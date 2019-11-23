@@ -283,6 +283,7 @@
     <Compile Include="Controllers\BookBrowseController.cs" />
     <Compile Include="Controllers\CartController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\UserController.cs" />
     <Compile Include="Controllers\ValuesController.cs" />
     <Compile Include="Controllers\WishListController.cs" />
     <Compile Include="Global.asax.cs">
