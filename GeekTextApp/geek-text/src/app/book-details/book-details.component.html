@@ -1,0 +1,76 @@
+
+<div class = ' card' >
+        <div class = 'card-header'>
+            {{pageTitle + ':  ' + book.Name }}
+        </div>
+         <br><br>
+        <div class='card-body'>
+           
+          
+          <div class='row'>
+               
+
+              <img src="{{book.CoverUrl}}"
+              class ="img-responsive center-block"
+              vspace = 10
+
+              />
+              
+
+               <div class="browse-list-item-details">
+                  
+                  <h1>{{ book.Name }}</h1>
+                  <a [routerLink]= "['/Author/', book.AuthorId]"
+                > <h3> By {{ book.Author }}</h3></a>
+                   
+                   
+                 
+                 
+                 <h4>Genre: {{ book.Genre}}</h4>
+                 
+                 <div class="stars">
+                   <span class="stars">&#9733;&#9733;&#9733;&#9734;&#9734; ({{starRating}})</span>
+                   <span>{{ NumberReviews }} Reviews</span>
+                 </div>
+             
+                 <ng-template #singleReview>
+                   <div class="rating">
+                     <span class="stars">&#9733;&#9733;&#9733;&#9734;&#9734; ({{starRating}})</span>
+                     <span>{{ starRating }} Review</span>
+                   </div>
+                 </ng-template>
+             
+                 <h2>{{ book.RetailPrice | currency:'USD':'symbol':'1.2-2' }}</h2>
+                 <h4>Published By: {{ book.PublisherName}}</h4>
+                 <h5>Release Date: {{ book.ReleaseDate }}</h5>
+                 
+                  <br>
+                 <button class='btn btn-primary'
+                      (click)='toggleImage()'>
+                {{showDescription ? 'Hide' : 'Show'}} Description
+                </button>
+                 </div>
+                 <table>
+                  <tr>
+                  <th *ngIf = 'showDescription'> {{book.Description}}{{book.Description}} </th>
+                  </tr>
+
+                   </table>
+                      
+               
+                    </div>
+                   
+                </div>
+             
+             
+                      
+                      <div class='card-footer'>
+                          <button class='btn btn-outline-secondary'
+                            (click)='onBack()'
+                             style='width:80px'>
+                      <i class='fa fa-chevron-left'></i> Back
+                          </button>
+                      </div>
+            </div>   
+ 
+
