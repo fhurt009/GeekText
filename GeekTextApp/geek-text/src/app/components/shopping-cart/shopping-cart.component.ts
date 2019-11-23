@@ -1,6 +1,8 @@
 import { Component, OnInit} from '@angular/core';
 import { ShoppingCartDataService } from '../../services/shopping-cart-data.service';
 import { MatSelectChange, MatOption } from '@angular/material';
+import { UserService } from 'src/app/services/user.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-shopping-cart',
@@ -11,13 +13,19 @@ export class ShoppingCartComponent implements OnInit {
   cartDataSource = null;
   savedForLaterDataSource = null;
   displayedColumns: string[] = ['CoverUrl', 'Name', 'Author', 'SaveForLater', 'Price', 'Quantity', 'Delete' ]
-  userId: number = 16;
+  userId: number;
   count: number;
   
-  constructor(private shoppingCartService: ShoppingCartDataService) {  }
+  constructor(private shoppingCartService: ShoppingCartDataService, private userService: UserService, private router: Router) {  }
 
   ngOnInit() {
-    this.getShoppingCart();
+    this.userService.currentUser.subscribe(userId => this.userId = userId);
+    if(this.userId == 0){
+      window.alert('Redirecting to login/register page to start shopping!');
+      this.router.navigate(['/user/login'])
+    }else {
+      this.getShoppingCart();
+    }
   }
 
   getShoppingCart() {
