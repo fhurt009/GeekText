@@ -26,4 +26,7 @@
     <Folder Include="geek-text\src\app\user\changepw\" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Content Remove="geek-text\src\app\services\book_details.cshtml" />
+  </ItemGroup>
 </Project>

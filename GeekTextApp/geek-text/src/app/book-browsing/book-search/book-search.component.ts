@@ -34,7 +34,7 @@ export class BookSearchComponent implements OnInit {
 
         // book Id of 0 means there were no results found
         if (bookId !== 0) {
-            this.router.navigate(['/browse/rating', bookId]);
+            this.router.navigate(['/book-detail', bookId]);
         }
     }
 

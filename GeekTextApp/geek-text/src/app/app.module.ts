@@ -19,6 +19,9 @@ import { LoginComponent } from './user/login/login.component';
 import { RegistrationComponent } from './user/registration/registration.component';
 import { ProfileComponent } from './user/profile/profile.component';
 import { AddToCartComponent } from './components/add-to-cart/add-to-cart.component';
+import { BooksComponent } from './books/books.component';
+import { BookDetailsComponent } from './book-details/book-details.component';
+import { BookAuthorComponent } from './book-author/book-author.component';
 import { BookSearchComponent } from './book-browsing/book-search/book-search.component';
 import { ChangepwComponent } from './user/changepw/changepw.component';
 import { WishListComponent } from './components/wish-list/wish-list.component';
@@ -38,6 +41,9 @@ import { WishlistButtonComponent } from './components/wishlist-button/wishlist-b
         RegistrationComponent,
         ProfileComponent,
         AddToCartComponent,
+        BooksComponent,
+        BookDetailsComponent,
+        BookAuthorComponent,
         BookSearchComponent,
         ChangepwComponent,
         WishListComponent,
@@ -57,8 +63,7 @@ import { WishlistButtonComponent } from './components/wishlist-button/wishlist-b
         RouterModule.forRoot([
             { path: '', component: AppComponent },
             { path: 'shopping-cart', component: ShoppingCartComponent },
-            { path: 'cart', component: ShoppingCartComponent },
-            { path: 'wishlist', component: WishListComponent }
+            { path: 'cart', component: ShoppingCartComponent }
         ])
     ],
     providers: [],
