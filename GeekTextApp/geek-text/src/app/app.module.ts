@@ -63,7 +63,7 @@ import { WishlistButtonComponent } from './components/wishlist-button/wishlist-b
         RouterModule.forRoot([
             { path: '', component: AppComponent },
             { path: 'shopping-cart', component: ShoppingCartComponent },
-            { path: 'cart', component: ShoppingCartComponent }
+            { path: 'wishlist', component: WishListComponent }
         ])
     ],
     providers: [],
