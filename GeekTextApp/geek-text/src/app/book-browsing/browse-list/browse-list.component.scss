@@ -39,11 +39,15 @@
   border-color: lightblue;
 }
 
+::ng-deep .mat-select-panel {
+  max-height: none !important;
+}
+
 .choose-sort {
   margin-top: 5px;
   margin-left: 25px;
   font-size: 14px;
-  width: 125px;
+  width: 200px;
 }
 
 .toolbar-fill-space {
