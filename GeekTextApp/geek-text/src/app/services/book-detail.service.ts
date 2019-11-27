@@ -11,7 +11,7 @@ import { Observable, throwError } from 'rxjs';
 
 export class BookDetailService {
 
-    baseUrl: string = 'http://127.0.0.1:8080/api';
+    baseUrl: string = 'https://localhost:44323/api/';
     
     constructor(private http: HttpClient) { }
 

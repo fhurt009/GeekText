@@ -63,13 +63,19 @@ namespace GeekTextAPI.Controllers
                 case "author":
                     ordered = list.OrderBy(b => b.Authors);
                     break;
-                case "price":
+                case "priceasc":
+                    ordered = list.OrderBy(b => b.RetailPrice);
+                    break;
+                case "pricedesc":
                     ordered = list.OrderByDescending(b => b.RetailPrice);
                     break;
                 case "rating":
                     ordered = list.OrderByDescending(b => b.Rating);
                     break;
-                case "date":
+                case "dateasc":
+                    ordered = list.OrderBy(b => b.ReleaseDate);
+                    break;
+                case "datedesc":
                     ordered = list.OrderByDescending(b => b.ReleaseDate);
                     break;
                 case "sold":
