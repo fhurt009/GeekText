@@ -79,5 +79,16 @@ namespace GeekTextData.DataAccess
             return output;
         }
 
+        public List<string> deleteUserWishList(int UserId, string WishListName)
+        {
+            SqlDataAccess sql = new SqlDataAccess();
+
+            var p = new { UserId, WishListName };
+
+            var output = sql.LoadData<string, dynamic>("dbo.deleteUserWishList", p, "GeekTextDB");
+
+            return output;
+        }
+
     }
 }

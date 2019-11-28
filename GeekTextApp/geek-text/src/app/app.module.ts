@@ -26,7 +26,8 @@ import { BookSearchComponent } from './book-browsing/book-search/book-search.com
 import { ChangepwComponent } from './user/changepw/changepw.component';
 import { WishListComponent } from './components/wish-list/wish-list.component';
 import { WishListsSectionComponent } from './components/wish-lists-section/wish-lists-section.component';
-import { WishlistButtonComponent } from './components/wishlist-button/wishlist-button.component';
+import { AddToWishlistComponent } from './add-to-wishlist/add-to-wishlist.component';
+import { AddToCartWishlistComponent } from './add-to-cart-wishlist/add-to-cart-wishlist.component';
 
 @NgModule({
     declarations: [
@@ -48,7 +49,8 @@ import { WishlistButtonComponent } from './components/wishlist-button/wishlist-b
         ChangepwComponent,
         WishListComponent,
         WishListsSectionComponent,
-        WishlistButtonComponent,
+        AddToWishlistComponent,
+        AddToCartWishlistComponent,
     ],
     imports: [
         BrowserModule,

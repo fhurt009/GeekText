@@ -25,9 +25,9 @@ const routes: Routes = [
     { path: 'user/profile', component: ProfileComponent },
     { path: 'user/changepw', component: ChangepwComponent },
     { path: 'cart', component: ShoppingCartComponent },
-    { path: 'book-detail/:Id', component: BookDetailsComponent },
+    { path: 'bookdetail/:Id', component: BookDetailsComponent },
     { path: 'Author/:id', component: BookAuthorComponent },
-    { path: 'wishlist', component: WishListComponent },
+    { path: 'wishlist/:name', component: WishListComponent },
     { path: 'wishlistSection', component: WishListsSectionComponent },
 
     // otherwise redirect to home
