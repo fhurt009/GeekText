@@ -1,0 +1,50 @@
+<!--<!DOCTYPE html>
+<html>
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+</head>
+<body>
+
+  <div class="dropdown">
+    <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown" (click)="addToWishlist(book)">
+      Add To Wishlist
+      <span class="caret"></span>
+    </button>
+    <ul class="dropdown-menu">
+      <li><a href="#">HTML</a></li>
+      <li><a href="#">CSS</a></li>
+      <li><a href="#">JavaScript</a></li>
+    </ul>
+  </div>
+
+</body>
+</html>-->
+
+  <button color="primary"> Add To Wishlist
+    <mat-select (selectionChange)="selected($event, book)">
+      <mat-option *ngFor="let wishlist of wishlists" [value]="wishlist.Name">
+        {{wishlist.Name}}
+      </mat-option>
+    </mat-select>
+  </button>
+      <!--<app-add-to-cart [book]="book"></app-add-to-cart>-->
+
+  <!--<ng-container matColumnDef="Add To WishList">
+    <th mat-header-cell *matHeaderCellDef> Add To WishList</th>
+    <td mat-cell *matCellDef="let book">
+      <app-add-to-wishlist [book]="book"></app-add-to-wishlist>
+    </td>
+    <td mat-footer-cell *matFooterCellDef></td>
+  </ng-container>-->
+
+  <!--<select (selectionChange)="selected($event, book)">
+    <option [value]="volvo">Volvo</option>
+    <option [value]="saab">Saab</option>
+    <option [value]="opel">Opel</option>
+    <option [value]="audi">Audi</option>
+  </select>-->
+
+<!--<button color="primary" mat-raised-button (click)="addToCart(book)">Add To Cart</button>-->

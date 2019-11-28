@@ -1,7 +1,7 @@
 <div class="wishlist-div">
   <mat-card>
     <mat-card-header>
-      <mat-card-title>Wish List</mat-card-title>
+      <mat-card-title>{{name}}</mat-card-title>
       <mat-card-subtitle *ngIf="wishlistDataSource == 0 ">
         <br>Your Wishlist is Empty. Start placing favorite items now!<br><br>
         <a color="primary" mat-raised-button [routerLink]="['/browse/topsellers']">Start Browsing</a>
@@ -30,22 +30,9 @@
           <td mat-footer-cell *matFooterCellDef> {{getTotalCost() | currency}} </td>
         </ng-container>
         <ng-container matColumnDef="Quantity">
-          <th mat-header-cell *matHeaderCellDef> Quantity </th>
-          <td mat-cell *matCellDef="let book">
-            <mat-select placeholder="{{book.Quantity}}" (selectionChange)="selected($event, book)">
-              <mat-option value="1">1</mat-option>
-              <mat-option value="2">2</mat-option>
-              <mat-option value="3">3</mat-option>
-              <mat-option value="4">4</mat-option>
-              <mat-option value="5">5</mat-option>
-              <mat-option value="6">6</mat-option>
-              <mat-option value="7">7</mat-option>
-              <mat-option value="8">8</mat-option>
-              <mat-option value="9">9</mat-option>
-              <mat-option value="10">10</mat-option>
-            </mat-select>
-          </td>
-          <td mat-footer-cell *matFooterCellDef></td>
+          <th mat-header-cell *matHeaderCellDef> Name </th>
+          <td mat-cell *matCellDef="let book"> {{book.Quantity}} </td>
+          <td mat-footer-cell *matFooterCellDef> Total </td>
         </ng-container>
         <ng-container matColumnDef="Delete">
           <th mat-header-cell *matHeaderCellDef> Delete </th>
@@ -54,8 +41,34 @@
               <mat-icon>clear</mat-icon>
             </button>
           </td>
-          <td mat-footer-cell *matFooterCellDef><button color="primary" mat-raised-button (click)="checkoutcart()">Checkout</button></td>
+          <td mat-footer-cell *matFooterCellDef></td>
         </ng-container>
+        <ng-container matColumnDef="Switch To">
+          <th mat-header-cell *matHeaderCellDef> Switch To</th>
+          <td mat-cell *matCellDef="let book">
+            <mat-select (selectionChange)="selected($event, book)">
+              <mat-option *ngFor="let wishlist of wishlists" [value]="wishlist.Name">
+                {{wishlist.Name}}
+              </mat-option>
+            </mat-select>
+            <!--<app-add-to-cart [book]="book"></app-add-to-cart>-->
+          </td>
+          <td mat-footer-cell *matFooterCellDef></td>
+        </ng-container>
+        <ng-container matColumnDef="Add To Cart">
+          <th mat-header-cell *matHeaderCellDef> Add To Cart</th>
+          <td mat-cell *matCellDef="let book">
+            <app-add-to-cart-wishlist [book]="book"></app-add-to-cart-wishlist>
+          </td>
+          <td mat-footer-cell *matFooterCellDef></td>
+        </ng-container>
+        <!--<ng-container matColumnDef="Add To WishList">
+          <th mat-header-cell *matHeaderCellDef> Add To WishList</th>
+          <td mat-cell *matCellDef="let book">
+            <app-add-to-wishlist [book]="book"></app-add-to-wishlist>
+          </td>
+          <td mat-footer-cell *matFooterCellDef></td>
+        </ng-container>-->
         <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
         <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
         <tr mat-footer-row *matFooterRowDef="displayedColumns"></tr>
@@ -63,3 +76,5 @@
     </ng-container>
   </mat-card>
 </div>
+
+<!--<button color="primary" mat-raised-button (click)="addToCart(book)">Add To Cart</button>-->

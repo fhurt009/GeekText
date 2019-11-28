@@ -69,5 +69,14 @@ namespace GeekTextAPI.Controllers
 
             return data.getUserWishList(UserId);
         }
+
+        [HttpDelete]
+        [Route("api/wishList/delete")]
+        public List<string> deleteUserWishList(int id, string wishListName)
+        {
+            WishListData data = new WishListData();
+
+            return data.deleteUserWishList(id, wishListName);
+        }
     }
 }

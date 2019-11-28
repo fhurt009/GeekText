@@ -27,14 +27,15 @@ export class WishListDataService {
         this.books.push(book);
     }
 
+    //https:// localhost:44323/api/wishList/create?id=2
     //https:// localhost:44323/api/wishList/create?id=2&wishListName=Wish_List_Roey_1
     createWishList(userId: number, name: string) {
-        return this.httpClient.post(this.url + "wishList/create?id=" + userId, name);
+        return this.httpClient.post(this.url + "wishList/create?id=" + userId + "&wishListName=" + name, '');
     }
 
     //https:// localhost:44323/api/wishList/addItem?id=2&bookId=3&wishListName=Wish_List_Roey_1
     addBookToWishlist(userId: number, bookId: number, wishlistName) {
-        return this.httpClient.post(this.url + "wishList/addItem?id=" + userId, bookId, wishlistName);
+        return this.httpClient.post(this.url + "wishList/addItem?id=" + userId + "&bookId=" + bookId + "&wishListName=" + wishlistName, '');
     }
     
     //https:// localhost:44323/api/wishList/removeItem?id=2&bookId=3&wishListName=Wish_List_Roey_1
@@ -44,8 +45,8 @@ export class WishListDataService {
     }
 
     //https:// localhost:44323/api/wishList?UserId=2
-    getWishlists(userId: number): Observable<Wishlist[]> {
-        return this.httpClient.get<Wishlist[]>(this.url + "wishList?UserId=" + userId)
+    getWishlists(userId: number): Observable<Wishlist> {
+        return this.httpClient.get<Wishlist>(this.url + "wishList?UserId=" + userId)
             .pipe(
                 catchError(this.handleError)
             );
@@ -64,7 +65,13 @@ export class WishListDataService {
     & wishListNameDestination=Wish_List_Edward_1**/
     transferBook(userId: number, bookId: number, wishlistNameOrigin: string, wishlistNameDestination: string)
     {
-        return this.httpClient.post(this.url + "wishList/addItem?id=" + userId, bookId);
+        return this.httpClient.post(this.url + "wishList/transferItem?id=" + userId + "&bookId=" + bookId +
+            "&wishListNameOrigin=" + wishlistNameOrigin + "&wishListNameDestination=" + wishlistNameDestination, '');
+    }
+
+    deleteUserWishlist(userId: number, wishlistName) {
+        return this.httpClient.delete(this.url + "wishList/delete?id=" + userId
+            + "&wishListName=" + wishlistName);
     }
 
     clearCart() {

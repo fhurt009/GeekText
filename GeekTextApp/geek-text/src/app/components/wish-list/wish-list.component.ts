@@ -2,8 +2,9 @@ import { Component, OnInit, Input } from '@angular/core';
 import { WishListDataService } from '../../services/wish-list-data.service';
 import { MatSelectChange, MatOption } from '@angular/material';
 import { Wishlist } from '../../models/wishlist.model';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Book } from '../../models/book.model';
+import { UserService } from '../../services/user.service';
 
 @Component({
   selector: 'app-wish-list',
@@ -11,18 +12,31 @@ import { Book } from '../../models/book.model';
   styleUrls: ['./wish-list.component.scss']
 })
 export class WishListComponent implements OnInit {
-    wishlist: string ;
+    name: string;
+    wishlists: Wishlist = null;
     wishlistDataSource;
     savedForLaterDataSource = null;
-    displayedColumns: string[] = ['CoverUrl', 'Name', 'Author', 'Price', 'Quantity', 'Delete']
-    userId: number = 2;
-    count: number;
+    displayedColumns: string[] = ['CoverUrl', 'Name', 'Author', 'Price', 'Quantity', 'Delete', 'Add To Cart', 'Switch To'/*, 'Add To WishList'*/]
+    userId: number;
+    nameDestination: string;
 
     constructor(private wishlistDataService: WishListDataService,
-        private route: ActivatedRoute) { }
+        private route: ActivatedRoute, private router: Router, private userService: UserService) { }
 
     ngOnInit() {
-        this.getBooks(this.userId, 'Wish_List_Roey_1');
+        this.userId = 2
+        this.userService.currentUser.subscribe(userId => this.userId = userId);
+
+        if (this.userId == 0) {
+            window.alert('Redirecting to login/register page to start shopping!');
+            this.router.navigate(['/user/login']);
+        } else
+        {
+            this.name = this.route.snapshot.paramMap.get('name');
+            this.getBooks(this.userId, this.name);
+            this.getWishlists(this.userId);
+            console.log("Success")
+        }
     }
 
     getBooks(userId: number, wishlistName: string) {
@@ -41,70 +55,49 @@ export class WishListComponent implements OnInit {
     }
     
     deleteBookFromWishList(book) {
-        this.wishlistDataService.removeBookFromWishlist(this.userId, book.BookId, "Wish_List_Roey_1")
+        this.wishlistDataService.removeBookFromWishlist(this.userId, book.BookId, this.name)
             .subscribe(
                 data => {
-                    console.log("Success: " + book.Name + " was removed from cart!");
-                    this.getBooks(2, 'Wish_List_Roey_1');
+                    alert(data)
+                    //console.log("Success: " + book.Name + " was removed from wishlist!");
+                    this.getBooks(this.userId, this.name);
                 });
     }
 
-    /** getTotalCost() {
-        if (this.cartDataSource) {
-            return this.cartDataSource.map(t => t.RetailPrice * t.Quantity).reduce((acc, value) => acc + value, 0);
-        }
-    }
-
-    saveForLater(book) {
-        if (book.IsSavedForLater) {
-            this.shoppingCartService.saveForLater(this.userId, book.BookId, false)
-                .subscribe(data => {
-                    console.log("Success: " + book.Name + " was added to the cart!");
-                    this.getShoppingCart();
-                });
-        } else {
-            this.shoppingCartService.saveForLater(this.userId, book.BookId, true)
-                .subscribe(data => {
-                    console.log("Success: " + book.Name + " was saved for later!");
-                    this.getShoppingCart();
-                });
-        }
-    }
-
-    deleteBookFromCart(book) {
-        this.shoppingCartService.deleteBookFromCart(this.userId, book.BookId)
-            .subscribe(
-                data => {
-                    console.log("Success: " + book.Name + " was removed from cart!");
-                    this.getShoppingCart();
-                });
-    }
-
-    checkoutcart() {
-        this.shoppingCartService.checkout(this.userId)
-            .subscribe(
-                data => {
-                    console.log("The shopping cart was checked out!");
-                    this.getShoppingCart();
-                });
-    }
-
-    selected(event: MatSelectChange, book) {
+    selected(event: MatSelectChange, book/*, nameDestination*/) {
         const selectedData = {
             text: (event.source.selected as MatOption).viewValue,
             value: event.source.value
         }
-        this.count = selectedData.value;
-        this.updateBookQuantity(book, this.count)
-    }
-
-    updateBookQuantity(book, quantity: number) {
-        this.shoppingCartService.updateBookQuantity(this.userId, book.BookId, this.count)
+        this.nameDestination = selectedData.text;
+        console.log("Inside selected")
+        //this.updateBookQuantity(book, this.count)
+        // this.name = origin
+        // this.nameDestination = destination
+        // this.userId = userId
+        // book.Id = book id
+        this.wishlistDataService.transferBook(this.userId, book.BookId, this.name, this.nameDestination)
             .subscribe(
                 data => {
-                    console.log("Success: " + book.Name + " was updated to quantity of " + this.count + " in the cart!");
-                    this.getShoppingCart();
+                    alert(data)
+                    this.getBooks(this.userId, this.name);
                 });
-    }*/
+    }
+
+    sleep = (ms) => {
+        return new Promise(resolve => setTimeout(resolve, ms));
+    }
+
+    async getWishlists(userId: number) {
+        this.wishlistDataService.getWishlists(userId)
+            .subscribe(
+                data => {
+                    let index = Array(data)[0].indexOf((data.find(x => x.Name === this.name)), 0)
+                    Array(data)[0].splice(index, 1)
+                    this.wishlists = data;
+                }
+            );
+        await this.sleep(1000)
+    }
 
 }
