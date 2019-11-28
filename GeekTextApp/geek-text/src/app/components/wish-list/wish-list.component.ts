@@ -24,7 +24,7 @@ export class WishListComponent implements OnInit {
         private route: ActivatedRoute, private router: Router, private userService: UserService) { }
 
     ngOnInit() {
-        this.userId = 2
+        //this.userId = 2
         this.userService.currentUser.subscribe(userId => this.userId = userId);
 
         if (this.userId == 0) {
